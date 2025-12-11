@@ -2,6 +2,8 @@
 
 A Thunderbird add-on that uses Google's Gemini AI to review your emails before sending. Get intelligent feedback on spelling, grammar, tone, clarity, and potential issues.
 
+English | [日本語](README.ja.md)
+
 ## Features
 
 - 🤖 **AI-Powered Review**: Uses Google's Gemini Pro model to analyze your emails
