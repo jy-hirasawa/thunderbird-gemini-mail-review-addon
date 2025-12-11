@@ -19,9 +19,26 @@ async function getComposeDetails(tabId) {
   }
 }
 
+// Sanitize email content to prevent prompt injection
+function sanitizeContent(content) {
+  if (!content) return '';
+  // Remove any potential prompt injection patterns
+  // Limit length to prevent abuse
+  const maxLength = 10000;
+  let sanitized = content.substring(0, maxLength);
+  // Escape any markdown or special formatting that might confuse the AI
+  sanitized = sanitized.replace(/```/g, '｀｀｀');
+  return sanitized;
+}
+
 // Call Gemini API
 async function analyzeEmailWithGemini(emailContent, apiKey) {
-  const API_ENDPOINT = `https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent?key=${apiKey}`;
+  const API_ENDPOINT = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent';
+  
+  // Sanitize email content
+  const sanitizedSubject = sanitizeContent(emailContent.subject || '(No subject)');
+  const sanitizedTo = sanitizeContent(emailContent.to || '(No recipient)');
+  const sanitizedBody = sanitizeContent(emailContent.body || '(Empty body)');
   
   const prompt = `You are an email assistant. Review the following email before it is sent. Check for:
 1. Spelling and grammar errors
@@ -32,10 +49,10 @@ async function analyzeEmailWithGemini(emailContent, apiKey) {
 
 Email content:
 ---
-Subject: ${emailContent.subject || '(No subject)'}
-To: ${emailContent.to || '(No recipient)'}
+Subject: ${sanitizedSubject}
+To: ${sanitizedTo}
 Body:
-${emailContent.body || '(Empty body)'}
+${sanitizedBody}
 ---
 
 Provide a concise review with specific suggestions. If the email looks good, say so. If there are issues, list them clearly.`;
@@ -45,6 +62,7 @@ Provide a concise review with specific suggestions. If the email looks good, say
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
+        'x-goog-api-key': apiKey
       },
       body: JSON.stringify({
         contents: [{
