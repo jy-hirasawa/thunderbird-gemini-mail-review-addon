@@ -40,9 +40,7 @@ function sanitizeContent(content) {
 }
 
 // Call Gemini API
-async function analyzeEmailWithGemini(emailContent, apiKey) {
-  const API_ENDPOINT = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent';
-  
+async function analyzeEmailWithGemini(emailContent, apiKey, apiEndpoint) {
   // Sanitize email content
   const sanitizedSubject = sanitizeContent(emailContent.subject || '(No subject)');
   const sanitizedTo = sanitizeContent(emailContent.to || '(No recipient)');
@@ -66,7 +64,7 @@ ${sanitizedBody}
 Provide a concise review with specific suggestions. If the email looks good, say so. If there are issues, list them clearly.`;
 
   try {
-    const response = await fetch(API_ENDPOINT, {
+    const response = await fetch(apiEndpoint, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -118,13 +116,16 @@ function displayError(message) {
 // Main analysis function
 async function analyzeEmail() {
   try {
-    // Get API key from storage
-    const { geminiApiKey } = await browser.storage.local.get('geminiApiKey');
+    // Get API key and endpoint from storage
+    const { geminiApiKey, geminiApiEndpoint } = await browser.storage.local.get(['geminiApiKey', 'geminiApiEndpoint']);
     
     if (!geminiApiKey) {
       displayError('Please configure your Gemini API key in the settings.');
       return;
     }
+    
+    // Use default endpoint if not configured
+    const apiEndpoint = geminiApiEndpoint || 'https://generativelanguage.googleapis.com/v1/models/gemini-2.5-flash:generateContent';
 
     // Get current compose tab
     currentTab = await getCurrentComposeTab();
@@ -155,7 +156,7 @@ async function analyzeEmail() {
 
     // Call Gemini API
     document.getElementById('status').textContent = 'Analyzing email with Gemini...';
-    const analysis = await analyzeEmailWithGemini(emailContent, geminiApiKey);
+    const analysis = await analyzeEmailWithGemini(emailContent, geminiApiKey, apiEndpoint);
     
     // Display results
     displayResults(analysis);

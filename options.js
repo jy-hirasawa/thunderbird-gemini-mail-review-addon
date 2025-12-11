@@ -1,18 +1,24 @@
 // Options script for Gemini Mail Review add-on
 
 const apiKeyInput = document.getElementById('api-key');
+const apiEndpointInput = document.getElementById('api-endpoint');
 const toggleButton = document.getElementById('toggle-visibility');
 const saveButton = document.getElementById('save');
 const testButton = document.getElementById('test');
 const statusDiv = document.getElementById('status');
 
+// Default API endpoint
+const DEFAULT_API_ENDPOINT = 'https://generativelanguage.googleapis.com/v1/models/gemini-2.5-flash:generateContent';
+
 // Load saved settings
 async function loadSettings() {
   try {
-    const { geminiApiKey } = await browser.storage.local.get('geminiApiKey');
+    const { geminiApiKey, geminiApiEndpoint } = await browser.storage.local.get(['geminiApiKey', 'geminiApiEndpoint']);
     if (geminiApiKey) {
       apiKeyInput.value = geminiApiKey;
     }
+    // Set API endpoint to saved value or default
+    apiEndpointInput.value = geminiApiEndpoint || DEFAULT_API_ENDPOINT;
   } catch (error) {
     console.error('Error loading settings:', error);
   }
@@ -21,14 +27,23 @@ async function loadSettings() {
 // Save settings
 async function saveSettings() {
   const apiKey = apiKeyInput.value.trim();
+  const apiEndpoint = apiEndpointInput.value.trim();
   
   if (!apiKey) {
     showStatus('Please enter an API key', 'error');
     return;
   }
   
+  if (!apiEndpoint) {
+    showStatus('Please enter an API endpoint', 'error');
+    return;
+  }
+  
   try {
-    await browser.storage.local.set({ geminiApiKey: apiKey });
+    await browser.storage.local.set({ 
+      geminiApiKey: apiKey,
+      geminiApiEndpoint: apiEndpoint
+    });
     showStatus('Settings saved successfully!', 'success');
   } catch (error) {
     console.error('Error saving settings:', error);
@@ -39,9 +54,15 @@ async function saveSettings() {
 // Test API connection
 async function testConnection() {
   const apiKey = apiKeyInput.value.trim();
+  const apiEndpoint = apiEndpointInput.value.trim();
   
   if (!apiKey) {
     showStatus('Please enter an API key first', 'error');
+    return;
+  }
+  
+  if (!apiEndpoint) {
+    showStatus('Please enter an API endpoint first', 'error');
     return;
   }
   
@@ -55,9 +76,7 @@ async function testConnection() {
   testButton.textContent = 'Testing...';
   
   try {
-    const API_ENDPOINT = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent';
-    
-    const response = await fetch(API_ENDPOINT, {
+    const response = await fetch(apiEndpoint, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
