@@ -1,5 +1,7 @@
 # Usage Guide
 
+English | [日本語](USAGE.ja.md)
+
 ## Quick Start
 
 1. **Install the Add-on**
