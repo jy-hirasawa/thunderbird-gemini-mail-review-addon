@@ -23,12 +23,16 @@ function localizeUI() {
 }
 
 let currentTab = null;
-let currentEmailId = null;
 
-// Generate a unique ID for an email based on its content
+// Get the current compose tab
 async function generateEmailId(emailContent) {
-  // Combine subject, recipients, and body to create a unique identifier
-  const contentString = `${emailContent.subject || ''}|${emailContent.to || ''}|${emailContent.body || ''}`;
+  // Use JSON serialization to ensure unique and collision-free hashing
+  const contentObject = {
+    subject: emailContent.subject || '',
+    to: emailContent.to || '',
+    body: emailContent.body || ''
+  };
+  const contentString = JSON.stringify(contentObject);
   
   // Use crypto.subtle to generate SHA-256 hash
   const encoder = new TextEncoder();
@@ -73,18 +77,23 @@ async function saveCachedResponse(emailId, response) {
     };
     
     // Limit cache size to prevent storage issues (keep last 50 entries)
-    const entries = Object.entries(cache);
-    if (entries.length > 50) {
-      // Sort by timestamp and keep only the 50 most recent
-      entries.sort((a, b) => b[1].timestamp - a[1].timestamp);
-      const limitedCache = {};
-      entries.slice(0, 50).forEach(([key, value]) => {
-        limitedCache[key] = value;
-      });
-      await browser.storage.local.set({ geminiCache: limitedCache });
-    } else {
-      await browser.storage.local.set({ geminiCache: cache });
+    const cacheKeys = Object.keys(cache);
+    if (cacheKeys.length > 50) {
+      // Find and remove the oldest entry
+      let oldestKey = cacheKeys[0];
+      let oldestTime = cache[oldestKey].timestamp;
+      
+      for (const key of cacheKeys) {
+        if (cache[key].timestamp < oldestTime) {
+          oldestTime = cache[key].timestamp;
+          oldestKey = key;
+        }
+      }
+      
+      delete cache[oldestKey];
     }
+    
+    await browser.storage.local.set({ geminiCache: cache });
   } catch (error) {
     console.error('Error saving cached response:', error);
   }
@@ -262,11 +271,11 @@ async function analyzeEmail(forceRefresh = false) {
     };
 
     // Generate unique ID for this email
-    currentEmailId = await generateEmailId(emailContent);
+    const emailId = await generateEmailId(emailContent);
     
     // Check cache if not forcing refresh
     if (!forceRefresh) {
-      const cachedData = await getCachedResponse(currentEmailId);
+      const cachedData = await getCachedResponse(emailId);
       if (cachedData) {
         // Display cached results
         displayResults(cachedData.response, true);
@@ -279,7 +288,7 @@ async function analyzeEmail(forceRefresh = false) {
     const analysis = await analyzeEmailWithGemini(emailContent, geminiApiKey, apiEndpoint, customPrompt || '');
     
     // Save to cache
-    await saveCachedResponse(currentEmailId, analysis);
+    await saveCachedResponse(emailId, analysis);
     
     // Display results
     displayResults(analysis, false);
