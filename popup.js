@@ -1,5 +1,27 @@
 // Popup script for Gemini Mail Review add-on
 
+// Initialize i18n
+function localizeUI() {
+  // Localize all elements with data-i18n attribute
+  document.querySelectorAll('[data-i18n]').forEach(element => {
+    const messageId = element.getAttribute('data-i18n');
+    const message = browser.i18n.getMessage(messageId);
+    if (message) {
+      element.textContent = message;
+    }
+  });
+  
+  // Localize title
+  const titleElement = document.querySelector('title[data-i18n]');
+  if (titleElement) {
+    const messageId = titleElement.getAttribute('data-i18n');
+    const message = browser.i18n.getMessage(messageId);
+    if (message) {
+      document.title = message;
+    }
+  }
+}
+
 let currentTab = null;
 
 // Get the current compose tab
@@ -120,7 +142,7 @@ async function analyzeEmail() {
     const { geminiApiKey, geminiApiEndpoint } = await browser.storage.local.get(['geminiApiKey', 'geminiApiEndpoint']);
     
     if (!geminiApiKey) {
-      displayError('Please configure your Gemini API key in the settings.');
+      displayError(browser.i18n.getMessage('errorConfigureApiKey'));
       return;
     }
     
@@ -131,7 +153,7 @@ async function analyzeEmail() {
     currentTab = await getCurrentComposeTab();
     
     if (!currentTab) {
-      displayError('Could not find compose window.');
+      displayError(browser.i18n.getMessage('errorComposeWindow'));
       return;
     }
 
@@ -155,7 +177,7 @@ async function analyzeEmail() {
     };
 
     // Call Gemini API
-    document.getElementById('status').textContent = 'Analyzing email with Gemini...';
+    document.getElementById('status').textContent = browser.i18n.getMessage('analyzingEmail');
     const analysis = await analyzeEmailWithGemini(emailContent, geminiApiKey, apiEndpoint);
     
     // Display results
@@ -163,12 +185,15 @@ async function analyzeEmail() {
     
   } catch (error) {
     console.error('Error analyzing email:', error);
-    displayError(`Error: ${error.message}`);
+    displayError(browser.i18n.getMessage('errorPrefix') + ' ' + error.message);
   }
 }
 
 // Event listeners
 document.addEventListener('DOMContentLoaded', () => {
+  // Localize UI first
+  localizeUI();
+  
   // Start analysis when popup opens
   analyzeEmail();
   

@@ -1,5 +1,36 @@
 // Options script for Gemini Mail Review add-on
 
+// Initialize i18n
+function localizeUI() {
+  // Localize all elements with data-i18n attribute
+  document.querySelectorAll('[data-i18n]').forEach(element => {
+    const messageId = element.getAttribute('data-i18n');
+    const message = browser.i18n.getMessage(messageId);
+    if (message) {
+      element.textContent = message;
+    }
+  });
+  
+  // Localize placeholder attributes
+  document.querySelectorAll('[data-i18n-placeholder]').forEach(element => {
+    const messageId = element.getAttribute('data-i18n-placeholder');
+    const message = browser.i18n.getMessage(messageId);
+    if (message) {
+      element.placeholder = message;
+    }
+  });
+  
+  // Localize title
+  const titleElement = document.querySelector('title[data-i18n]');
+  if (titleElement) {
+    const messageId = titleElement.getAttribute('data-i18n');
+    const message = browser.i18n.getMessage(messageId);
+    if (message) {
+      document.title = message;
+    }
+  }
+}
+
 const apiKeyInput = document.getElementById('api-key');
 const apiEndpointInput = document.getElementById('api-endpoint');
 const toggleButton = document.getElementById('toggle-visibility');
@@ -30,12 +61,12 @@ async function saveSettings() {
   const apiEndpoint = apiEndpointInput.value.trim();
   
   if (!apiKey) {
-    showStatus('Please enter an API key', 'error');
+    showStatus(browser.i18n.getMessage('errorApiKeyRequired'), 'error');
     return;
   }
   
   if (!apiEndpoint) {
-    showStatus('Please enter an API endpoint', 'error');
+    showStatus(browser.i18n.getMessage('errorEndpointRequired'), 'error');
     return;
   }
   
@@ -44,10 +75,10 @@ async function saveSettings() {
       geminiApiKey: apiKey,
       geminiApiEndpoint: apiEndpoint
     });
-    showStatus('Settings saved successfully!', 'success');
+    showStatus(browser.i18n.getMessage('successSaved'), 'success');
   } catch (error) {
     console.error('Error saving settings:', error);
-    showStatus('Error saving settings: ' + error.message, 'error');
+    showStatus(browser.i18n.getMessage('errorSaving') + ' ' + error.message, 'error');
   }
 }
 
@@ -57,23 +88,23 @@ async function testConnection() {
   const apiEndpoint = apiEndpointInput.value.trim();
   
   if (!apiKey) {
-    showStatus('Please enter an API key first', 'error');
+    showStatus(browser.i18n.getMessage('errorTestApiKeyFirst'), 'error');
     return;
   }
   
   if (!apiEndpoint) {
-    showStatus('Please enter an API endpoint first', 'error');
+    showStatus(browser.i18n.getMessage('errorTestEndpointFirst'), 'error');
     return;
   }
   
   // Basic API key format validation (Google API keys are typically 39 characters)
   if (apiKey.length < 20) {
-    showStatus('API key appears to be too short. Please check your key.', 'error');
+    showStatus(browser.i18n.getMessage('errorApiKeyTooShort'), 'error');
     return;
   }
   
   testButton.disabled = true;
-  testButton.textContent = 'Testing...';
+  testButton.textContent = browser.i18n.getMessage('testingButton');
   
   try {
     const response = await fetch(apiEndpoint, {
@@ -99,16 +130,16 @@ async function testConnection() {
     const data = await response.json();
     
     if (data.candidates && data.candidates.length > 0) {
-      showStatus('✓ Connection successful! API key is valid.', 'success');
+      showStatus(browser.i18n.getMessage('successTestConnection'), 'success');
     } else {
-      showStatus('Connection succeeded but received unexpected response', 'error');
+      showStatus(browser.i18n.getMessage('errorTestUnexpectedResponse'), 'error');
     }
   } catch (error) {
     console.error('Error testing connection:', error);
-    showStatus('Connection failed: ' + error.message, 'error');
+    showStatus(browser.i18n.getMessage('errorTestConnectionFailed') + ' ' + error.message, 'error');
   } finally {
     testButton.disabled = false;
-    testButton.textContent = 'Test Connection';
+    testButton.textContent = browser.i18n.getMessage('testButton');
   }
 }
 
@@ -116,10 +147,10 @@ async function testConnection() {
 function toggleVisibility() {
   if (apiKeyInput.type === 'password') {
     apiKeyInput.type = 'text';
-    toggleButton.textContent = 'Hide';
+    toggleButton.textContent = browser.i18n.getMessage('hideButton');
   } else {
     apiKeyInput.type = 'password';
-    toggleButton.textContent = 'Show';
+    toggleButton.textContent = browser.i18n.getMessage('showButton');
   }
 }
 
@@ -136,7 +167,10 @@ function showStatus(message, type) {
 }
 
 // Event listeners
-document.addEventListener('DOMContentLoaded', loadSettings);
+document.addEventListener('DOMContentLoaded', () => {
+  localizeUI();
+  loadSettings();
+});
 saveButton.addEventListener('click', saveSettings);
 testButton.addEventListener('click', testConnection);
 toggleButton.addEventListener('click', toggleVisibility);

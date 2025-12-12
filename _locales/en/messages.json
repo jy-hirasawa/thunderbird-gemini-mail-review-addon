@@ -1,0 +1,158 @@
+{
+  "extensionName": {
+    "message": "Gemini Mail Review",
+    "description": "Name of the extension"
+  },
+  "extensionDescription": {
+    "message": "Check your email with Gemini AI before sending",
+    "description": "Description of the extension"
+  },
+  "optionsTitle": {
+    "message": "Gemini Mail Review Settings",
+    "description": "Title of the options page"
+  },
+  "apiConfigurationHeading": {
+    "message": "API Configuration",
+    "description": "Heading for API configuration section"
+  },
+  "apiConfigurationDescription": {
+    "message": "To use this add-on, you need a Gemini API key. Get one for free at",
+    "description": "Description text for API configuration"
+  },
+  "googleAIStudio": {
+    "message": "Google AI Studio",
+    "description": "Link text for Google AI Studio"
+  },
+  "apiKeyLabel": {
+    "message": "Gemini API Key:",
+    "description": "Label for API key input"
+  },
+  "apiKeyPlaceholder": {
+    "message": "Enter your API key",
+    "description": "Placeholder for API key input"
+  },
+  "showButton": {
+    "message": "Show",
+    "description": "Button text to show password"
+  },
+  "hideButton": {
+    "message": "Hide",
+    "description": "Button text to hide password"
+  },
+  "apiEndpointLabel": {
+    "message": "API Endpoint:",
+    "description": "Label for API endpoint input"
+  },
+  "apiEndpointPlaceholder": {
+    "message": "API endpoint URL",
+    "description": "Placeholder for API endpoint input"
+  },
+  "saveButton": {
+    "message": "Save Settings",
+    "description": "Button text to save settings"
+  },
+  "testButton": {
+    "message": "Test Connection",
+    "description": "Button text to test connection"
+  },
+  "testingButton": {
+    "message": "Testing...",
+    "description": "Button text while testing"
+  },
+  "aboutHeading": {
+    "message": "About",
+    "description": "Heading for about section"
+  },
+  "aboutDescription1": {
+    "message": "This add-on uses Google's Gemini AI to review your emails before sending. It checks for spelling, grammar, tone, clarity, and potential issues.",
+    "description": "First paragraph of about description"
+  },
+  "aboutDescription2": {
+    "message": "Your emails are sent to Google's Gemini API for analysis. Please review Google's privacy policy before using this add-on.",
+    "description": "Second paragraph of about description"
+  },
+  "privacyLabel": {
+    "message": "Privacy:",
+    "description": "Label for privacy notice"
+  },
+  "errorApiKeyRequired": {
+    "message": "Please enter an API key",
+    "description": "Error message when API key is missing"
+  },
+  "errorEndpointRequired": {
+    "message": "Please enter an API endpoint",
+    "description": "Error message when API endpoint is missing"
+  },
+  "successSaved": {
+    "message": "Settings saved successfully!",
+    "description": "Success message when settings are saved"
+  },
+  "errorSaving": {
+    "message": "Error saving settings:",
+    "description": "Error message when saving fails"
+  },
+  "errorApiKeyTooShort": {
+    "message": "API key appears to be too short. Please check your key.",
+    "description": "Error message when API key is too short"
+  },
+  "errorTestApiKeyFirst": {
+    "message": "Please enter an API key first",
+    "description": "Error message when testing without API key"
+  },
+  "errorTestEndpointFirst": {
+    "message": "Please enter an API endpoint first",
+    "description": "Error message when testing without endpoint"
+  },
+  "successTestConnection": {
+    "message": "✓ Connection successful! API key is valid.",
+    "description": "Success message when connection test passes"
+  },
+  "errorTestUnexpectedResponse": {
+    "message": "Connection succeeded but received unexpected response",
+    "description": "Error message when test succeeds but response is unexpected"
+  },
+  "errorTestConnectionFailed": {
+    "message": "Connection failed:",
+    "description": "Error message when connection test fails"
+  },
+  "popupTitle": {
+    "message": "Gemini Mail Review",
+    "description": "Title of the popup"
+  },
+  "checkingEmail": {
+    "message": "Checking email...",
+    "description": "Status text while checking email"
+  },
+  "analyzingEmail": {
+    "message": "Analyzing email with Gemini...",
+    "description": "Status text while analyzing email"
+  },
+  "analysisResultsHeading": {
+    "message": "Analysis Results:",
+    "description": "Heading for analysis results"
+  },
+  "sendAnywayButton": {
+    "message": "Send Anyway",
+    "description": "Button text to send email anyway"
+  },
+  "editEmailButton": {
+    "message": "Edit Email",
+    "description": "Button text to edit email"
+  },
+  "configureApiKeyLink": {
+    "message": "Configure API Key",
+    "description": "Link text to open settings"
+  },
+  "errorConfigureApiKey": {
+    "message": "Please configure your Gemini API key in the settings.",
+    "description": "Error message when API key is not configured"
+  },
+  "errorComposeWindow": {
+    "message": "Could not find compose window.",
+    "description": "Error message when compose window is not found"
+  },
+  "errorPrefix": {
+    "message": "Error:",
+    "description": "Prefix for error messages"
+  }
+}

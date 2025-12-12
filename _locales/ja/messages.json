@@ -1,0 +1,158 @@
+{
+  "extensionName": {
+    "message": "Gemini メールレビュー",
+    "description": "Name of the extension"
+  },
+  "extensionDescription": {
+    "message": "送信前にGemini AIでメールをチェック",
+    "description": "Description of the extension"
+  },
+  "optionsTitle": {
+    "message": "Gemini メールレビュー 設定",
+    "description": "Title of the options page"
+  },
+  "apiConfigurationHeading": {
+    "message": "API 設定",
+    "description": "Heading for API configuration section"
+  },
+  "apiConfigurationDescription": {
+    "message": "このアドオンを使用するには、Gemini API キーが必要です。無料で取得できます：",
+    "description": "Description text for API configuration"
+  },
+  "googleAIStudio": {
+    "message": "Google AI Studio",
+    "description": "Link text for Google AI Studio"
+  },
+  "apiKeyLabel": {
+    "message": "Gemini API キー:",
+    "description": "Label for API key input"
+  },
+  "apiKeyPlaceholder": {
+    "message": "API キーを入力",
+    "description": "Placeholder for API key input"
+  },
+  "showButton": {
+    "message": "表示",
+    "description": "Button text to show password"
+  },
+  "hideButton": {
+    "message": "非表示",
+    "description": "Button text to hide password"
+  },
+  "apiEndpointLabel": {
+    "message": "API エンドポイント:",
+    "description": "Label for API endpoint input"
+  },
+  "apiEndpointPlaceholder": {
+    "message": "API エンドポイント URL",
+    "description": "Placeholder for API endpoint input"
+  },
+  "saveButton": {
+    "message": "設定を保存",
+    "description": "Button text to save settings"
+  },
+  "testButton": {
+    "message": "接続テスト",
+    "description": "Button text to test connection"
+  },
+  "testingButton": {
+    "message": "テスト中...",
+    "description": "Button text while testing"
+  },
+  "aboutHeading": {
+    "message": "このアドオンについて",
+    "description": "Heading for about section"
+  },
+  "aboutDescription1": {
+    "message": "このアドオンは、Google の Gemini AI を使用してメール送信前にチェックします。スペル、文法、トーン、明瞭さ、潜在的な問題を確認します。",
+    "description": "First paragraph of about description"
+  },
+  "aboutDescription2": {
+    "message": "メールは分析のために Google の Gemini API に送信されます。このアドオンを使用する前に、Google のプライバシーポリシーをご確認ください。",
+    "description": "Second paragraph of about description"
+  },
+  "privacyLabel": {
+    "message": "プライバシー:",
+    "description": "Label for privacy notice"
+  },
+  "errorApiKeyRequired": {
+    "message": "API キーを入力してください",
+    "description": "Error message when API key is missing"
+  },
+  "errorEndpointRequired": {
+    "message": "API エンドポイントを入力してください",
+    "description": "Error message when API endpoint is missing"
+  },
+  "successSaved": {
+    "message": "設定を保存しました！",
+    "description": "Success message when settings are saved"
+  },
+  "errorSaving": {
+    "message": "設定の保存エラー:",
+    "description": "Error message when saving fails"
+  },
+  "errorApiKeyTooShort": {
+    "message": "API キーが短すぎるようです。キーを確認してください。",
+    "description": "Error message when API key is too short"
+  },
+  "errorTestApiKeyFirst": {
+    "message": "まず API キーを入力してください",
+    "description": "Error message when testing without API key"
+  },
+  "errorTestEndpointFirst": {
+    "message": "まず API エンドポイントを入力してください",
+    "description": "Error message when testing without endpoint"
+  },
+  "successTestConnection": {
+    "message": "✓ 接続成功！API キーは有効です。",
+    "description": "Success message when connection test passes"
+  },
+  "errorTestUnexpectedResponse": {
+    "message": "接続は成功しましたが、予期しないレスポンスを受信しました",
+    "description": "Error message when test succeeds but response is unexpected"
+  },
+  "errorTestConnectionFailed": {
+    "message": "接続失敗:",
+    "description": "Error message when connection test fails"
+  },
+  "popupTitle": {
+    "message": "Gemini メールレビュー",
+    "description": "Title of the popup"
+  },
+  "checkingEmail": {
+    "message": "メールをチェック中...",
+    "description": "Status text while checking email"
+  },
+  "analyzingEmail": {
+    "message": "Gemini でメールを分析中...",
+    "description": "Status text while analyzing email"
+  },
+  "analysisResultsHeading": {
+    "message": "分析結果:",
+    "description": "Heading for analysis results"
+  },
+  "sendAnywayButton": {
+    "message": "このまま送信",
+    "description": "Button text to send email anyway"
+  },
+  "editEmailButton": {
+    "message": "メールを編集",
+    "description": "Button text to edit email"
+  },
+  "configureApiKeyLink": {
+    "message": "API キーを設定",
+    "description": "Link text to open settings"
+  },
+  "errorConfigureApiKey": {
+    "message": "設定で Gemini API キーを設定してください。",
+    "description": "Error message when API key is not configured"
+  },
+  "errorComposeWindow": {
+    "message": "作成ウィンドウが見つかりませんでした。",
+    "description": "Error message when compose window is not found"
+  },
+  "errorPrefix": {
+    "message": "エラー:",
+    "description": "Prefix for error messages"
+  }
+}

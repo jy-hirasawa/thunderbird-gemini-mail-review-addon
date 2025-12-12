@@ -1,8 +1,9 @@
 {
   "manifest_version": 2,
-  "name": "Gemini Mail Review",
+  "name": "__MSG_extensionName__",
   "version": "1.0.0",
-  "description": "Check your email with Gemini AI before sending",
+  "description": "__MSG_extensionDescription__",
+  "default_locale": "en",
   "author": "Your Name",
   "applications": {
     "gecko": {
