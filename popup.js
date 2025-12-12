@@ -102,10 +102,13 @@ async function saveLastCheckedHash(tabId, emailId) {
     if (keys.length > 20) {
       // Find and remove the oldest entry by timestamp
       let oldestKey = keys[0];
-      let oldestTime = hashes[oldestKey].timestamp || 0;
+      let oldestTime = typeof hashes[oldestKey] === 'object' ? 
+        (hashes[oldestKey].timestamp || 0) : 0;
       
       for (const key of keys) {
-        const entryTime = hashes[key].timestamp || 0;
+        const entry = hashes[key];
+        const entryTime = typeof entry === 'object' ? 
+          (entry.timestamp || 0) : 0;
         if (entryTime < oldestTime) {
           oldestTime = entryTime;
           oldestKey = key;
