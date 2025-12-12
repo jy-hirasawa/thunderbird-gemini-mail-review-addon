@@ -64,6 +64,38 @@ async function getCachedResponse(emailId) {
   }
 }
 
+// Get the last checked content hash for a tab
+async function getLastCheckedHash(tabId) {
+  try {
+    const result = await browser.storage.local.get('lastCheckedHashes');
+    const hashes = result.lastCheckedHashes || {};
+    return hashes[tabId] || null;
+  } catch (error) {
+    console.error('Error getting last checked hash:', error);
+    return null;
+  }
+}
+
+// Save the last checked content hash for a tab
+async function saveLastCheckedHash(tabId, emailId) {
+  try {
+    const result = await browser.storage.local.get('lastCheckedHashes');
+    const hashes = result.lastCheckedHashes || {};
+    hashes[tabId] = emailId;
+    
+    // Limit to last 20 tabs to prevent storage bloat
+    const keys = Object.keys(hashes);
+    if (keys.length > 20) {
+      // Remove first (oldest) entry
+      delete hashes[keys[0]];
+    }
+    
+    await browser.storage.local.set({ lastCheckedHashes: hashes });
+  } catch (error) {
+    console.error('Error saving last checked hash:', error);
+  }
+}
+
 // Save response to cache
 async function saveCachedResponse(emailId, response) {
   try {
@@ -203,7 +235,7 @@ Provide a concise review with specific suggestions. If the email looks good, say
 }
 
 // Display results
-function displayResults(analysis, isFromCache = false) {
+function displayResults(analysis, isFromCache = false, contentChanged = false) {
   document.getElementById('loading').style.display = 'none';
   document.getElementById('status').style.display = 'none';
   document.getElementById('results').style.display = 'block';
@@ -211,13 +243,23 @@ function displayResults(analysis, isFromCache = false) {
   
   // Show/hide cache indicator
   const cacheIndicator = document.getElementById('cache-indicator');
+  const contentChangedIndicator = document.getElementById('content-changed-indicator');
   const reRequestButton = document.getElementById('re-request');
   
   if (isFromCache) {
-    cacheIndicator.style.display = 'block';
+    if (contentChanged) {
+      // Content has changed - show different indicator
+      cacheIndicator.style.display = 'none';
+      contentChangedIndicator.style.display = 'block';
+    } else {
+      // Same content - show normal cache indicator
+      cacheIndicator.style.display = 'block';
+      contentChangedIndicator.style.display = 'none';
+    }
     reRequestButton.style.display = 'inline-block';
   } else {
     cacheIndicator.style.display = 'none';
+    contentChangedIndicator.style.display = 'none';
     reRequestButton.style.display = 'none';
   }
 }
@@ -271,16 +313,32 @@ async function analyzeEmail(forceRefresh = false) {
       body: details.plainTextBody || details.body || ''
     };
 
-    // Generate unique ID for this email
+    // Generate unique ID for this email based on content
     const emailId = await generateEmailId(emailContent);
+    
+    // Check if content has changed since last check for this tab
+    const lastCheckedHash = await getLastCheckedHash(currentTab.id);
+    const contentChanged = lastCheckedHash && lastCheckedHash !== emailId;
     
     // Check cache if not forcing refresh
     if (!forceRefresh) {
-      const cachedData = await getCachedResponse(emailId);
+      // First, try to get cache for current content
+      let cachedData = await getCachedResponse(emailId);
       if (cachedData) {
-        // Display cached results
-        displayResults(cachedData.response, true);
+        // Display cached results for exact same content
+        await saveLastCheckedHash(currentTab.id, emailId);
+        displayResults(cachedData.response, true, false);
         return;
+      }
+      
+      // If content changed, try to show old cache from last check
+      if (contentChanged) {
+        cachedData = await getCachedResponse(lastCheckedHash);
+        if (cachedData) {
+          // Display old cached results with indicator that content changed
+          displayResults(cachedData.response, true, true);
+          return;
+        }
       }
     }
 
@@ -291,8 +349,11 @@ async function analyzeEmail(forceRefresh = false) {
     // Save to cache
     await saveCachedResponse(emailId, analysis);
     
+    // Save this as the last checked hash for this tab
+    await saveLastCheckedHash(currentTab.id, emailId);
+    
     // Display results
-    displayResults(analysis, false);
+    displayResults(analysis, false, false);
     
   } catch (error) {
     console.error('Error analyzing email:', error);
