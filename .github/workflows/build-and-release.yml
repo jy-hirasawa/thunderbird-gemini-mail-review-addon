@@ -5,8 +5,6 @@ on:
     branches:
       - main
       - master
-    tags:
-      - 'v*'
   pull_request:
     branches:
       - main
@@ -14,57 +12,8 @@ on:
   workflow_dispatch:
 
 jobs:
-  build:
+  build-and-release:
     runs-on: ubuntu-latest
-    
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-      
-      - name: Get version from manifest
-        id: get_version
-        run: |
-          VERSION=$(grep -o '"version"[^,]*' manifest.json | grep -o '[0-9.]*')
-          echo "version=$VERSION" >> $GITHUB_OUTPUT
-          echo "Version: $VERSION"
-      
-      - name: Create ZIP file
-        run: |
-          # Create a clean build directory
-          mkdir -p build
-          
-          # Copy necessary files to build directory
-          cp manifest.json build/
-          cp background.js build/
-          cp popup.html build/
-          cp popup.css build/
-          cp popup.js build/
-          cp options.html build/
-          cp options.css build/
-          cp options.js build/
-          cp -r icons build/
-          
-          # Create ZIP file
-          cd build
-          zip -r ../gemini-mail-review-${{ steps.get_version.outputs.version }}.zip .
-          cd ..
-          
-          # List contents
-          echo "ZIP contents:"
-          unzip -l gemini-mail-review-${{ steps.get_version.outputs.version }}.zip
-      
-      - name: Upload artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: gemini-mail-review-${{ steps.get_version.outputs.version }}
-          path: gemini-mail-review-${{ steps.get_version.outputs.version }}.zip
-          retention-days: 90
-  
-  release:
-    needs: build
-    runs-on: ubuntu-latest
-    if: startsWith(github.ref, 'refs/tags/v')
-    
     permissions:
       contents: write
     
@@ -72,12 +21,26 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
       
-      - name: Get version from manifest
-        id: get_version
+      - name: Generate date-based version
+        id: version
         run: |
-          VERSION=$(grep -o '"version"[^,]*' manifest.json | grep -o '[0-9.]*')
+          # Generate version in YYYY.MM.DD format
+          VERSION=$(date -u +"%Y.%-m.%-d")
           echo "version=$VERSION" >> $GITHUB_OUTPUT
-          echo "Version: $VERSION"
+          echo "Generated version: $VERSION"
+          
+          # Also generate tag name
+          TAG_NAME="v${VERSION}"
+          echo "tag_name=$TAG_NAME" >> $GITHUB_OUTPUT
+          echo "Tag name: $TAG_NAME"
+      
+      - name: Update manifest.json with new version
+        run: |
+          VERSION="${{ steps.version.outputs.version }}"
+          # Update version in manifest.json
+          sed -i "s/\"version\": \"[^\"]*\"/\"version\": \"$VERSION\"/" manifest.json
+          echo "Updated manifest.json:"
+          grep "version" manifest.json
       
       - name: Create ZIP file
         run: |
@@ -96,14 +59,29 @@ jobs:
           cp -r icons build/
           
           # Create ZIP file
+          VERSION="${{ steps.version.outputs.version }}"
           cd build
-          zip -r ../gemini-mail-review-${{ steps.get_version.outputs.version }}.zip .
+          zip -r ../gemini-mail-review-${VERSION}.zip .
           cd ..
+          
+          # List contents
+          echo "ZIP contents:"
+          unzip -l gemini-mail-review-${VERSION}.zip
+      
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: gemini-mail-review-${{ steps.version.outputs.version }}
+          path: gemini-mail-review-${{ steps.version.outputs.version }}.zip
+          retention-days: 90
       
       - name: Create Release
+        if: github.event_name == 'push' && (github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master')
         uses: softprops/action-gh-release@v1
         with:
-          files: gemini-mail-review-${{ steps.get_version.outputs.version }}.zip
+          tag_name: ${{ steps.version.outputs.tag_name }}
+          name: Release ${{ steps.version.outputs.version }}
+          files: gemini-mail-review-${{ steps.version.outputs.version }}.zip
           generate_release_notes: true
           draft: false
           prerelease: false
