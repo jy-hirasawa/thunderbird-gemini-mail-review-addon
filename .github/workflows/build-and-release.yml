@@ -1,0 +1,111 @@
+name: Build and Release
+
+on:
+  push:
+    branches:
+      - main
+      - master
+    tags:
+      - 'v*'
+  pull_request:
+    branches:
+      - main
+      - master
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      
+      - name: Get version from manifest
+        id: get_version
+        run: |
+          VERSION=$(grep -o '"version"[^,]*' manifest.json | grep -o '[0-9.]*')
+          echo "version=$VERSION" >> $GITHUB_OUTPUT
+          echo "Version: $VERSION"
+      
+      - name: Create ZIP file
+        run: |
+          # Create a clean build directory
+          mkdir -p build
+          
+          # Copy necessary files to build directory
+          cp manifest.json build/
+          cp background.js build/
+          cp popup.html build/
+          cp popup.css build/
+          cp popup.js build/
+          cp options.html build/
+          cp options.css build/
+          cp options.js build/
+          cp -r icons build/
+          
+          # Create ZIP file
+          cd build
+          zip -r ../gemini-mail-review-${{ steps.get_version.outputs.version }}.zip .
+          cd ..
+          
+          # List contents
+          echo "ZIP contents:"
+          unzip -l gemini-mail-review-${{ steps.get_version.outputs.version }}.zip
+      
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: gemini-mail-review-${{ steps.get_version.outputs.version }}
+          path: gemini-mail-review-${{ steps.get_version.outputs.version }}.zip
+          retention-days: 90
+  
+  release:
+    needs: build
+    runs-on: ubuntu-latest
+    if: startsWith(github.ref, 'refs/tags/v')
+    
+    permissions:
+      contents: write
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      
+      - name: Get version from manifest
+        id: get_version
+        run: |
+          VERSION=$(grep -o '"version"[^,]*' manifest.json | grep -o '[0-9.]*')
+          echo "version=$VERSION" >> $GITHUB_OUTPUT
+          echo "Version: $VERSION"
+      
+      - name: Create ZIP file
+        run: |
+          # Create a clean build directory
+          mkdir -p build
+          
+          # Copy necessary files to build directory
+          cp manifest.json build/
+          cp background.js build/
+          cp popup.html build/
+          cp popup.css build/
+          cp popup.js build/
+          cp options.html build/
+          cp options.css build/
+          cp options.js build/
+          cp -r icons build/
+          
+          # Create ZIP file
+          cd build
+          zip -r ../gemini-mail-review-${{ steps.get_version.outputs.version }}.zip .
+          cd ..
+      
+      - name: Create Release
+        uses: softprops/action-gh-release@v1
+        with:
+          files: gemini-mail-review-${{ steps.get_version.outputs.version }}.zip
+          generate_release_notes: true
+          draft: false
+          prerelease: false
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
