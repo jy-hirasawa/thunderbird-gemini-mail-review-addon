@@ -24,7 +24,7 @@ function localizeUI() {
 
 let currentTab = null;
 
-// Get the current compose tab
+// Generate a unique ID for an email based on its content
 async function generateEmailId(emailContent) {
   // Use JSON serialization to ensure unique and collision-free hashing
   const contentObject = {
@@ -80,6 +80,7 @@ async function saveCachedResponse(emailId, response) {
     const cacheKeys = Object.keys(cache);
     if (cacheKeys.length > 50) {
       // Find and remove the oldest entry
+      // O(n) iteration is acceptable here since cache is limited to 51 entries max
       let oldestKey = cacheKeys[0];
       let oldestTime = cache[oldestKey].timestamp;
       
