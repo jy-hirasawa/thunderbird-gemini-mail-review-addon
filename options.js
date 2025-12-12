@@ -33,6 +33,7 @@ function localizeUI() {
 
 const apiKeyInput = document.getElementById('api-key');
 const apiEndpointInput = document.getElementById('api-endpoint');
+const customPromptInput = document.getElementById('custom-prompt');
 const toggleButton = document.getElementById('toggle-visibility');
 const saveButton = document.getElementById('save');
 const testButton = document.getElementById('test');
@@ -44,12 +45,16 @@ const DEFAULT_API_ENDPOINT = 'https://generativelanguage.googleapis.com/v1/model
 // Load saved settings
 async function loadSettings() {
   try {
-    const { geminiApiKey, geminiApiEndpoint } = await browser.storage.local.get(['geminiApiKey', 'geminiApiEndpoint']);
+    const { geminiApiKey, geminiApiEndpoint, customPrompt } = await browser.storage.local.get(['geminiApiKey', 'geminiApiEndpoint', 'customPrompt']);
     if (geminiApiKey) {
       apiKeyInput.value = geminiApiKey;
     }
     // Set API endpoint to saved value or default
     apiEndpointInput.value = geminiApiEndpoint || DEFAULT_API_ENDPOINT;
+    // Set custom prompt if saved
+    if (customPrompt) {
+      customPromptInput.value = customPrompt;
+    }
   } catch (error) {
     console.error('Error loading settings:', error);
   }
@@ -59,6 +64,7 @@ async function loadSettings() {
 async function saveSettings() {
   const apiKey = apiKeyInput.value.trim();
   const apiEndpoint = apiEndpointInput.value.trim();
+  const customPrompt = customPromptInput.value.trim();
   
   if (!apiKey) {
     showStatus(browser.i18n.getMessage('errorApiKeyRequired'), 'error');
@@ -73,7 +79,8 @@ async function saveSettings() {
   try {
     await browser.storage.local.set({ 
       geminiApiKey: apiKey,
-      geminiApiEndpoint: apiEndpoint
+      geminiApiEndpoint: apiEndpoint,
+      customPrompt: customPrompt
     });
     showStatus(browser.i18n.getMessage('successSaved'), 'success');
   } catch (error) {

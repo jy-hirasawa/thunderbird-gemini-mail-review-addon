@@ -43,6 +43,9 @@ English | [日本語](README.ja.md)
    - Paste your API key
    - (Optional) Customize the API endpoint URL if you want to use a different Gemini model
      - Default: `https://generativelanguage.googleapis.com/v1/models/gemini-2.5-flash:generateContent`
+   - (Optional) Add a custom prompt to customize how Gemini analyzes your emails
+     - The custom prompt will be prepended to all review requests
+     - Example: "Review this email for business communication. Check if the language is polite, appropriate for clients, and sufficiently formal. Flag any inappropriate, unnatural, or misleading expressions."
    - Click **Save Settings**
    - (Optional) Click **Test Connection** to verify your configuration works
 
