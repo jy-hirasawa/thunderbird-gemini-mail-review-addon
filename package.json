@@ -1,0 +1,29 @@
+{
+  "name": "gemini-mail-review",
+  "version": "1.0.0",
+  "description": "A Thunderbird add-on that checks your email with Gemini AI before sending",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jy-hirasawa/thundirbird-gemini-mail-review-addon.git"
+  },
+  "keywords": [
+    "thunderbird",
+    "addon",
+    "extension",
+    "email",
+    "gemini",
+    "ai",
+    "review",
+    "grammar",
+    "spell-check"
+  ],
+  "author": "jy-hirasawa",
+  "license": "MIT",
+  "scripts": {
+    "lint": "echo 'No linting configured'",
+    "package": "web-ext build --overwrite-dest",
+    "start": "web-ext run"
+  },
+  "devDependencies": {},
+  "dependencies": {}
+}
