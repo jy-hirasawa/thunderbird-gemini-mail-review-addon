@@ -27,6 +27,14 @@
         <input type="text" id="api-endpoint" data-i18n-placeholder="apiEndpointPlaceholder" placeholder="API endpoint URL" />
       </div>
       
+      <div class="form-group form-group-column">
+        <label for="custom-prompt" data-i18n="customPromptLabel">Custom Prompt:</label>
+        <p class="description" data-i18n="customPromptDescription">
+          You can add custom instructions that will be prepended to every email review request. This allows you to customize how Gemini analyzes your emails.
+        </p>
+        <textarea id="custom-prompt" rows="5" data-i18n-placeholder="customPromptPlaceholder" placeholder="Optional: Enter additional instructions for Gemini AI"></textarea>
+      </div>
+      
       <div id="status" class="status"></div>
       
       <div class="button-group">

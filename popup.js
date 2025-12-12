@@ -62,13 +62,20 @@ function sanitizeContent(content) {
 }
 
 // Call Gemini API
-async function analyzeEmailWithGemini(emailContent, apiKey, apiEndpoint) {
+async function analyzeEmailWithGemini(emailContent, apiKey, apiEndpoint, customPrompt) {
   // Sanitize email content
   const sanitizedSubject = sanitizeContent(emailContent.subject || '(No subject)');
   const sanitizedTo = sanitizeContent(emailContent.to || '(No recipient)');
   const sanitizedBody = sanitizeContent(emailContent.body || '(Empty body)');
   
-  const prompt = `You are an email assistant. Review the following email before it is sent. Check for:
+  // Build the prompt - prepend custom prompt if provided
+  let prompt = '';
+  
+  if (customPrompt && customPrompt.trim()) {
+    prompt = `${customPrompt.trim()}\n\n`;
+  }
+  
+  prompt += `You are an email assistant. Review the following email before it is sent. Check for:
 1. Spelling and grammar errors
 2. Tone and professionalism
 3. Clarity and conciseness
@@ -138,8 +145,8 @@ function displayError(message) {
 // Main analysis function
 async function analyzeEmail() {
   try {
-    // Get API key and endpoint from storage
-    const { geminiApiKey, geminiApiEndpoint } = await browser.storage.local.get(['geminiApiKey', 'geminiApiEndpoint']);
+    // Get API key, endpoint, and custom prompt from storage
+    const { geminiApiKey, geminiApiEndpoint, customPrompt } = await browser.storage.local.get(['geminiApiKey', 'geminiApiEndpoint', 'customPrompt']);
     
     if (!geminiApiKey) {
       displayError(browser.i18n.getMessage('errorConfigureApiKey'));
@@ -176,9 +183,9 @@ async function analyzeEmail() {
       body: details.plainTextBody || details.body || ''
     };
 
-    // Call Gemini API
+    // Call Gemini API with custom prompt
     document.getElementById('status').textContent = browser.i18n.getMessage('analyzingEmail');
-    const analysis = await analyzeEmailWithGemini(emailContent, geminiApiKey, apiEndpoint);
+    const analysis = await analyzeEmailWithGemini(emailContent, geminiApiKey, apiEndpoint, customPrompt || '');
     
     // Display results
     displayResults(analysis);

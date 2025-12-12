@@ -154,5 +154,17 @@
   "errorPrefix": {
     "message": "エラー:",
     "description": "Prefix for error messages"
+  },
+  "customPromptLabel": {
+    "message": "カスタムプロンプト:",
+    "description": "Label for custom prompt textarea"
+  },
+  "customPromptPlaceholder": {
+    "message": "オプション: Gemini AI への追加指示を入力（各リクエストの先頭に追加されます）",
+    "description": "Placeholder for custom prompt textarea"
+  },
+  "customPromptDescription": {
+    "message": "すべてのメールレビューリクエストの先頭に追加されるカスタム指示を設定できます。Gemini がメールを分析する方法をカスタマイズできます。",
+    "description": "Description for custom prompt feature"
   }
 }
