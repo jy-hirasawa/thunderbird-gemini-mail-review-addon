@@ -184,16 +184,17 @@ async function saveCachedResponse(emailId, response) {
     };
     
     // Limit cache size to prevent storage issues (keep last 50 entries)
-    const remainingKeys = Object.keys(cache);
-    if (remainingKeys.length > 50) {
+    const cacheKeys = Object.keys(cache);
+    if (cacheKeys.length > 50) {
       // Find and remove the oldest entry
       // O(n) iteration is acceptable here since cache is limited to 51 entries max
-      let oldestKey = remainingKeys[0];
-      let oldestTime = cache[oldestKey].timestamp;
+      let oldestKey = cacheKeys[0];
+      let oldestTime = cache[oldestKey]?.timestamp || Date.now();
       
-      for (const key of remainingKeys) {
-        if (cache[key].timestamp < oldestTime) {
-          oldestTime = cache[key].timestamp;
+      for (const key of cacheKeys) {
+        const timestamp = cache[key]?.timestamp;
+        if (typeof timestamp === 'number' && timestamp < oldestTime) {
+          oldestTime = timestamp;
           oldestKey = key;
         }
       }
