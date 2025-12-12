@@ -47,6 +47,30 @@ async function generateEmailId(emailContent) {
   return hashHex;
 }
 
+// Remove expired entries from cache (older than CACHE_TTL)
+function cleanupExpiredCache(cache) {
+  const now = Date.now();
+  const cacheKeys = Object.keys(cache);
+  let cleanedCount = 0;
+  
+  for (const key of cacheKeys) {
+    // Safety check: ensure timestamp exists and is a number
+    if (!cache[key] || typeof cache[key].timestamp !== 'number') {
+      delete cache[key];
+      cleanedCount++;
+      continue;
+    }
+    
+    const cacheAge = now - cache[key].timestamp;
+    if (cacheAge > CACHE_TTL) {
+      delete cache[key];
+      cleanedCount++;
+    }
+  }
+  
+  return cleanedCount;
+}
+
 // Get cached response for an email ID
 async function getCachedResponse(emailId) {
   try {
@@ -54,6 +78,13 @@ async function getCachedResponse(emailId) {
     const cache = result.geminiCache || {};
     
     if (cache[emailId]) {
+      // Safety check: ensure timestamp exists
+      if (typeof cache[emailId].timestamp !== 'number') {
+        delete cache[emailId];
+        await browser.storage.local.set({ geminiCache: cache });
+        return null;
+      }
+      
       const cacheAge = Date.now() - cache[emailId].timestamp;
       
       // Check if cache has expired (older than CACHE_TTL)
@@ -144,19 +175,12 @@ async function saveCachedResponse(emailId, response) {
     const cache = result.geminiCache || {};
     
     // Remove expired entries (older than CACHE_TTL)
-    const now = Date.now();
-    const cacheKeys = Object.keys(cache);
-    for (const key of cacheKeys) {
-      const cacheAge = now - cache[key].timestamp;
-      if (cacheAge > CACHE_TTL) {
-        delete cache[key];
-      }
-    }
+    cleanupExpiredCache(cache);
     
     // Store the response with timestamp
     cache[emailId] = {
       response: response,
-      timestamp: now
+      timestamp: Date.now()
     };
     
     // Limit cache size to prevent storage issues (keep last 50 entries)
