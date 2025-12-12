@@ -24,7 +24,7 @@ jobs:
       - name: Generate date-based version
         id: version
         run: |
-          # Generate version in YYYY.MM.DD format
+          # Generate version in YYYY.M.D format (without zero-padding)
           VERSION=$(date -u +"%Y.%-m.%-d")
           echo "version=$VERSION" >> $GITHUB_OUTPUT
           echo "Generated version: $VERSION"
@@ -37,8 +37,8 @@ jobs:
       - name: Update manifest.json with new version
         run: |
           VERSION="${{ steps.version.outputs.version }}"
-          # Update version in manifest.json
-          sed -i "s/\"version\": \"[^\"]*\"/\"version\": \"$VERSION\"/" manifest.json
+          # Update version in manifest.json (more robust pattern)
+          sed -i 's/"version":[[:space:]]*"[^"]*"/"version": "'$VERSION'"/' manifest.json
           echo "Updated manifest.json:"
           grep "version" manifest.json
       
