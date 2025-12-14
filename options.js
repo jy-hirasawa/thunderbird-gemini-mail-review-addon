@@ -61,7 +61,7 @@ async function loadSettings() {
       customPromptInput.value = customPrompt;
     }
     // Set cache retention days to saved value or default
-    cacheRetentionInput.value = cacheRetentionDays || DEFAULT_CACHE_RETENTION_DAYS;
+    cacheRetentionInput.value = cacheRetentionDays ?? DEFAULT_CACHE_RETENTION_DAYS;
   } catch (error) {
     console.error('Error loading settings:', error);
   }

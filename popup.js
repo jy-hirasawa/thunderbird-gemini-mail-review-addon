@@ -42,7 +42,7 @@ async function getCacheTTL() {
   
   try {
     const { cacheRetentionDays } = await browser.storage.local.get('cacheRetentionDays');
-    let days = cacheRetentionDays || DEFAULT_CACHE_RETENTION_DAYS;
+    let days = cacheRetentionDays ?? DEFAULT_CACHE_RETENTION_DAYS;
     
     // Validate retrieved value to prevent corrupted data
     if (typeof days !== 'number' || days < MIN_CACHE_RETENTION_DAYS || days > MAX_CACHE_RETENTION_DAYS) {
