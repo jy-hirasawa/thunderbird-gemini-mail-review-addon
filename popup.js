@@ -25,8 +25,13 @@ function localizeUI() {
 let currentTab = null;
 let cachedTTL = null; // Cache the TTL value to avoid redundant storage reads
 
+// Cache retention period constants (must match options.js)
+const DEFAULT_CACHE_RETENTION_DAYS = 7;
+const MIN_CACHE_RETENTION_DAYS = 1;
+const MAX_CACHE_RETENTION_DAYS = 365;
+
 // Default cache TTL: 7 days in milliseconds
-const DEFAULT_CACHE_TTL = 7 * 24 * 60 * 60 * 1000;
+const DEFAULT_CACHE_TTL = DEFAULT_CACHE_RETENTION_DAYS * 24 * 60 * 60 * 1000;
 
 // Get cache TTL from settings or use default
 async function getCacheTTL() {
@@ -37,7 +42,14 @@ async function getCacheTTL() {
   
   try {
     const { cacheRetentionDays } = await browser.storage.local.get('cacheRetentionDays');
-    const days = cacheRetentionDays || 7;
+    let days = cacheRetentionDays || DEFAULT_CACHE_RETENTION_DAYS;
+    
+    // Validate retrieved value to prevent corrupted data
+    if (typeof days !== 'number' || days < MIN_CACHE_RETENTION_DAYS || days > MAX_CACHE_RETENTION_DAYS) {
+      console.warn(`Invalid cache retention days value: ${days}, using default`);
+      days = DEFAULT_CACHE_RETENTION_DAYS;
+    }
+    
     cachedTTL = days * 24 * 60 * 60 * 1000;
     return cachedTTL;
   } catch (error) {
