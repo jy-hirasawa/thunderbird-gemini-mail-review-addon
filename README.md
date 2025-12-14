@@ -47,6 +47,9 @@ English | [日本語](README.ja.md)
    - (Optional) Add a custom prompt to customize how Gemini analyzes your emails
      - The custom prompt will be prepended to all review requests
      - Example: "Review this email for business communication. Check if the language is polite, appropriate for clients, and sufficiently formal. Flag any inappropriate, unnatural, or misleading expressions."
+   - (Optional) Configure cache retention days (1-365 days)
+     - Default: 7 days
+     - Determines how long cached analysis results are kept before expiring
    - Click **Save Settings**
    - (Optional) Click **Test Connection** to verify your configuration works
 
@@ -79,7 +82,8 @@ The add-on intelligently caches Gemini responses to:
   - A "Request Again from Gemini" button appears to get fresh analysis for the updated content
   - This allows you to quickly see the previous feedback while deciding if you need a new review
 - Cache stores the last 50 email analyses (oldest entries are automatically removed)
-- Cached responses are retained for 7 days and expire automatically after that
+- Cached responses are retained for a configurable period (default: 7 days) and expire automatically after that
+- You can customize the cache retention period in the settings (1-365 days)
 - Cache is stored locally in your Thunderbird profile using browser.storage.local
 
 ## What Gets Analyzed
