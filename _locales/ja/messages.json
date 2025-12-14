@@ -167,6 +167,22 @@
     "message": "すべてのメールレビューリクエストの先頭に追加されるカスタム指示を設定できます。Gemini がメールを分析する方法をカスタマイズできます。",
     "description": "Description for custom prompt feature"
   },
+  "cacheRetentionLabel": {
+    "message": "キャッシュ保持期間（日数）:",
+    "description": "Label for cache retention days input"
+  },
+  "cacheRetentionPlaceholder": {
+    "message": "7",
+    "description": "Placeholder for cache retention days input"
+  },
+  "cacheRetentionDescription": {
+    "message": "キャッシュされた分析結果を保持する日数です。デフォルトは7日です。",
+    "description": "Description for cache retention days feature"
+  },
+  "errorCacheRetentionInvalid": {
+    "message": "キャッシュ保持期間は1〜365日の間で指定してください",
+    "description": "Error message when cache retention days value is invalid"
+  },
   "cachedResponse": {
     "message": "📦 キャッシュから表示中",
     "description": "Indicator showing that the response is from cache"

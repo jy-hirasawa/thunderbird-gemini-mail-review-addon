@@ -35,6 +35,14 @@
         <textarea id="custom-prompt" rows="5" data-i18n-placeholder="customPromptPlaceholder" placeholder="Optional: Enter additional instructions for Gemini AI"></textarea>
       </div>
       
+      <div class="form-group">
+        <label for="cache-retention-days" data-i18n="cacheRetentionLabel">Cache Retention Days:</label>
+        <input type="number" id="cache-retention-days" min="1" max="365" value="7" data-i18n-placeholder="cacheRetentionPlaceholder" placeholder="7" />
+        <p class="description" data-i18n="cacheRetentionDescription">
+          Number of days to retain cached analysis results. Default is 7 days.
+        </p>
+      </div>
+      
       <div id="status" class="status"></div>
       
       <div class="button-group">

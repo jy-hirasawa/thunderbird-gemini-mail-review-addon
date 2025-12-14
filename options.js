@@ -34,6 +34,7 @@ function localizeUI() {
 const apiKeyInput = document.getElementById('api-key');
 const apiEndpointInput = document.getElementById('api-endpoint');
 const customPromptInput = document.getElementById('custom-prompt');
+const cacheRetentionInput = document.getElementById('cache-retention-days');
 const toggleButton = document.getElementById('toggle-visibility');
 const saveButton = document.getElementById('save');
 const testButton = document.getElementById('test');
@@ -41,11 +42,15 @@ const statusDiv = document.getElementById('status');
 
 // Default API endpoint
 const DEFAULT_API_ENDPOINT = 'https://generativelanguage.googleapis.com/v1/models/gemini-2.5-flash:generateContent';
+// Cache retention period constants
+const DEFAULT_CACHE_RETENTION_DAYS = 7;
+const MIN_CACHE_RETENTION_DAYS = 1;
+const MAX_CACHE_RETENTION_DAYS = 365;
 
 // Load saved settings
 async function loadSettings() {
   try {
-    const { geminiApiKey, geminiApiEndpoint, customPrompt } = await browser.storage.local.get(['geminiApiKey', 'geminiApiEndpoint', 'customPrompt']);
+    const { geminiApiKey, geminiApiEndpoint, customPrompt, cacheRetentionDays } = await browser.storage.local.get(['geminiApiKey', 'geminiApiEndpoint', 'customPrompt', 'cacheRetentionDays']);
     if (geminiApiKey) {
       apiKeyInput.value = geminiApiKey;
     }
@@ -55,6 +60,8 @@ async function loadSettings() {
     if (customPrompt) {
       customPromptInput.value = customPrompt;
     }
+    // Set cache retention days to saved value or default
+    cacheRetentionInput.value = cacheRetentionDays ?? DEFAULT_CACHE_RETENTION_DAYS;
   } catch (error) {
     console.error('Error loading settings:', error);
   }
@@ -65,6 +72,7 @@ async function saveSettings() {
   const apiKey = apiKeyInput.value.trim();
   const apiEndpoint = apiEndpointInput.value.trim();
   const customPrompt = customPromptInput.value.trim();
+  const cacheRetentionDays = parseInt(cacheRetentionInput.value, 10);
   
   if (!apiKey) {
     showStatus(browser.i18n.getMessage('errorApiKeyRequired'), 'error');
@@ -76,11 +84,18 @@ async function saveSettings() {
     return;
   }
   
+  // Validate cache retention days
+  if (isNaN(cacheRetentionDays) || cacheRetentionDays < MIN_CACHE_RETENTION_DAYS || cacheRetentionDays > MAX_CACHE_RETENTION_DAYS) {
+    showStatus(browser.i18n.getMessage('errorCacheRetentionInvalid'), 'error');
+    return;
+  }
+  
   try {
     await browser.storage.local.set({ 
       geminiApiKey: apiKey,
       geminiApiEndpoint: apiEndpoint,
-      customPrompt: customPrompt
+      customPrompt: customPrompt,
+      cacheRetentionDays: cacheRetentionDays
     });
     showStatus(browser.i18n.getMessage('successSaved'), 'success');
   } catch (error) {

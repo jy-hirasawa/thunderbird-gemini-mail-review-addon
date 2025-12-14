@@ -23,9 +23,50 @@ function localizeUI() {
 }
 
 let currentTab = null;
+let cachedTTL = null; // Cache the TTL value to avoid redundant storage reads
 
-// Cache TTL: 7 days in milliseconds
-const CACHE_TTL = 7 * 24 * 60 * 60 * 1000;
+// Cache retention period constants (must match options.js)
+const DEFAULT_CACHE_RETENTION_DAYS = 7;
+const MIN_CACHE_RETENTION_DAYS = 1;
+const MAX_CACHE_RETENTION_DAYS = 365;
+
+// Default cache TTL: 7 days in milliseconds
+const DEFAULT_CACHE_TTL = DEFAULT_CACHE_RETENTION_DAYS * 24 * 60 * 60 * 1000;
+
+// Get cache TTL from settings or use default
+async function getCacheTTL() {
+  // Return cached value if available
+  if (cachedTTL !== null) {
+    return cachedTTL;
+  }
+  
+  try {
+    const { cacheRetentionDays } = await browser.storage.local.get('cacheRetentionDays');
+    let days = cacheRetentionDays ?? DEFAULT_CACHE_RETENTION_DAYS;
+    
+    // Validate retrieved value to prevent corrupted data
+    if (typeof days !== 'number' || days < MIN_CACHE_RETENTION_DAYS || days > MAX_CACHE_RETENTION_DAYS) {
+      console.warn(`Invalid cache retention days value: ${days}, using default`);
+      days = DEFAULT_CACHE_RETENTION_DAYS;
+    }
+    
+    cachedTTL = days * 24 * 60 * 60 * 1000;
+    return cachedTTL;
+  } catch (error) {
+    console.error('Error getting cache TTL:', error);
+    cachedTTL = DEFAULT_CACHE_TTL;
+    return DEFAULT_CACHE_TTL;
+  }
+}
+
+// Listen for storage changes to invalidate cached TTL
+browser.storage.onChanged.addListener((changes, areaName) => {
+  if (areaName === 'local' && changes.cacheRetentionDays) {
+    // Invalidate cached TTL when setting changes
+    cachedTTL = null;
+    console.log('Cache retention days changed, invalidating cached TTL');
+  }
+});
 
 // Generate a unique ID for an email based on its content
 async function generateEmailId(emailContent) {
@@ -47,8 +88,8 @@ async function generateEmailId(emailContent) {
   return hashHex;
 }
 
-// Remove expired entries from cache (older than CACHE_TTL)
-function cleanupExpiredCache(cache) {
+// Remove expired entries from cache (older than cacheTTL)
+function cleanupExpiredCache(cache, cacheTTL) {
   const now = Date.now();
   const cacheKeys = Object.keys(cache);
   let cleanedCount = 0;
@@ -62,7 +103,7 @@ function cleanupExpiredCache(cache) {
     }
     
     const cacheAge = now - cache[key].timestamp;
-    if (cacheAge > CACHE_TTL) {
+    if (cacheAge > cacheTTL) {
       delete cache[key];
       cleanedCount++;
     }
@@ -74,6 +115,7 @@ function cleanupExpiredCache(cache) {
 // Get cached response for an email ID
 async function getCachedResponse(emailId) {
   try {
+    const cacheTTL = await getCacheTTL();
     const result = await browser.storage.local.get('geminiCache');
     const cache = result.geminiCache || {};
     
@@ -87,8 +129,8 @@ async function getCachedResponse(emailId) {
       
       const cacheAge = Date.now() - cache[emailId].timestamp;
       
-      // Check if cache has expired (older than CACHE_TTL)
-      if (cacheAge > CACHE_TTL) {
+      // Check if cache has expired (older than cacheTTL)
+      if (cacheAge > cacheTTL) {
         // Cache expired, remove it and return null
         delete cache[emailId];
         await browser.storage.local.set({ geminiCache: cache });
@@ -171,11 +213,12 @@ async function saveLastCheckedHash(tabId, emailId) {
 // Save response to cache
 async function saveCachedResponse(emailId, response) {
   try {
+    const cacheTTL = await getCacheTTL();
     const result = await browser.storage.local.get('geminiCache');
     const cache = result.geminiCache || {};
     
-    // Remove expired entries (older than CACHE_TTL)
-    cleanupExpiredCache(cache);
+    // Remove expired entries (older than cacheTTL)
+    cleanupExpiredCache(cache, cacheTTL);
     
     // Store the response with timestamp
     cache[emailId] = {
