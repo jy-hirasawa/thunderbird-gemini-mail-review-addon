@@ -4,7 +4,7 @@
   "version": "1.0.0",
   "description": "__MSG_extensionDescription__",
   "default_locale": "en",
-  "author": "Your Name",
+  "author": "jy-hirasawa",
   "homepage_url": "https://github.com/jy-hirasawa/thundirbird-gemini-mail-review-addon",
   "applications": {
     "gecko": {
