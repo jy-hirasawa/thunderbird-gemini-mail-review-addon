@@ -156,16 +156,56 @@
     "description": "Prefix for error messages"
   },
   "customPromptLabel": {
-    "message": "カスタムプロンプト:",
-    "description": "Label for custom prompt textarea"
-  },
-  "customPromptPlaceholder": {
-    "message": "オプション: Gemini AI への追加指示を入力（各リクエストの先頭に追加されます）",
-    "description": "Placeholder for custom prompt textarea"
+    "message": "カスタムプロンプトテンプレート:",
+    "description": "Label for custom prompt templates section"
   },
   "customPromptDescription": {
-    "message": "すべてのメールレビューリクエストの先頭に追加されるカスタム指示を設定できます。Gemini がメールを分析する方法をカスタマイズできます。",
+    "message": "3種類のカスタムプロンプトテンプレートを保存できます。メールレビュー時にテンプレートを選択して編集できます。",
     "description": "Description for custom prompt feature"
+  },
+  "customPromptTemplate1Label": {
+    "message": "テンプレート 1:",
+    "description": "Label for custom prompt template 1"
+  },
+  "customPromptTemplate2Label": {
+    "message": "テンプレート 2:",
+    "description": "Label for custom prompt template 2"
+  },
+  "customPromptTemplate3Label": {
+    "message": "テンプレート 3:",
+    "description": "Label for custom prompt template 3"
+  },
+  "customPromptPlaceholder": {
+    "message": "オプション: Gemini AI への追加指示を入力",
+    "description": "Placeholder for custom prompt textarea"
+  },
+  "customPromptTemplateName1Label": {
+    "message": "テンプレート 1 名:",
+    "description": "Label for template 1 name"
+  },
+  "customPromptTemplateName2Label": {
+    "message": "テンプレート 2 名:",
+    "description": "Label for template 2 name"
+  },
+  "customPromptTemplateName3Label": {
+    "message": "テンプレート 3 名:",
+    "description": "Label for template 3 name"
+  },
+  "customPromptTemplateNamePlaceholder": {
+    "message": "テンプレート名（オプション）",
+    "description": "Placeholder for template name input"
+  },
+  "selectTemplateLabel": {
+    "message": "カスタムプロンプトテンプレートを選択:",
+    "description": "Label for template selector dropdown"
+  },
+  "analyzeButton": {
+    "message": "分析を実行",
+    "description": "Button text to start analysis"
+  },
+  "editPromptLabel": {
+    "message": "カスタムプロンプトを編集:",
+    "description": "Label for editable custom prompt textarea"
   },
   "cacheRetentionLabel": {
     "message": "キャッシュ保持期間（日数）:",

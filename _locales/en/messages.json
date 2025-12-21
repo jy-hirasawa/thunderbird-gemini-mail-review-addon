@@ -156,16 +156,56 @@
     "description": "Prefix for error messages"
   },
   "customPromptLabel": {
-    "message": "Custom Prompt:",
-    "description": "Label for custom prompt textarea"
-  },
-  "customPromptPlaceholder": {
-    "message": "Optional: Enter additional instructions for Gemini AI (will be added to the beginning of each request)",
-    "description": "Placeholder for custom prompt textarea"
+    "message": "Custom Prompt Templates:",
+    "description": "Label for custom prompt templates section"
   },
   "customPromptDescription": {
-    "message": "You can add custom instructions that will be prepended to every email review request. This allows you to customize how Gemini analyzes your emails.",
+    "message": "You can save 3 types of custom prompt templates. When reviewing emails, you can select and edit the template.",
     "description": "Description for custom prompt feature"
+  },
+  "customPromptTemplate1Label": {
+    "message": "Template 1:",
+    "description": "Label for custom prompt template 1"
+  },
+  "customPromptTemplate2Label": {
+    "message": "Template 2:",
+    "description": "Label for custom prompt template 2"
+  },
+  "customPromptTemplate3Label": {
+    "message": "Template 3:",
+    "description": "Label for custom prompt template 3"
+  },
+  "customPromptPlaceholder": {
+    "message": "Optional: Enter additional instructions for Gemini AI",
+    "description": "Placeholder for custom prompt textarea"
+  },
+  "customPromptTemplateName1Label": {
+    "message": "Template 1 Name:",
+    "description": "Label for template 1 name"
+  },
+  "customPromptTemplateName2Label": {
+    "message": "Template 2 Name:",
+    "description": "Label for template 2 name"
+  },
+  "customPromptTemplateName3Label": {
+    "message": "Template 3 Name:",
+    "description": "Label for template 3 name"
+  },
+  "customPromptTemplateNamePlaceholder": {
+    "message": "Template name (optional)",
+    "description": "Placeholder for template name input"
+  },
+  "selectTemplateLabel": {
+    "message": "Select Custom Prompt Template:",
+    "description": "Label for template selector dropdown"
+  },
+  "analyzeButton": {
+    "message": "Analyze Email",
+    "description": "Button text to start analysis"
+  },
+  "editPromptLabel": {
+    "message": "Edit Custom Prompt:",
+    "description": "Label for editable custom prompt textarea"
   },
   "cacheRetentionLabel": {
     "message": "Cache Retention Days:",

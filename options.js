@@ -33,7 +33,12 @@ function localizeUI() {
 
 const apiKeyInput = document.getElementById('api-key');
 const apiEndpointInput = document.getElementById('api-endpoint');
-const customPromptInput = document.getElementById('custom-prompt');
+const customPromptName1Input = document.getElementById('custom-prompt-name-1');
+const customPromptName2Input = document.getElementById('custom-prompt-name-2');
+const customPromptName3Input = document.getElementById('custom-prompt-name-3');
+const customPrompt1Input = document.getElementById('custom-prompt-1');
+const customPrompt2Input = document.getElementById('custom-prompt-2');
+const customPrompt3Input = document.getElementById('custom-prompt-3');
 const cacheRetentionInput = document.getElementById('cache-retention-days');
 const toggleButton = document.getElementById('toggle-visibility');
 const saveButton = document.getElementById('save');
@@ -50,16 +55,46 @@ const MAX_CACHE_RETENTION_DAYS = 365;
 // Load saved settings
 async function loadSettings() {
   try {
-    const { geminiApiKey, geminiApiEndpoint, customPrompt, cacheRetentionDays } = await browser.storage.local.get(['geminiApiKey', 'geminiApiEndpoint', 'customPrompt', 'cacheRetentionDays']);
+    const { 
+      geminiApiKey, 
+      geminiApiEndpoint, 
+      customPrompt, // Legacy single prompt for migration
+      customPromptTemplates,
+      cacheRetentionDays 
+    } = await browser.storage.local.get([
+      'geminiApiKey', 
+      'geminiApiEndpoint', 
+      'customPrompt',
+      'customPromptTemplates',
+      'cacheRetentionDays'
+    ]);
+    
     if (geminiApiKey) {
       apiKeyInput.value = geminiApiKey;
     }
     // Set API endpoint to saved value or default
     apiEndpointInput.value = geminiApiEndpoint || DEFAULT_API_ENDPOINT;
-    // Set custom prompt if saved
-    if (customPrompt) {
-      customPromptInput.value = customPrompt;
+    
+    // Load custom prompt templates
+    if (customPromptTemplates) {
+      // Load from new format
+      if (customPromptTemplates.template1) {
+        customPromptName1Input.value = customPromptTemplates.template1.name || '';
+        customPrompt1Input.value = customPromptTemplates.template1.content || '';
+      }
+      if (customPromptTemplates.template2) {
+        customPromptName2Input.value = customPromptTemplates.template2.name || '';
+        customPrompt2Input.value = customPromptTemplates.template2.content || '';
+      }
+      if (customPromptTemplates.template3) {
+        customPromptName3Input.value = customPromptTemplates.template3.name || '';
+        customPrompt3Input.value = customPromptTemplates.template3.content || '';
+      }
+    } else if (customPrompt) {
+      // Migrate from legacy single prompt to template 1
+      customPrompt1Input.value = customPrompt;
     }
+    
     // Set cache retention days to saved value or default
     cacheRetentionInput.value = cacheRetentionDays ?? DEFAULT_CACHE_RETENTION_DAYS;
   } catch (error) {
@@ -71,8 +106,23 @@ async function loadSettings() {
 async function saveSettings() {
   const apiKey = apiKeyInput.value.trim();
   const apiEndpoint = apiEndpointInput.value.trim();
-  const customPrompt = customPromptInput.value.trim();
   const cacheRetentionDays = parseInt(cacheRetentionInput.value, 10);
+  
+  // Get custom prompt templates
+  const customPromptTemplates = {
+    template1: {
+      name: customPromptName1Input.value.trim(),
+      content: customPrompt1Input.value.trim()
+    },
+    template2: {
+      name: customPromptName2Input.value.trim(),
+      content: customPrompt2Input.value.trim()
+    },
+    template3: {
+      name: customPromptName3Input.value.trim(),
+      content: customPrompt3Input.value.trim()
+    }
+  };
   
   if (!apiKey) {
     showStatus(browser.i18n.getMessage('errorApiKeyRequired'), 'error');
@@ -94,9 +144,13 @@ async function saveSettings() {
     await browser.storage.local.set({ 
       geminiApiKey: apiKey,
       geminiApiEndpoint: apiEndpoint,
-      customPrompt: customPrompt,
+      customPromptTemplates: customPromptTemplates,
       cacheRetentionDays: cacheRetentionDays
     });
+    
+    // Remove legacy customPrompt field if it exists
+    await browser.storage.local.remove('customPrompt');
+    
     showStatus(browser.i18n.getMessage('successSaved'), 'success');
   } catch (error) {
     console.error('Error saving settings:', error);
