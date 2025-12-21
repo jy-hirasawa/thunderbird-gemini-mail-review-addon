@@ -253,6 +253,22 @@ async function saveCachedResponse(emailId, response) {
 
 // Get the current compose tab
 async function getCurrentComposeTab() {
+  // Check if tab ID is provided in URL parameter (when opened as separate window)
+  const urlParams = new URLSearchParams(window.location.search);
+  const tabId = urlParams.get('tabId');
+  
+  if (tabId) {
+    // Tab ID provided, get the tab directly
+    try {
+      const tab = await browser.tabs.get(parseInt(tabId, 10));
+      return tab;
+    } catch (error) {
+      console.error("Error getting tab by ID:", error);
+      // Fall back to querying active tab
+    }
+  }
+  
+  // Original behavior: query for active tab in current window (for popup mode)
   const tabs = await browser.tabs.query({ active: true, currentWindow: true });
   return tabs[0];
 }

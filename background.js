@@ -10,9 +10,9 @@ browser.runtime.onInstalled.addListener(() => {
 browser.composeAction.onClicked.addListener((tab) => {
   console.log("Gemini Mail Review button clicked for tab:", tab.id);
   
-  // Open popup.html in a new window
+  // Open popup.html in a new window with tab ID as query parameter
   browser.windows.create({
-    url: "popup.html",
+    url: `popup.html?tabId=${tab.id}`,
     type: "popup",
     width: 600,
     height: 700
