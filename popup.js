@@ -83,10 +83,24 @@ async function loadCustomPromptTemplates() {
   }
   
   try {
-    const { customPromptTemplates: templates, customPrompt } = await browser.storage.local.get(['customPromptTemplates', 'customPrompt']);
+    const { customPromptTemplates: templates, customPromptTemplatesEncrypted, customPrompt } = await browser.storage.local.get(['customPromptTemplates', 'customPromptTemplatesEncrypted', 'customPrompt']);
     
-    if (templates) {
-      customPromptTemplates = templates;
+    // Try to load encrypted templates first
+    let loadedTemplates = null;
+    if (customPromptTemplatesEncrypted) {
+      try {
+        loadedTemplates = await window.CryptoUtils.decryptSettings(customPromptTemplatesEncrypted);
+      } catch (error) {
+        console.error('Error decrypting custom prompt templates:', error);
+        // Fall back to unencrypted if decryption fails
+        loadedTemplates = templates;
+      }
+    } else {
+      loadedTemplates = templates;
+    }
+    
+    if (loadedTemplates) {
+      customPromptTemplates = loadedTemplates;
     } else if (customPrompt) {
       // Migrate from legacy single prompt
       customPromptTemplates = {
@@ -172,20 +186,39 @@ async function generateEmailId(emailContent) {
 }
 
 // Remove expired entries from cache (older than cacheTTL)
-function cleanupExpiredCache(cache, cacheTTL) {
+async function cleanupExpiredCache(cache, cacheTTL) {
   const now = Date.now();
   const cacheKeys = Object.keys(cache);
   let cleanedCount = 0;
   
   for (const key of cacheKeys) {
-    // Safety check: ensure timestamp exists and is a number
-    if (!cache[key] || typeof cache[key].timestamp !== 'number') {
+    // Try to get timestamp from cache entry
+    let timestamp;
+    
+    // Check if entry is encrypted (string) or unencrypted (object)
+    if (typeof cache[key] === 'string') {
+      // Encrypted entry - need to decrypt to check timestamp
+      try {
+        const decrypted = await window.CryptoUtils.decryptCacheData(cache[key], key);
+        timestamp = decrypted.timestamp;
+      } catch (error) {
+        console.error('Error decrypting cache entry during cleanup:', error);
+        // Remove corrupted entry
+        delete cache[key];
+        cleanedCount++;
+        continue;
+      }
+    } else if (cache[key] && typeof cache[key].timestamp === 'number') {
+      // Unencrypted legacy entry
+      timestamp = cache[key].timestamp;
+    } else {
+      // Invalid entry
       delete cache[key];
       cleanedCount++;
       continue;
     }
     
-    const cacheAge = now - cache[key].timestamp;
+    const cacheAge = now - timestamp;
     if (cacheAge > cacheTTL) {
       delete cache[key];
       cleanedCount++;
@@ -203,14 +236,32 @@ async function getCachedResponse(emailId) {
     const cache = result.geminiCache || {};
     
     if (cache[emailId]) {
+      // Try to decrypt the cached data
+      let cacheEntry;
+      if (typeof cache[emailId] === 'string') {
+        // Data is encrypted
+        try {
+          cacheEntry = await window.CryptoUtils.decryptCacheData(cache[emailId], emailId);
+        } catch (error) {
+          console.error('Error decrypting cached response:', error);
+          // If decryption fails, remove corrupted entry
+          delete cache[emailId];
+          await browser.storage.local.set({ geminiCache: cache });
+          return null;
+        }
+      } else {
+        // Data is not encrypted (legacy format)
+        cacheEntry = cache[emailId];
+      }
+      
       // Safety check: ensure timestamp exists
-      if (typeof cache[emailId].timestamp !== 'number') {
+      if (typeof cacheEntry.timestamp !== 'number') {
         delete cache[emailId];
         await browser.storage.local.set({ geminiCache: cache });
         return null;
       }
       
-      const cacheAge = Date.now() - cache[emailId].timestamp;
+      const cacheAge = Date.now() - cacheEntry.timestamp;
       
       // Check if cache has expired (older than cacheTTL)
       if (cacheAge > cacheTTL) {
@@ -221,9 +272,9 @@ async function getCachedResponse(emailId) {
       }
       
       return {
-        response: cache[emailId].response,
-        timestamp: cache[emailId].timestamp,
-        customPrompt: cache[emailId].customPrompt || ''
+        response: cacheEntry.response,
+        timestamp: cacheEntry.timestamp,
+        customPrompt: cacheEntry.customPrompt || ''
       };
     }
     
@@ -302,32 +353,62 @@ async function saveCachedResponse(emailId, response, customPrompt) {
     const cache = result.geminiCache || {};
     
     // Remove expired entries (older than cacheTTL)
-    cleanupExpiredCache(cache, cacheTTL);
+    await cleanupExpiredCache(cache, cacheTTL);
     
-    // Store the response with timestamp and custom prompt
-    cache[emailId] = {
+    // Prepare the cache entry
+    const cacheEntry = {
       response: response,
       timestamp: Date.now(),
       customPrompt: customPrompt || ''
     };
     
+    // Encrypt the cache entry using emailId as key
+    const encryptedEntry = await window.CryptoUtils.encryptCacheData(cacheEntry, emailId);
+    
+    // Store the encrypted response
+    cache[emailId] = encryptedEntry;
+    
     // Limit cache size to prevent storage issues (keep last 50 entries)
     const cacheKeys = Object.keys(cache);
     if (cacheKeys.length > 50) {
       // Find and remove the oldest entry
-      // O(n) iteration is acceptable here since cache is limited to 51 entries max
-      let oldestKey = cacheKeys[0];
-      let oldestTime = cache[oldestKey]?.timestamp || Date.now();
+      // Note: This requires decrypting entries to check timestamps
+      // Trade-off: Performance vs. simplicity. Cache limit is 50 so this is infrequent.
+      // Alternative would be to store timestamps separately, but adds complexity.
+      let oldestKey = null;
+      let oldestTime = Date.now();
       
       for (const key of cacheKeys) {
-        const timestamp = cache[key]?.timestamp;
-        if (typeof timestamp === 'number' && timestamp < oldestTime) {
-          oldestTime = timestamp;
-          oldestKey = key;
+        try {
+          let timestamp;
+          if (typeof cache[key] === 'string') {
+            // Encrypted entry
+            const decrypted = await window.CryptoUtils.decryptCacheData(cache[key], key);
+            timestamp = decrypted.timestamp;
+          } else if (cache[key] && typeof cache[key].timestamp === 'number') {
+            // Unencrypted legacy entry
+            timestamp = cache[key].timestamp;
+          } else {
+            // Invalid entry - mark for deletion
+            timestamp = 0;
+          }
+          
+          if (timestamp < oldestTime) {
+            oldestTime = timestamp;
+            oldestKey = key;
+          }
+        } catch (error) {
+          console.error('Error checking cache entry age:', error);
+          // If we can't decrypt, consider it for removal
+          if (oldestKey === null) {
+            oldestKey = key;
+          }
         }
       }
       
-      delete cache[oldestKey];
+      if (oldestKey) {
+        delete cache[oldestKey];
+      }
     }
     
     await browser.storage.local.set({ geminiCache: cache });
@@ -560,9 +641,24 @@ function validateApiEndpoint(endpoint) {
 async function analyzeEmail(forceRefresh = false, useInitialPrompt = false) {
   try {
     // Get API key and endpoint from storage
-    const { geminiApiKey, geminiApiEndpoint } = await browser.storage.local.get(['geminiApiKey', 'geminiApiEndpoint']);
+    const { geminiApiKey, geminiApiKeyEncrypted, geminiApiEndpoint } = await browser.storage.local.get(['geminiApiKey', 'geminiApiKeyEncrypted', 'geminiApiEndpoint']);
     
-    if (!geminiApiKey) {
+    // Try to decrypt API key
+    let apiKey = null;
+    if (geminiApiKeyEncrypted) {
+      try {
+        apiKey = await window.CryptoUtils.decryptSettings(geminiApiKeyEncrypted);
+      } catch (error) {
+        console.error('Error decrypting API key:', error);
+        displayError('Failed to decrypt API key. Please reconfigure your settings.');
+        return;
+      }
+    } else if (geminiApiKey) {
+      // Fall back to unencrypted key for backward compatibility
+      apiKey = geminiApiKey;
+    }
+    
+    if (!apiKey) {
       displayError(browser.i18n.getMessage('errorConfigureApiKey'));
       return;
     }
@@ -644,7 +740,7 @@ async function analyzeEmail(forceRefresh = false, useInitialPrompt = false) {
 
     // Call Gemini API with custom prompt
     document.getElementById('status').textContent = browser.i18n.getMessage('analyzingEmail');
-    const analysis = await analyzeEmailWithGemini(emailContent, geminiApiKey, apiEndpoint, customPrompt || '');
+    const analysis = await analyzeEmailWithGemini(emailContent, apiKey, apiEndpoint, customPrompt || '');
     
     // Save to cache with custom prompt
     await saveCachedResponse(emailId, analysis, customPrompt);
