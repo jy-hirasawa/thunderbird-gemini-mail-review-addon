@@ -545,7 +545,9 @@ function validateApiEndpoint(endpoint) {
       return { valid: false, error: 'API endpoint cannot be a local or private address' };
     }
     // Validate it's the expected Google API domain
-    if (!hostname.includes('googleapis.com') && !hostname.includes('google.com')) {
+    // Use endsWith to ensure the domain is exactly googleapis.com or a subdomain of it
+    if (!hostname.endsWith('.googleapis.com') && hostname !== 'googleapis.com' &&
+        !hostname.endsWith('.google.com') && hostname !== 'google.com') {
       return { valid: false, error: 'API endpoint must be a Google API domain (googleapis.com)' };
     }
     return { valid: true };

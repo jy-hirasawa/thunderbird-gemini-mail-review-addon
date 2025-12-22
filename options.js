@@ -86,7 +86,9 @@ function validateApiEndpoint(endpoint) {
       return { valid: false, error: 'API endpoint cannot be a local or private address' };
     }
     // Validate it's the expected Google API domain (with flexibility for regional endpoints)
-    if (!hostname.includes('googleapis.com') && !hostname.includes('google.com')) {
+    // Use endsWith to ensure the domain is exactly googleapis.com or a subdomain of it
+    if (!hostname.endsWith('.googleapis.com') && hostname !== 'googleapis.com' &&
+        !hostname.endsWith('.google.com') && hostname !== 'google.com') {
       return { valid: false, error: 'API endpoint must be a Google API domain (googleapis.com)' };
     }
     return { valid: true };
@@ -142,33 +144,6 @@ async function loadSettings() {
     cacheRetentionInput.value = cacheRetentionDays ?? DEFAULT_CACHE_RETENTION_DAYS;
   } catch (error) {
     console.error('Error loading settings:', error);
-  }
-}
-
-// Validate API endpoint URL to prevent SSRF attacks
-function validateApiEndpoint(endpoint) {
-  try {
-    const url = new URL(endpoint);
-    // Only allow HTTPS protocol for security
-    if (url.protocol !== 'https:') {
-      return { valid: false, error: 'API endpoint must use HTTPS protocol' };
-    }
-    // Validate hostname is not a local/private address
-    const hostname = url.hostname.toLowerCase();
-    if (hostname === 'localhost' || 
-        hostname === '127.0.0.1' ||
-        hostname.startsWith('192.168.') ||
-        hostname.startsWith('10.') ||
-        hostname.match(/^172\.(1[6-9]|2[0-9]|3[0-1])\./)) {
-      return { valid: false, error: 'API endpoint cannot be a local or private address' };
-    }
-    // Validate it's the expected Google API domain (with flexibility for regional endpoints)
-    if (!hostname.includes('googleapis.com') && !hostname.includes('google.com')) {
-      return { valid: false, error: 'API endpoint must be a Google API domain (googleapis.com)' };
-    }
-    return { valid: true };
-  } catch (error) {
-    return { valid: false, error: 'Invalid API endpoint URL format' };
   }
 }
 
