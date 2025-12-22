@@ -460,6 +460,14 @@ Provide a concise review with specific suggestions. If the email looks good, say
   }
 }
 
+// Populate custom prompt edit textarea
+function populateCustomPromptEdit(customPrompt) {
+  const customPromptEdit = document.getElementById('custom-prompt-edit');
+  if (customPromptEdit) {
+    customPromptEdit.value = customPrompt || '';
+  }
+}
+
 // Display results
 function displayResults(analysis, isFromCache = false, contentChanged = false, savedCustomPrompt = '', showPromptSection = false) {
   document.getElementById('loading').style.display = 'none';
@@ -487,10 +495,7 @@ function displayResults(analysis, isFromCache = false, contentChanged = false, s
     resultsPromptSection.style.display = 'block';
     
     // Populate the custom prompt textarea with the saved prompt
-    const customPromptEdit = document.getElementById('custom-prompt-edit');
-    if (customPromptEdit) {
-      customPromptEdit.value = savedCustomPrompt || '';
-    }
+    populateCustomPromptEdit(savedCustomPrompt);
   } else {
     cacheIndicator.style.display = 'none';
     contentChangedIndicator.style.display = 'none';
@@ -501,10 +506,7 @@ function displayResults(analysis, isFromCache = false, contentChanged = false, s
       resultsPromptSection.style.display = 'block';
       
       // Populate the custom prompt textarea with the prompt that was just used
-      const customPromptEdit = document.getElementById('custom-prompt-edit');
-      if (customPromptEdit) {
-        customPromptEdit.value = savedCustomPrompt || '';
-      }
+      populateCustomPromptEdit(savedCustomPrompt);
     } else {
       reRequestButton.style.display = 'none';
       resultsPromptSection.style.display = 'none';
@@ -695,6 +697,8 @@ document.addEventListener('DOMContentLoaded', async () => {
   
   // Load and initialize custom prompt templates
   await loadCustomPromptTemplates();
+  // Only update initial template selector - results section no longer has template selector
+  // as it directly shows the saved custom prompt for the email
   await updateTemplateSelectorOptions('template-selector-initial');
   
   // Set up template selector change listener for initial selector only
