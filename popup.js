@@ -24,6 +24,7 @@ function localizeUI() {
 
 let currentTab = null;
 let cachedTTL = null; // Cache the TTL value to avoid redundant storage reads
+let customPromptTemplates = null; // Store loaded templates
 
 // Cache retention period constants (must match options.js)
 const DEFAULT_CACHE_RETENTION_DAYS = 7;
@@ -61,12 +62,89 @@ async function getCacheTTL() {
 
 // Listen for storage changes to invalidate cached TTL
 browser.storage.onChanged.addListener((changes, areaName) => {
-  if (areaName === 'local' && changes.cacheRetentionDays) {
-    // Invalidate cached TTL when setting changes
-    cachedTTL = null;
-    console.log('Cache retention days changed, invalidating cached TTL');
+  if (areaName === 'local') {
+    if (changes.cacheRetentionDays) {
+      // Invalidate cached TTL when setting changes
+      cachedTTL = null;
+      console.log('Cache retention days changed, invalidating cached TTL');
+    }
+    if (changes.customPromptTemplates) {
+      // Reload templates when they change
+      customPromptTemplates = null;
+      loadCustomPromptTemplates();
+    }
   }
 });
+
+// Load custom prompt templates from storage
+async function loadCustomPromptTemplates() {
+  if (customPromptTemplates !== null) {
+    return customPromptTemplates;
+  }
+  
+  try {
+    const { customPromptTemplates: templates, customPrompt } = await browser.storage.local.get(['customPromptTemplates', 'customPrompt']);
+    
+    if (templates) {
+      customPromptTemplates = templates;
+    } else if (customPrompt) {
+      // Migrate from legacy single prompt
+      customPromptTemplates = {
+        template1: { name: '', content: customPrompt },
+        template2: { name: '', content: '' },
+        template3: { name: '', content: '' }
+      };
+    } else {
+      // Initialize empty templates
+      customPromptTemplates = {
+        template1: { name: '', content: '' },
+        template2: { name: '', content: '' },
+        template3: { name: '', content: '' }
+      };
+    }
+    
+    return customPromptTemplates;
+  } catch (error) {
+    console.error('Error loading custom prompt templates:', error);
+    customPromptTemplates = {
+      template1: { name: '', content: '' },
+      template2: { name: '', content: '' },
+      template3: { name: '', content: '' }
+    };
+    return customPromptTemplates;
+  }
+}
+
+// Update template selector options with names
+async function updateTemplateSelectorOptions() {
+  const templates = await loadCustomPromptTemplates();
+  const selector = document.getElementById('template-selector');
+  
+  // Update option labels with template names if they exist
+  for (let i = 1; i <= 3; i++) {
+    const template = templates[`template${i}`];
+    const option = selector.options[i - 1];
+    if (template && template.name) {
+      option.textContent = template.name;
+    } else {
+      option.textContent = browser.i18n.getMessage(`customPromptTemplate${i}Label`) || `Template ${i}`;
+    }
+  }
+}
+
+// Handle template selection change
+function handleTemplateChange() {
+  const selector = document.getElementById('template-selector');
+  const promptEdit = document.getElementById('custom-prompt-edit');
+  const selectedValue = selector.value;
+  
+  if (customPromptTemplates) {
+    const template = customPromptTemplates[`template${selectedValue}`];
+    if (template) {
+      promptEdit.value = template.content || '';
+    }
+  }
+}
 
 // Generate a unique ID for an email based on its content
 async function generateEmailId(emailContent) {
@@ -416,13 +494,17 @@ function displayError(message) {
 // Main analysis function
 async function analyzeEmail(forceRefresh = false) {
   try {
-    // Get API key, endpoint, and custom prompt from storage
-    const { geminiApiKey, geminiApiEndpoint, customPrompt } = await browser.storage.local.get(['geminiApiKey', 'geminiApiEndpoint', 'customPrompt']);
+    // Get API key and endpoint from storage
+    const { geminiApiKey, geminiApiEndpoint } = await browser.storage.local.get(['geminiApiKey', 'geminiApiEndpoint']);
     
     if (!geminiApiKey) {
       displayError(browser.i18n.getMessage('errorConfigureApiKey'));
       return;
     }
+    
+    // Get custom prompt from the editable textarea
+    const customPromptEdit = document.getElementById('custom-prompt-edit');
+    const customPrompt = customPromptEdit ? customPromptEdit.value.trim() : '';
     
     // Use default endpoint if not configured
     const apiEndpoint = geminiApiEndpoint || 'https://generativelanguage.googleapis.com/v1/models/gemini-2.5-flash:generateContent';
@@ -503,12 +585,32 @@ async function analyzeEmail(forceRefresh = false) {
 }
 
 // Event listeners
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', async () => {
   // Localize UI first
   localizeUI();
   
-  // Start analysis when popup opens
-  analyzeEmail();
+  // Load and initialize custom prompt templates
+  await loadCustomPromptTemplates();
+  await updateTemplateSelectorOptions();
+  
+  // Set up template selector change listener
+  const templateSelector = document.getElementById('template-selector');
+  templateSelector.addEventListener('change', handleTemplateChange);
+  
+  // Initialize the first template content in the edit textarea
+  handleTemplateChange();
+  
+  // Analyze button - don't auto-analyze, wait for user click
+  document.getElementById('analyze').addEventListener('click', async () => {
+    // Hide prompt section and show loading
+    document.getElementById('prompt-section').style.display = 'none';
+    document.getElementById('loading').style.display = 'block';
+    document.getElementById('status').style.display = 'block';
+    document.getElementById('status').textContent = browser.i18n.getMessage('analyzingEmail');
+    
+    // Start analysis
+    await analyzeEmail(false);
+  });
   
   // Re-request button
   document.getElementById('re-request').addEventListener('click', async () => {
