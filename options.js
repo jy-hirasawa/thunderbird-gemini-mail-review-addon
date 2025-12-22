@@ -122,8 +122,18 @@ async function loadSettings() {
     let apiKey = null;
     if (geminiApiKeyEncrypted) {
       try {
-        apiKey = await window.CryptoUtils.decryptSettings(geminiApiKeyEncrypted);
-        apiKeyInput.value = apiKey;
+        // Check if CryptoUtils is available
+        if (window.CryptoUtils && typeof window.CryptoUtils.decryptSettings === 'function') {
+          apiKey = await window.CryptoUtils.decryptSettings(geminiApiKeyEncrypted);
+          apiKeyInput.value = apiKey;
+        } else {
+          console.warn('CryptoUtils not available, skipping decryption');
+          // Fall back to unencrypted if CryptoUtils not available
+          if (geminiApiKey) {
+            apiKey = geminiApiKey;
+            apiKeyInput.value = apiKey;
+          }
+        }
       } catch (error) {
         console.error('Error decrypting API key:', error);
         // Fall back to unencrypted if decryption fails
@@ -145,7 +155,14 @@ async function loadSettings() {
     let templates = null;
     if (customPromptTemplatesEncrypted) {
       try {
-        templates = await window.CryptoUtils.decryptSettings(customPromptTemplatesEncrypted);
+        // Check if CryptoUtils is available
+        if (window.CryptoUtils && typeof window.CryptoUtils.decryptSettings === 'function') {
+          templates = await window.CryptoUtils.decryptSettings(customPromptTemplatesEncrypted);
+        } else {
+          console.warn('CryptoUtils not available, skipping template decryption');
+          // Fall back to unencrypted if CryptoUtils not available
+          templates = customPromptTemplates;
+        }
       } catch (error) {
         console.error('Error decrypting custom prompt templates:', error);
         // Fall back to unencrypted if decryption fails
@@ -228,6 +245,11 @@ async function saveSettings() {
   }
   
   try {
+    // Check if CryptoUtils is available
+    if (!window.CryptoUtils || typeof window.CryptoUtils.encryptSettings !== 'function') {
+      throw new Error('Encryption utilities not loaded. Please reload the page.');
+    }
+    
     // Encrypt sensitive data
     const encryptedApiKey = await window.CryptoUtils.encryptSettings(apiKey);
     const encryptedCustomPromptTemplates = await window.CryptoUtils.encryptSettings(customPromptTemplates);
