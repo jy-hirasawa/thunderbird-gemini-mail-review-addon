@@ -268,15 +268,15 @@ function isEncrypted(data) {
     
     // Initialize CryptoUtils namespace on window object
     window.CryptoUtils = {
-      generateProfileKey: generateProfileKey,
-      deriveKeyFromIdentifier: deriveKeyFromIdentifier,
-      encryptData: encryptData,
-      decryptData: decryptData,
-      encryptSettings: encryptSettings,
-      decryptSettings: decryptSettings,
-      encryptCacheData: encryptCacheData,
-      decryptCacheData: decryptCacheData,
-      isEncrypted: isEncrypted
+      generateProfileKey,
+      deriveKeyFromIdentifier,
+      encryptData,
+      decryptData,
+      encryptSettings,
+      decryptSettings,
+      encryptCacheData,
+      decryptCacheData,
+      isEncrypted
     };
     
     console.log('CryptoUtils initialized successfully');
