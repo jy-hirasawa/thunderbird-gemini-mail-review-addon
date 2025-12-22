@@ -60,29 +60,65 @@ When you add a new file (e.g., `new-feature.js`), add it to the "Create ZIP file
 
 ## Documentation Updates
 
+### Documentation Structure
+
+**IMPORTANT**: All documentation must be created in both English and Japanese.
+
+#### Documentation Location Rules:
+
+1. **README files** are kept in the **repository root**:
+   - `README.md` (English)
+   - `README.ja.md` (Japanese)
+
+2. **USAGE files** are kept in the **repository root**:
+   - `USAGE.md` (English)
+   - `USAGE.ja.md` (Japanese)
+
+3. **All other documentation** must be placed under the `doc/` directory:
+   - English documentation: `doc/en/`
+   - Japanese documentation: `doc/ja/`
+
+#### Example Documentation Structure:
+```
+repository-root/
+├── README.md              # English README (root)
+├── README.ja.md           # Japanese README (root)
+├── USAGE.md               # English usage guide (root)
+├── USAGE.ja.md            # Japanese usage guide (root)
+└── doc/
+    ├── en/
+    │   ├── DEVELOPMENT.md  # English development guide
+    │   ├── I18N.md         # English i18n guide
+    │   └── SECURITY.md     # English security policy
+    └── ja/
+        ├── DEVELOPMENT.md  # Japanese development guide
+        ├── I18N.md         # Japanese i18n guide
+        └── SECURITY.md     # Japanese security policy
+```
+
 ### When Modifying Code
 
-**IMPORTANT**: When you modify code that affects functionality, features, or usage, you MUST update the relevant documentation files.
+**IMPORTANT**: When you modify code that affects functionality, features, or usage, you MUST update the relevant documentation files in **BOTH** English and Japanese.
 
 #### Documentation Files to Check:
 
-1. **README.md** (English) and **README.ja.md** (Japanese)
+1. **README.md** (English) and **README.ja.md** (Japanese) - **Root directory**
    - Update when: Adding/removing features, changing setup steps, modifying usage instructions
    - Sections to check: Features, Setup, Usage, Project Structure
 
-2. **USAGE.md** (English) and **USAGE.ja.md** (Japanese)
+2. **USAGE.md** (English) and **USAGE.ja.md** (Japanese) - **Root directory**
    - Update when: Changing how users interact with the addon
    - Sections to check: Step-by-step usage instructions
 
-3. **DEVELOPMENT.md**
+3. **doc/en/DEVELOPMENT.md** (English) and **doc/ja/DEVELOPMENT.md** (Japanese)
    - Update when: Adding new files, changing project structure, modifying development workflow
    - Sections to check: Project Structure, Building, Testing
 
-4. **SECURITY.md** and **SECURITY_IMPROVEMENTS.ja.md**
+4. **doc/en/SECURITY.md** (English) and **doc/ja/SECURITY.md** (Japanese)
    - Update when: Modifying security features, encryption, data storage
    - Sections to check: Security features list, encryption mechanisms
 
-5. **I18N.md**
+5. **doc/en/I18N.md** (English) and **doc/ja/I18N.md** (Japanese)
    - Update when: Adding new UI elements that need translation
    - Sections to check: Translation keys list
 
@@ -91,34 +127,34 @@ When you add a new file (e.g., `new-feature.js`), add it to the "Create ZIP file
 When making code changes, ask yourself:
 
 - [ ] Does this change add, remove, or modify a user-facing feature?
-  - → Update README.md and README.ja.md
+  - → Update README.md and README.ja.md (in root)
 - [ ] Does this change how users interact with the addon?
-  - → Update USAGE.md and USAGE.ja.md
+  - → Update USAGE.md and USAGE.ja.md (in root)
 - [ ] Does this change the project structure or add new files?
-  - → Update DEVELOPMENT.md (Project Structure section)
+  - → Update doc/en/DEVELOPMENT.md and doc/ja/DEVELOPMENT.md (Project Structure section)
   - → Update .github/workflows/build-and-release.yml (if addon file)
 - [ ] Does this change security features or data handling?
-  - → Update SECURITY.md and SECURITY_IMPROVEMENTS.ja.md
+  - → Update doc/en/SECURITY.md and doc/ja/SECURITY.md
 - [ ] Does this add new UI text or messages?
-  - → Update I18N.md
+  - → Update doc/en/I18N.md and doc/ja/I18N.md
   - → Add translations to _locales/en/messages.json and _locales/ja/messages.json
 
 ### Example Scenarios
 
 **Scenario 1**: Adding a new JavaScript module `email-validator.js`
 - ✅ Add to `.github/workflows/build-and-release.yml` (in the ZIP creation step)
-- ✅ Update `DEVELOPMENT.md` (add to Project Structure)
+- ✅ Update `doc/en/DEVELOPMENT.md` and `doc/ja/DEVELOPMENT.md` (add to Project Structure)
 - ✅ Update `README.md` and `README.ja.md` if it adds user-facing features
 
 **Scenario 2**: Adding a new configuration option in `options.js`
 - ✅ Update `README.md` and `README.ja.md` (Setup section)
 - ✅ Update `USAGE.md` and `USAGE.ja.md` if it changes how users configure the addon
-- ✅ Update `I18N.md` if new UI text is added
+- ✅ Update `doc/en/I18N.md` and `doc/ja/I18N.md` if new UI text is added
 - ✅ Add translations to `_locales/en/messages.json` and `_locales/ja/messages.json`
 
 **Scenario 3**: Modifying the encryption mechanism in `crypto-utils.js`
-- ✅ Update `SECURITY.md` and `SECURITY_IMPROVEMENTS.ja.md` (explain the new mechanism)
-- ✅ Update `README.md` security section if user-visible
+- ✅ Update `doc/en/SECURITY.md` and `doc/ja/SECURITY.md` (explain the new mechanism)
+- ✅ Update `README.md` and `README.ja.md` security section if user-visible
 
 ## General Guidelines
 

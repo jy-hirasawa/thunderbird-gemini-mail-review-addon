@@ -114,7 +114,7 @@ This add-on sends your email content to Google's Gemini API for analysis. Your e
 - Cached email data is encrypted with email-specific keys
 - Profile-specific encryption isolates data between different Thunderbird profiles
 - Encryption keys are derived from profile ID and email ID
-- See [SECURITY.md](SECURITY.md) for details
+- See [SECURITY.md](doc/en/SECURITY.md) for details
 
 **Important**: Do not use this add-on for highly sensitive or confidential emails unless you are comfortable with them being processed by Google's AI service.
 
