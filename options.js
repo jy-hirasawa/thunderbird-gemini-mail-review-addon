@@ -102,38 +102,73 @@ async function loadSettings() {
   try {
     const { 
       geminiApiKey, 
+      geminiApiKeyEncrypted,
       geminiApiEndpoint, 
       customPrompt, // Legacy single prompt for migration
       customPromptTemplates,
+      customPromptTemplatesEncrypted,
       cacheRetentionDays 
     } = await browser.storage.local.get([
-      'geminiApiKey', 
+      'geminiApiKey',
+      'geminiApiKeyEncrypted',
       'geminiApiEndpoint', 
       'customPrompt',
       'customPromptTemplates',
+      'customPromptTemplatesEncrypted',
       'cacheRetentionDays'
     ]);
     
-    if (geminiApiKey) {
-      apiKeyInput.value = geminiApiKey;
+    // Try to load encrypted API key first
+    let apiKey = null;
+    if (geminiApiKeyEncrypted) {
+      try {
+        apiKey = await window.CryptoUtils.decryptSettings(geminiApiKeyEncrypted);
+        apiKeyInput.value = apiKey;
+      } catch (error) {
+        console.error('Error decrypting API key:', error);
+        // Fall back to unencrypted if decryption fails
+        if (geminiApiKey) {
+          apiKey = geminiApiKey;
+          apiKeyInput.value = apiKey;
+        }
+      }
+    } else if (geminiApiKey) {
+      // Legacy unencrypted API key
+      apiKey = geminiApiKey;
+      apiKeyInput.value = apiKey;
     }
+    
     // Set API endpoint to saved value or default
     apiEndpointInput.value = geminiApiEndpoint || DEFAULT_API_ENDPOINT;
     
+    // Try to load encrypted custom prompt templates first
+    let templates = null;
+    if (customPromptTemplatesEncrypted) {
+      try {
+        templates = await window.CryptoUtils.decryptSettings(customPromptTemplatesEncrypted);
+      } catch (error) {
+        console.error('Error decrypting custom prompt templates:', error);
+        // Fall back to unencrypted if decryption fails
+        templates = customPromptTemplates;
+      }
+    } else {
+      templates = customPromptTemplates;
+    }
+    
     // Load custom prompt templates
-    if (customPromptTemplates) {
+    if (templates) {
       // Load from new format
-      if (customPromptTemplates.template1) {
-        customPromptName1Input.value = customPromptTemplates.template1.name || '';
-        customPrompt1Input.value = customPromptTemplates.template1.content || '';
+      if (templates.template1) {
+        customPromptName1Input.value = templates.template1.name || '';
+        customPrompt1Input.value = templates.template1.content || '';
       }
-      if (customPromptTemplates.template2) {
-        customPromptName2Input.value = customPromptTemplates.template2.name || '';
-        customPrompt2Input.value = customPromptTemplates.template2.content || '';
+      if (templates.template2) {
+        customPromptName2Input.value = templates.template2.name || '';
+        customPrompt2Input.value = templates.template2.content || '';
       }
-      if (customPromptTemplates.template3) {
-        customPromptName3Input.value = customPromptTemplates.template3.name || '';
-        customPrompt3Input.value = customPromptTemplates.template3.content || '';
+      if (templates.template3) {
+        customPromptName3Input.value = templates.template3.name || '';
+        customPrompt3Input.value = templates.template3.content || '';
       }
     } else if (customPrompt) {
       // Migrate from legacy single prompt to template 1
@@ -193,15 +228,19 @@ async function saveSettings() {
   }
   
   try {
+    // Encrypt sensitive data
+    const encryptedApiKey = await window.CryptoUtils.encryptSettings(apiKey);
+    const encryptedCustomPromptTemplates = await window.CryptoUtils.encryptSettings(customPromptTemplates);
+    
     await browser.storage.local.set({ 
-      geminiApiKey: apiKey,
+      geminiApiKeyEncrypted: encryptedApiKey,
       geminiApiEndpoint: apiEndpoint,
-      customPromptTemplates: customPromptTemplates,
+      customPromptTemplatesEncrypted: encryptedCustomPromptTemplates,
       cacheRetentionDays: cacheRetentionDays
     });
     
-    // Remove legacy customPrompt field if it exists
-    await browser.storage.local.remove('customPrompt');
+    // Remove legacy unencrypted fields if they exist
+    await browser.storage.local.remove(['geminiApiKey', 'customPrompt', 'customPromptTemplates']);
     
     showStatus(browser.i18n.getMessage('successSaved'), 'success');
   } catch (error) {
