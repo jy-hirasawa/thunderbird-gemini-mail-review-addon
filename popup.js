@@ -89,7 +89,13 @@ async function loadCustomPromptTemplates() {
     let loadedTemplates = null;
     if (customPromptTemplatesEncrypted) {
       try {
-        loadedTemplates = await window.CryptoUtils.decryptSettings(customPromptTemplatesEncrypted);
+        // Check if CryptoUtils is available
+        if (window.CryptoUtils && typeof window.CryptoUtils.decryptSettings === 'function') {
+          loadedTemplates = await window.CryptoUtils.decryptSettings(customPromptTemplatesEncrypted);
+        } else {
+          console.warn('CryptoUtils not available, falling back to unencrypted templates');
+          loadedTemplates = templates;
+        }
       } catch (error) {
         console.error('Error decrypting custom prompt templates:', error);
         // Fall back to unencrypted if decryption fails
@@ -199,8 +205,17 @@ async function cleanupExpiredCache(cache, cacheTTL) {
     if (typeof cache[key] === 'string') {
       // Encrypted entry - need to decrypt to check timestamp
       try {
-        const decrypted = await window.CryptoUtils.decryptCacheData(cache[key], key);
-        timestamp = decrypted.timestamp;
+        // Check if CryptoUtils is available
+        if (window.CryptoUtils && typeof window.CryptoUtils.decryptCacheData === 'function') {
+          const decrypted = await window.CryptoUtils.decryptCacheData(cache[key], key);
+          timestamp = decrypted.timestamp;
+        } else {
+          console.warn('CryptoUtils not available, cannot decrypt cache entry');
+          // Remove entry that can't be decrypted
+          delete cache[key];
+          cleanedCount++;
+          continue;
+        }
       } catch (error) {
         console.error('Error decrypting cache entry during cleanup:', error);
         // Remove corrupted entry
@@ -241,7 +256,13 @@ async function getCachedResponse(emailId) {
       if (typeof cache[emailId] === 'string') {
         // Data is encrypted
         try {
-          cacheEntry = await window.CryptoUtils.decryptCacheData(cache[emailId], emailId);
+          // Check if CryptoUtils is available
+          if (window.CryptoUtils && typeof window.CryptoUtils.decryptCacheData === 'function') {
+            cacheEntry = await window.CryptoUtils.decryptCacheData(cache[emailId], emailId);
+          } else {
+            console.warn('CryptoUtils not available, cannot decrypt cache');
+            return null;
+          }
         } catch (error) {
           console.error('Error decrypting cached response:', error);
           // If decryption fails, remove corrupted entry
@@ -362,11 +383,18 @@ async function saveCachedResponse(emailId, response, customPrompt) {
       customPrompt: customPrompt || ''
     };
     
-    // Encrypt the cache entry using emailId as key
-    const encryptedEntry = await window.CryptoUtils.encryptCacheData(cacheEntry, emailId);
-    
-    // Store the encrypted response
-    cache[emailId] = encryptedEntry;
+    // Check if CryptoUtils is available
+    if (!window.CryptoUtils || typeof window.CryptoUtils.encryptCacheData !== 'function') {
+      console.warn('CryptoUtils not available, storing cache unencrypted');
+      // Store unencrypted as fallback
+      cache[emailId] = cacheEntry;
+    } else {
+      // Encrypt the cache entry using emailId as key
+      const encryptedEntry = await window.CryptoUtils.encryptCacheData(cacheEntry, emailId);
+      
+      // Store the encrypted response
+      cache[emailId] = encryptedEntry;
+    }
     
     // Limit cache size to prevent storage issues (keep last 50 entries)
     const cacheKeys = Object.keys(cache);
@@ -383,8 +411,15 @@ async function saveCachedResponse(emailId, response, customPrompt) {
           let timestamp;
           if (typeof cache[key] === 'string') {
             // Encrypted entry
-            const decrypted = await window.CryptoUtils.decryptCacheData(cache[key], key);
-            timestamp = decrypted.timestamp;
+            // Check if CryptoUtils is available
+            if (window.CryptoUtils && typeof window.CryptoUtils.decryptCacheData === 'function') {
+              const decrypted = await window.CryptoUtils.decryptCacheData(cache[key], key);
+              timestamp = decrypted.timestamp;
+            } else {
+              console.warn('CryptoUtils not available, treating entry as oldest');
+              // If we can't decrypt, treat as oldest and remove it
+              timestamp = 0;
+            }
           } else if (cache[key] && typeof cache[key].timestamp === 'number') {
             // Unencrypted legacy entry
             timestamp = cache[key].timestamp;
@@ -647,7 +682,14 @@ async function analyzeEmail(forceRefresh = false, useInitialPrompt = false) {
     let apiKey = null;
     if (geminiApiKeyEncrypted) {
       try {
-        apiKey = await window.CryptoUtils.decryptSettings(geminiApiKeyEncrypted);
+        // Check if CryptoUtils is available
+        if (window.CryptoUtils && typeof window.CryptoUtils.decryptSettings === 'function') {
+          apiKey = await window.CryptoUtils.decryptSettings(geminiApiKeyEncrypted);
+        } else {
+          console.error('CryptoUtils not available, cannot decrypt API key');
+          displayError('Encryption utilities not loaded. Please reload the page.');
+          return;
+        }
       } catch (error) {
         console.error('Error decrypting API key:', error);
         displayError('Failed to decrypt API key. Please reconfigure your settings.');
