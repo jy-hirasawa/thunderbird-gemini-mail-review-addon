@@ -47,7 +47,9 @@ English | [日本語](README.ja.md)
      - You can save up to 3 custom prompt templates with names
      - Each template will be available for selection when reviewing emails
      - Custom prompts are prepended to the analysis request
-     - Example: "Review this email for business communication. Check if the language is polite, appropriate for clients, and sufficiently formal. Flag any inappropriate, unnatural, or misleading expressions."
+     - **Multi-language Support**: Write prompts in any language for analysis results in that language
+     - Example (English): "Review this email for business communication. Check if the language is polite, appropriate for clients, and sufficiently formal. Flag any inappropriate, unnatural, or misleading expressions."
+     - Example (Japanese): "以下のメール本文が、取引先・顧客など会社宛てのメールとして、敬語や言い回しが適切か、失礼・不自然・誤解を招く表現がないか、ビジネスメールとして十分にフォーマルかを確認してください。問題点があれば、理由とあわせて修正案を提示してください。"
    - (Optional) Configure cache retention days (1-365 days)
      - Default: 7 days
      - Determines how long cached analysis results are kept before expiring

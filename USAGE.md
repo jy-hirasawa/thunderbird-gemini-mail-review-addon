@@ -17,7 +17,13 @@ English | [日本語](USAGE.ja.md)
    - (Optional) Add custom prompt templates to customize how Gemini analyzes your emails
      - You can save up to 3 custom prompt templates with names
      - Each template can have a descriptive name and custom instructions
-     - Example for business email checking: "Review this email for business communication. Check if the language is polite, appropriate for clients, and sufficiently formal. Flag any inappropriate, unnatural, or misleading expressions."
+     - **Multi-language Support**: Write your custom prompt in any language, and Gemini will respond in that same language
+       - English prompt → English analysis results
+       - Japanese prompt (日本語) → Japanese analysis results (日本語)
+       - Spanish prompt (Español) → Spanish analysis results (Español)
+       - This works for any language supported by Gemini
+     - Example for business email checking (English): "Review this email for business communication. Check if the language is polite, appropriate for clients, and sufficiently formal. Flag any inappropriate, unnatural, or misleading expressions."
+     - Example for business email checking (Japanese): "以下のメール本文が、取引先・顧客など会社宛てのメールとして、敬語や言い回しが適切か、失礼・不自然・誤解を招く表現がないか、ビジネスメールとして十分にフォーマルかを確認してください。問題点があれば、理由とあわせて修正案を提示してください。"
    - Click **Test Connection** to verify your configuration
    - Click **Save Settings**
 
@@ -59,6 +65,46 @@ English | [日本語](USAGE.ja.md)
 **Scenario**: You wrote a complex email and want to ensure it's clear.
 
 **Action**: The review will identify unclear sections and suggest ways to improve clarity and conciseness.
+
+### Multi-language Email Review
+**Scenario**: You write emails in languages other than English and want analysis in your native language.
+
+**Action**: Create a custom prompt template in your preferred language. The AI will analyze your email and provide feedback in that same language. For example:
+- Write your custom prompt in Japanese → Get analysis results in Japanese
+- Write your custom prompt in Spanish → Get analysis results in Spanish
+- Write your custom prompt in French → Get analysis results in French
+
+**Example Custom Prompts by Language**:
+
+**Japanese (日本語)**:
+```
+このメールを分析して、以下の点を確認してください：
+- 文法とスペルミス
+- 敬語の適切な使用
+- ビジネスメールとしての適切さ
+- 言い回しの自然さ
+問題点があれば、理由と修正案を日本語で提示してください。
+```
+
+**Spanish (Español)**:
+```
+Analiza este correo electrónico y verifica:
+- Gramática y ortografía
+- Tono profesional
+- Claridad del mensaje
+- Posibles problemas
+Proporciona comentarios y sugerencias en español.
+```
+
+**French (Français)**:
+```
+Analysez cet e-mail et vérifiez:
+- La grammaire et l'orthographe
+- Le ton professionnel
+- La clarté du message
+- Les problèmes potentiels
+Fournissez des commentaires et des suggestions en français.
+```
 
 ## Understanding Review Results
 
