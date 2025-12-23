@@ -17,7 +17,13 @@
    - （オプション）Gemini がメールを分析する方法をカスタマイズするためにカスタムプロンプトテンプレートを追加
      - 最大3つのカスタムプロンプトテンプレートを名前付きで保存できます
      - 各テンプレートには説明的な名前とカスタム指示を設定できます
-     - ビジネスメールチェックの例: "以下のメール本文が、取引先・顧客など会社宛てのメールとして、敬語や言い回しが適切か、失礼・不自然・誤解を招く表現がないか、ビジネスメールとして十分にフォーマルかを確認してください。問題点があれば、理由とあわせて修正案を提示してください。内容の意図は変えないでください。"
+     - **多言語対応**: カスタムプロンプトは任意の言語で記述でき、Gemini は同じ言語で応答します
+       - 英語のプロンプト → 英語の分析結果
+       - 日本語のプロンプト → 日本語の分析結果
+       - スペイン語のプロンプト（Español） → スペイン語の分析結果（Español）
+       - Gemini がサポートするすべての言語で利用可能
+     - ビジネスメールチェックの例（日本語）: "以下のメール本文が、取引先・顧客など会社宛てのメールとして、敬語や言い回しが適切か、失礼・不自然・誤解を招く表現がないか、ビジネスメールとして十分にフォーマルかを確認してください。問題点があれば、理由とあわせて修正案を提示してください。"
+     - ビジネスメールチェックの例（英語）: "Review this email for business communication. Check if the language is polite, appropriate for clients, and sufficiently formal. Flag any inappropriate, unnatural, or misleading expressions."
    - **接続テスト** をクリックして設定を確認
    - **設定を保存** をクリック
 
@@ -59,6 +65,56 @@
 **シナリオ**: 複雑なメールを書いたので、内容が明確かどうか確認したい。
 
 **アクション**: レビューは不明瞭な箇所を特定し、明瞭さと簡潔さを向上させる方法を提案します。
+
+### 多言語メールレビュー
+**シナリオ**: 英語以外の言語でメールを書いており、母国語で分析を受けたい。
+
+**アクション**: 希望する言語でカスタムプロンプトテンプレートを作成します。AI は同じ言語でメールを分析し、フィードバックを提供します。例えば：
+- 日本語でカスタムプロンプトを記述 → 日本語で分析結果を取得
+- スペイン語でカスタムプロンプトを記述 → スペイン語で分析結果を取得
+- フランス語でカスタムプロンプトを記述 → フランス語で分析結果を取得
+
+**言語別カスタムプロンプトの例**:
+
+**日本語**:
+```
+このメールを分析して、以下の点を確認してください：
+- 文法とスペルミス
+- 敬語の適切な使用
+- ビジネスメールとしての適切さ
+- 言い回しの自然さ
+問題点があれば、理由と修正案を日本語で提示してください。
+```
+
+**英語 (English)**:
+```
+Review this email for business communication. Check:
+- Grammar and spelling
+- Professional tone
+- Message clarity
+- Potential issues
+Provide feedback and suggestions in English.
+```
+
+**スペイン語 (Español)**:
+```
+Analiza este correo electrónico y verifica:
+- Gramática y ortografía
+- Tono profesional
+- Claridad del mensaje
+- Posibles problemas
+Proporciona comentarios y sugerencias en español.
+```
+
+**フランス語 (Français)**:
+```
+Analysez cet e-mail et vérifiez:
+- La grammaire et l'orthographe
+- Le ton professionnel
+- La clarté du message
+- Les problèmes potentiels
+Fournissez des commentaires et des suggestions en français.
+```
 
 ## レビュー結果の理解
 
