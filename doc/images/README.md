@@ -57,3 +57,26 @@ The following screenshots should be captured from Thunderbird and added to this 
   - Use suffix `-en.png` for English screenshots
   - Use suffix `-ja.png` for Japanese screenshots
   - If UI is language-neutral, no suffix needed
+
+## Current Status
+
+### Japanese Screenshots (`-ja.png`)
+
+The following Japanese screenshot files exist:
+
+✅ **Completed (with Japanese UI text):**
+- `popup-template-selection-ja.png`
+- `popup-analyzing-ja.png`
+- `popup-results-ja.png`
+- `popup-cached-result-ja.png`
+- `popup-content-changed-ja.png`
+
+⚠️ **Placeholders (need proper Japanese UI capture):**
+- `settings-page-ja.png` - Currently uses English UI, needs Japanese locale capture
+- `compose-window-icon-ja.png` - Currently uses English UI, needs Japanese locale capture
+
+To capture proper Japanese screenshots:
+1. Set Thunderbird to Japanese locale (日本語)
+2. Install the add-on
+3. Capture screenshots following the guidelines above
+4. Replace the placeholder files
