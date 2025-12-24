@@ -360,21 +360,8 @@ function showStatus(message, type) {
 document.addEventListener('DOMContentLoaded', () => {
   localizeUI();
   loadSettings();
-});
-saveButton.addEventListener('click', saveSettings);
-testButton.addEventListener('click', testConnection);
-toggleButton.addEventListener('click', toggleVisibility);
-clearCacheButton.addEventListener('click', clearCache);
-
-// Save on Enter key
-apiKeyInput.addEventListener('keypress', (e) => {
-  if (e.key === 'Enter') {
-    saveSettings();
-  }
-});
-
-// Tab switching functionality
-document.addEventListener('DOMContentLoaded', () => {
+  
+  // Tab switching functionality
   const tabButtons = document.querySelectorAll('.tab-button');
   const tabContents = document.querySelectorAll('.tab-content');
   
@@ -388,7 +375,21 @@ document.addEventListener('DOMContentLoaded', () => {
       
       // Add active class to clicked button and corresponding content
       button.classList.add('active');
-      document.getElementById(targetTab).classList.add('active');
+      const tabContent = document.getElementById(targetTab);
+      if (tabContent) {
+        tabContent.classList.add('active');
+      }
     });
   });
+});
+saveButton.addEventListener('click', saveSettings);
+testButton.addEventListener('click', testConnection);
+toggleButton.addEventListener('click', toggleVisibility);
+clearCacheButton.addEventListener('click', clearCache);
+
+// Save on Enter key
+apiKeyInput.addEventListener('keypress', (e) => {
+  if (e.key === 'Enter') {
+    saveSettings();
+  }
 });
