@@ -45,17 +45,17 @@
      - 必要に応じてカスタムプロンプトを確認・編集
      - **メールを分析** をクリックして分析を開始
    
-   ![テンプレート選択](doc/images/popup-template-selection.png)
+   ![テンプレート選択](doc/images/popup-template-selection-ja.png)
    *テンプレート選択とカスタムプロンプトエディタを示すポップアップ*
    
    - AI 分析を待つ（通常 2〜5 秒）
    
-   ![分析中](doc/images/popup-analyzing.png)
+   ![分析中](doc/images/popup-analyzing-ja.png)
    *分析処理中*
    
    - フィードバックを確認
    
-   ![分析結果](doc/images/popup-results.png)
+   ![分析結果](doc/images/popup-results-ja.png)
    *AI フィードバックと提案が表示される*
 
 5. **フィードバックへの対応**
@@ -69,13 +69,13 @@
 ### キャッシュされたレスポンス
 すでに分析したメールを再度レビューすると、キャッシュされたレスポンスのインジケータが表示されます：
 
-![キャッシュされた結果](doc/images/popup-cached-result.png)
+![キャッシュされた結果](doc/images/popup-cached-result-ja.png)
 *「📦 キャッシュから表示中」インジケータとともに即座に表示されるキャッシュされた分析結果*
 
 ### 内容変更の警告
 メールを分析した後に編集すると、次回のレビューでは警告とともに前回の分析が表示されます：
 
-![内容変更](doc/images/popup-content-changed.png)
+![内容変更](doc/images/popup-content-changed-ja.png)
 *「⚠️ メール内容が変更されています」警告と、新しい分析をリクエストするオプションとともに表示される前回の分析*
 
 これにより、次のことができます：
