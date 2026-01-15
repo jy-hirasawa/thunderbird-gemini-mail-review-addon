@@ -42,7 +42,7 @@ jobs:
           echo "Updated manifest.json:"
           grep "version" manifest.json
       
-      - name: Create ZIP file
+      - name: Create XPI file
         run: |
           # Create a clean build directory
           mkdir -p build
@@ -60,21 +60,21 @@ jobs:
           cp -r icons build/
           cp -r _locales build/
           
-          # Create ZIP file
+          # Create XPI file (XPI is a ZIP file with .xpi extension for Thunderbird addons)
           VERSION="${{ steps.version.outputs.version }}"
           cd build
-          zip -r ../gemini-mail-review-${VERSION}.zip .
+          zip -r ../gemini-mail-review-${VERSION}.xpi .
           cd ..
           
           # List contents
-          echo "ZIP contents:"
-          unzip -l gemini-mail-review-${VERSION}.zip
+          echo "XPI contents:"
+          unzip -l gemini-mail-review-${VERSION}.xpi
       
       - name: Upload artifact
         uses: actions/upload-artifact@v4
         with:
           name: gemini-mail-review-${{ steps.version.outputs.version }}
-          path: gemini-mail-review-${{ steps.version.outputs.version }}.zip
+          path: gemini-mail-review-${{ steps.version.outputs.version }}.xpi
           retention-days: 90
       
       - name: Create Release
@@ -83,7 +83,7 @@ jobs:
         with:
           tag_name: ${{ steps.version.outputs.tag_name }}
           name: Release ${{ steps.version.outputs.version }}
-          files: gemini-mail-review-${{ steps.version.outputs.version }}.zip
+          files: gemini-mail-review-${{ steps.version.outputs.version }}.xpi
           generate_release_notes: true
           draft: false
           prerelease: false
