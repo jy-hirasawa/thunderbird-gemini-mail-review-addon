@@ -1,6 +1,6 @@
 # Usage Guide
 
-English | [日本語](USAGE.ja.md)
+English | [日本語](USAGE.ja.md) | [Deutsch](USAGE.de.md) | [Français](USAGE.fr.md) | [简体中文](USAGE.zh_CN.md)
 
 ## Quick Start
 
