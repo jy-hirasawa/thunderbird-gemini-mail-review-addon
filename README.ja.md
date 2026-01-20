@@ -2,7 +2,7 @@
 
 Google の Gemini AI を使用してメール送信前にチェックする Thunderbird アドオンです。スペル、文法、トーン、明瞭さ、潜在的な問題についてインテリジェントなフィードバックを得られます。
 
-[English](README.md) | 日本語
+[English](README.md) | 日本語 | [Deutsch](README.de.md) | [Français](README.fr.md) | [简体中文](README.zh_CN.md)
 
 ## 機能
 

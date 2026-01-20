@@ -1,0 +1,270 @@
+{
+  "extensionName": {
+    "message": "Gemini Mail Review",
+    "description": "Name of the extension"
+  },
+  "extensionDescription": {
+    "message": "在发送前使用 Gemini AI 检查您的电子邮件",
+    "description": "Description of the extension"
+  },
+  "optionsTitle": {
+    "message": "Gemini Mail Review 设置",
+    "description": "Title of the options page"
+  },
+  "apiConfigurationHeading": {
+    "message": "API 配置",
+    "description": "Heading for API configuration section"
+  },
+  "apiConfigurationDescription": {
+    "message": "要使用此扩展，您需要一个 Gemini API 密钥。在此免费获取",
+    "description": "Description text for API configuration"
+  },
+  "googleAIStudio": {
+    "message": "Google AI Studio",
+    "description": "Link text for Google AI Studio"
+  },
+  "apiKeyLabel": {
+    "message": "Gemini API 密钥：",
+    "description": "Label for API key input"
+  },
+  "apiKeyPlaceholder": {
+    "message": "输入您的 API 密钥",
+    "description": "Placeholder for API key input"
+  },
+  "showButton": {
+    "message": "显示",
+    "description": "Button text to show password"
+  },
+  "hideButton": {
+    "message": "隐藏",
+    "description": "Button text to hide password"
+  },
+  "apiEndpointLabel": {
+    "message": "API 端点：",
+    "description": "Label for API endpoint input"
+  },
+  "apiEndpointPlaceholder": {
+    "message": "API 端点 URL",
+    "description": "Placeholder for API endpoint input"
+  },
+  "saveButton": {
+    "message": "保存设置",
+    "description": "Button text to save settings"
+  },
+  "testButton": {
+    "message": "测试连接",
+    "description": "Button text to test connection"
+  },
+  "testingButton": {
+    "message": "测试中...",
+    "description": "Button text while testing"
+  },
+  "aboutHeading": {
+    "message": "关于",
+    "description": "Heading for about section"
+  },
+  "aboutDescription1": {
+    "message": "此扩展使用 Google 的 Gemini AI 在发送前检查您的电子邮件。它检查拼写、语法、语气、清晰度和潜在问题。",
+    "description": "First paragraph of about description"
+  },
+  "aboutDescription2": {
+    "message": "您的电子邮件将发送到 Google 的 Gemini API 进行分析。使用此扩展前，请查看 Google 的隐私政策。",
+    "description": "Second paragraph of about description"
+  },
+  "privacyLabel": {
+    "message": "隐私：",
+    "description": "Label for privacy notice"
+  },
+  "errorApiKeyRequired": {
+    "message": "请输入 API 密钥",
+    "description": "Error message when API key is missing"
+  },
+  "errorEndpointRequired": {
+    "message": "请输入 API 端点",
+    "description": "Error message when API endpoint is missing"
+  },
+  "successSaved": {
+    "message": "设置保存成功！",
+    "description": "Success message when settings are saved"
+  },
+  "errorSaving": {
+    "message": "保存设置时出错：",
+    "description": "Error message when saving fails"
+  },
+  "errorApiKeyTooShort": {
+    "message": "API 密钥似乎太短。请检查您的密钥。",
+    "description": "Error message when API key is too short"
+  },
+  "errorTestApiKeyFirst": {
+    "message": "请先输入 API 密钥",
+    "description": "Error message when testing without API key"
+  },
+  "errorTestEndpointFirst": {
+    "message": "请先输入 API 端点",
+    "description": "Error message when testing without endpoint"
+  },
+  "successTestConnection": {
+    "message": "✓ 连接成功！API 密钥有效。",
+    "description": "Success message when connection test passes"
+  },
+  "errorTestUnexpectedResponse": {
+    "message": "连接成功但收到意外响应",
+    "description": "Error message when test succeeds but response is unexpected"
+  },
+  "errorTestConnectionFailed": {
+    "message": "连接失败：",
+    "description": "Error message when connection test fails"
+  },
+  "popupTitle": {
+    "message": "Gemini Mail Review",
+    "description": "Title of the popup"
+  },
+  "checkingEmail": {
+    "message": "正在检查电子邮件...",
+    "description": "Status text while checking email"
+  },
+  "analyzingEmail": {
+    "message": "正在使用 Gemini 分析电子邮件...",
+    "description": "Status text while analyzing email"
+  },
+  "analysisResultsHeading": {
+    "message": "分析结果：",
+    "description": "Heading for analysis results"
+  },
+  "sendAnywayButton": {
+    "message": "仍然发送",
+    "description": "Button text to send email anyway"
+  },
+  "editEmailButton": {
+    "message": "编辑电子邮件",
+    "description": "Button text to edit email"
+  },
+  "configureApiKeyLink": {
+    "message": "配置 API 密钥和自定义提示",
+    "description": "Link text to open settings"
+  },
+  "errorConfigureApiKey": {
+    "message": "请在设置中配置您的 Gemini API 密钥。",
+    "description": "Error message when API key is not configured"
+  },
+  "errorComposeWindow": {
+    "message": "找不到撰写窗口。",
+    "description": "Error message when compose window is not found"
+  },
+  "errorPrefix": {
+    "message": "错误：",
+    "description": "Prefix for error messages"
+  },
+  "customPromptLabel": {
+    "message": "自定义提示模板：",
+    "description": "Label for custom prompt templates section"
+  },
+  "customPromptDescription": {
+    "message": "您可以保存 3 种类型的自定义提示模板。检查电子邮件时，您可以选择和编辑模板。",
+    "description": "Description for custom prompt feature"
+  },
+  "customPromptTemplate1Label": {
+    "message": "模板 1：",
+    "description": "Label for custom prompt template 1"
+  },
+  "customPromptTemplate2Label": {
+    "message": "模板 2：",
+    "description": "Label for custom prompt template 2"
+  },
+  "customPromptTemplate3Label": {
+    "message": "模板 3：",
+    "description": "Label for custom prompt template 3"
+  },
+  "customPromptPlaceholder": {
+    "message": "可选：为 Gemini AI 输入附加说明",
+    "description": "Placeholder for custom prompt textarea"
+  },
+  "customPromptTemplateName1Label": {
+    "message": "模板 1 名称：",
+    "description": "Label for template 1 name"
+  },
+  "customPromptTemplateName2Label": {
+    "message": "模板 2 名称：",
+    "description": "Label for template 2 name"
+  },
+  "customPromptTemplateName3Label": {
+    "message": "模板 3 名称：",
+    "description": "Label for template 3 name"
+  },
+  "customPromptTemplateNamePlaceholder": {
+    "message": "模板名称（可选）",
+    "description": "Placeholder for template name input"
+  },
+  "selectTemplateLabel": {
+    "message": "选择自定义提示模板：",
+    "description": "Label for template selector dropdown"
+  },
+  "analyzeButton": {
+    "message": "分析电子邮件",
+    "description": "Button text to start analysis"
+  },
+  "editPromptLabel": {
+    "message": "编辑自定义提示：",
+    "description": "Label for editable custom prompt textarea"
+  },
+  "cacheRetentionLabel": {
+    "message": "缓存保留天数：",
+    "description": "Label for cache retention days input"
+  },
+  "cacheRetentionPlaceholder": {
+    "message": "7",
+    "description": "Placeholder for cache retention days input"
+  },
+  "cacheRetentionDescription": {
+    "message": "保留缓存分析结果的天数。默认为 7 天。",
+    "description": "Description for cache retention days feature"
+  },
+  "errorCacheRetentionInvalid": {
+    "message": "缓存保留天数必须在 1 到 365 之间",
+    "description": "Error message when cache retention days value is invalid"
+  },
+  "cachedResponse": {
+    "message": "📦 显示缓存的响应",
+    "description": "Indicator showing that the response is from cache"
+  },
+  "contentChangedCachedResponse": {
+    "message": "⚠️ 电子邮件内容已更改。显示之前的分析。",
+    "description": "Indicator showing that email content changed but displaying old cached response"
+  },
+  "reRequestButton": {
+    "message": "从 Gemini 重新请求",
+    "description": "Button text to re-request analysis from Gemini"
+  },
+  "cacheManagementLabel": {
+    "message": "缓存管理：",
+    "description": "Label for cache management section"
+  },
+  "cacheManagementDescription": {
+    "message": "缓存数据包括电子邮件内容和分析结果。清除缓存以删除所有存储的电子邮件数据。",
+    "description": "Description for cache management feature"
+  },
+  "clearCacheButton": {
+    "message": "清除所有缓存数据",
+    "description": "Button text to clear all cached data"
+  },
+  "confirmClearCache": {
+    "message": "您确定要清除所有缓存的分析结果吗？此操作无法撤消。",
+    "description": "Confirmation message before clearing cache"
+  },
+  "successCacheCleared": {
+    "message": "缓存清除成功",
+    "description": "Success message when cache is cleared"
+  },
+  "errorClearingCache": {
+    "message": "清除缓存时出错：",
+    "description": "Error message when clearing cache fails"
+  },
+  "securityLabel": {
+    "message": "安全性：",
+    "description": "Label for security notice"
+  },
+  "aboutDescription3": {
+    "message": "您的 API 密钥和电子邮件缓存本地存储在 Thunderbird 的存储中。缓存包括电子邮件主题、收件人和正文内容。对于敏感电子邮件，请考虑禁用缓存或使用上述缓存管理选项定期清除。",
+    "description": "Third paragraph of about description - security notice"
+  }
+}

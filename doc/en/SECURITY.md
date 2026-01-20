@@ -1,6 +1,6 @@
 # Security Policy
 
-English | [日本語](../ja/SECURITY.md)
+English | [日本語](../ja/SECURITY.md) | [Deutsch](../de/SECURITY.md) | [Français](../fr/SECURITY.md) | [简体中文](../zh_CN/SECURITY.md)
 
 ## Data Storage and Privacy
 

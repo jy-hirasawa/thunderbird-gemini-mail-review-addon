@@ -1,6 +1,6 @@
 # 開発ノート
 
-[English](../en/DEVELOPMENT.md) | 日本語
+[English](../en/DEVELOPMENT.md) | 日本語 | [Deutsch](../de/DEVELOPMENT.md) | [Français](../fr/DEVELOPMENT.md) | [简体中文](../zh_CN/DEVELOPMENT.md)
 
 ## プロジェクト概要
 これは、Google の Gemini AI を統合して、送信前にメールをレビューする Thunderbird アドオンです。

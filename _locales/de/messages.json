@@ -1,0 +1,270 @@
+{
+  "extensionName": {
+    "message": "Gemini Mail Review",
+    "description": "Name of the extension"
+  },
+  "extensionDescription": {
+    "message": "Überprüfen Sie Ihre E-Mail mit Gemini AI vor dem Senden",
+    "description": "Description of the extension"
+  },
+  "optionsTitle": {
+    "message": "Gemini Mail Review Einstellungen",
+    "description": "Title of the options page"
+  },
+  "apiConfigurationHeading": {
+    "message": "API-Konfiguration",
+    "description": "Heading for API configuration section"
+  },
+  "apiConfigurationDescription": {
+    "message": "Um dieses Add-on zu verwenden, benötigen Sie einen Gemini API-Schlüssel. Erhalten Sie kostenlos einen unter",
+    "description": "Description text for API configuration"
+  },
+  "googleAIStudio": {
+    "message": "Google AI Studio",
+    "description": "Link text for Google AI Studio"
+  },
+  "apiKeyLabel": {
+    "message": "Gemini API-Schlüssel:",
+    "description": "Label for API key input"
+  },
+  "apiKeyPlaceholder": {
+    "message": "Geben Sie Ihren API-Schlüssel ein",
+    "description": "Placeholder for API key input"
+  },
+  "showButton": {
+    "message": "Anzeigen",
+    "description": "Button text to show password"
+  },
+  "hideButton": {
+    "message": "Verbergen",
+    "description": "Button text to hide password"
+  },
+  "apiEndpointLabel": {
+    "message": "API-Endpunkt:",
+    "description": "Label for API endpoint input"
+  },
+  "apiEndpointPlaceholder": {
+    "message": "API-Endpunkt URL",
+    "description": "Placeholder for API endpoint input"
+  },
+  "saveButton": {
+    "message": "Einstellungen speichern",
+    "description": "Button text to save settings"
+  },
+  "testButton": {
+    "message": "Verbindung testen",
+    "description": "Button text to test connection"
+  },
+  "testingButton": {
+    "message": "Teste...",
+    "description": "Button text while testing"
+  },
+  "aboutHeading": {
+    "message": "Über",
+    "description": "Heading for about section"
+  },
+  "aboutDescription1": {
+    "message": "Dieses Add-on verwendet Google's Gemini AI, um Ihre E-Mails vor dem Senden zu überprüfen. Es prüft Rechtschreibung, Grammatik, Tonfall, Klarheit und potenzielle Probleme.",
+    "description": "First paragraph of about description"
+  },
+  "aboutDescription2": {
+    "message": "Ihre E-Mails werden zur Analyse an Google's Gemini API gesendet. Bitte lesen Sie die Datenschutzerklärung von Google, bevor Sie dieses Add-on verwenden.",
+    "description": "Second paragraph of about description"
+  },
+  "privacyLabel": {
+    "message": "Datenschutz:",
+    "description": "Label for privacy notice"
+  },
+  "errorApiKeyRequired": {
+    "message": "Bitte geben Sie einen API-Schlüssel ein",
+    "description": "Error message when API key is missing"
+  },
+  "errorEndpointRequired": {
+    "message": "Bitte geben Sie einen API-Endpunkt ein",
+    "description": "Error message when API endpoint is missing"
+  },
+  "successSaved": {
+    "message": "Einstellungen erfolgreich gespeichert!",
+    "description": "Success message when settings are saved"
+  },
+  "errorSaving": {
+    "message": "Fehler beim Speichern der Einstellungen:",
+    "description": "Error message when saving fails"
+  },
+  "errorApiKeyTooShort": {
+    "message": "Der API-Schlüssel scheint zu kurz zu sein. Bitte überprüfen Sie Ihren Schlüssel.",
+    "description": "Error message when API key is too short"
+  },
+  "errorTestApiKeyFirst": {
+    "message": "Bitte geben Sie zuerst einen API-Schlüssel ein",
+    "description": "Error message when testing without API key"
+  },
+  "errorTestEndpointFirst": {
+    "message": "Bitte geben Sie zuerst einen API-Endpunkt ein",
+    "description": "Error message when testing without endpoint"
+  },
+  "successTestConnection": {
+    "message": "✓ Verbindung erfolgreich! API-Schlüssel ist gültig.",
+    "description": "Success message when connection test passes"
+  },
+  "errorTestUnexpectedResponse": {
+    "message": "Verbindung erfolgreich, aber unerwartete Antwort erhalten",
+    "description": "Error message when test succeeds but response is unexpected"
+  },
+  "errorTestConnectionFailed": {
+    "message": "Verbindung fehlgeschlagen:",
+    "description": "Error message when connection test fails"
+  },
+  "popupTitle": {
+    "message": "Gemini Mail Review",
+    "description": "Title of the popup"
+  },
+  "checkingEmail": {
+    "message": "E-Mail wird überprüft...",
+    "description": "Status text while checking email"
+  },
+  "analyzingEmail": {
+    "message": "E-Mail wird mit Gemini analysiert...",
+    "description": "Status text while analyzing email"
+  },
+  "analysisResultsHeading": {
+    "message": "Analyseergebnisse:",
+    "description": "Heading for analysis results"
+  },
+  "sendAnywayButton": {
+    "message": "Trotzdem senden",
+    "description": "Button text to send email anyway"
+  },
+  "editEmailButton": {
+    "message": "E-Mail bearbeiten",
+    "description": "Button text to edit email"
+  },
+  "configureApiKeyLink": {
+    "message": "API-Schlüssel und benutzerdefinierte Eingabeaufforderung konfigurieren",
+    "description": "Link text to open settings"
+  },
+  "errorConfigureApiKey": {
+    "message": "Bitte konfigurieren Sie Ihren Gemini API-Schlüssel in den Einstellungen.",
+    "description": "Error message when API key is not configured"
+  },
+  "errorComposeWindow": {
+    "message": "Verfassen-Fenster konnte nicht gefunden werden.",
+    "description": "Error message when compose window is not found"
+  },
+  "errorPrefix": {
+    "message": "Fehler:",
+    "description": "Prefix for error messages"
+  },
+  "customPromptLabel": {
+    "message": "Benutzerdefinierte Eingabeaufforderungsvorlagen:",
+    "description": "Label for custom prompt templates section"
+  },
+  "customPromptDescription": {
+    "message": "Sie können 3 Arten von benutzerdefinierten Eingabeaufforderungsvorlagen speichern. Beim Überprüfen von E-Mails können Sie die Vorlage auswählen und bearbeiten.",
+    "description": "Description for custom prompt feature"
+  },
+  "customPromptTemplate1Label": {
+    "message": "Vorlage 1:",
+    "description": "Label for custom prompt template 1"
+  },
+  "customPromptTemplate2Label": {
+    "message": "Vorlage 2:",
+    "description": "Label for custom prompt template 2"
+  },
+  "customPromptTemplate3Label": {
+    "message": "Vorlage 3:",
+    "description": "Label for custom prompt template 3"
+  },
+  "customPromptPlaceholder": {
+    "message": "Optional: Geben Sie zusätzliche Anweisungen für Gemini AI ein",
+    "description": "Placeholder for custom prompt textarea"
+  },
+  "customPromptTemplateName1Label": {
+    "message": "Name der Vorlage 1:",
+    "description": "Label for template 1 name"
+  },
+  "customPromptTemplateName2Label": {
+    "message": "Name der Vorlage 2:",
+    "description": "Label for template 2 name"
+  },
+  "customPromptTemplateName3Label": {
+    "message": "Name der Vorlage 3:",
+    "description": "Label for template 3 name"
+  },
+  "customPromptTemplateNamePlaceholder": {
+    "message": "Vorlagenname (optional)",
+    "description": "Placeholder for template name input"
+  },
+  "selectTemplateLabel": {
+    "message": "Benutzerdefinierte Eingabeaufforderungsvorlage auswählen:",
+    "description": "Label for template selector dropdown"
+  },
+  "analyzeButton": {
+    "message": "E-Mail analysieren",
+    "description": "Button text to start analysis"
+  },
+  "editPromptLabel": {
+    "message": "Benutzerdefinierte Eingabeaufforderung bearbeiten:",
+    "description": "Label for editable custom prompt textarea"
+  },
+  "cacheRetentionLabel": {
+    "message": "Cache-Aufbewahrungstage:",
+    "description": "Label for cache retention days input"
+  },
+  "cacheRetentionPlaceholder": {
+    "message": "7",
+    "description": "Placeholder for cache retention days input"
+  },
+  "cacheRetentionDescription": {
+    "message": "Anzahl der Tage, für die zwischengespeicherte Analyseergebnisse aufbewahrt werden. Standard ist 7 Tage.",
+    "description": "Description for cache retention days feature"
+  },
+  "errorCacheRetentionInvalid": {
+    "message": "Cache-Aufbewahrungstage müssen zwischen 1 und 365 liegen",
+    "description": "Error message when cache retention days value is invalid"
+  },
+  "cachedResponse": {
+    "message": "📦 Zwischengespeicherte Antwort wird angezeigt",
+    "description": "Indicator showing that the response is from cache"
+  },
+  "contentChangedCachedResponse": {
+    "message": "⚠️ E-Mail-Inhalt hat sich geändert. Vorherige Analyse wird angezeigt.",
+    "description": "Indicator showing that email content changed but displaying old cached response"
+  },
+  "reRequestButton": {
+    "message": "Erneut von Gemini anfordern",
+    "description": "Button text to re-request analysis from Gemini"
+  },
+  "cacheManagementLabel": {
+    "message": "Cache-Verwaltung:",
+    "description": "Label for cache management section"
+  },
+  "cacheManagementDescription": {
+    "message": "Zwischengespeicherte Daten umfassen E-Mail-Inhalte und Analyseergebnisse. Löschen Sie den Cache, um alle gespeicherten E-Mail-Daten zu entfernen.",
+    "description": "Description for cache management feature"
+  },
+  "clearCacheButton": {
+    "message": "Alle zwischengespeicherten Daten löschen",
+    "description": "Button text to clear all cached data"
+  },
+  "confirmClearCache": {
+    "message": "Sind Sie sicher, dass Sie alle zwischengespeicherten Analyseergebnisse löschen möchten? Dies kann nicht rückgängig gemacht werden.",
+    "description": "Confirmation message before clearing cache"
+  },
+  "successCacheCleared": {
+    "message": "Cache erfolgreich gelöscht",
+    "description": "Success message when cache is cleared"
+  },
+  "errorClearingCache": {
+    "message": "Fehler beim Löschen des Caches:",
+    "description": "Error message when clearing cache fails"
+  },
+  "securityLabel": {
+    "message": "Sicherheit:",
+    "description": "Label for security notice"
+  },
+  "aboutDescription3": {
+    "message": "Ihr API-Schlüssel und E-Mail-Cache werden lokal im Thunderbird-Speicher gespeichert. Der Cache enthält E-Mail-Betreffzeilen, Empfänger und Nachrichteninhalte. Für sensible E-Mails sollten Sie den Cache deaktivieren oder regelmäßig mit der oben genannten Cache-Verwaltungsoption löschen.",
+    "description": "Third paragraph of about description - security notice"
+  }
+}
