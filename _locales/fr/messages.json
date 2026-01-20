@@ -1,0 +1,270 @@
+{
+  "extensionName": {
+    "message": "Gemini Mail Review",
+    "description": "Name of the extension"
+  },
+  "extensionDescription": {
+    "message": "Vérifiez votre e-mail avec Gemini AI avant de l'envoyer",
+    "description": "Description of the extension"
+  },
+  "optionsTitle": {
+    "message": "Paramètres de Gemini Mail Review",
+    "description": "Title of the options page"
+  },
+  "apiConfigurationHeading": {
+    "message": "Configuration de l'API",
+    "description": "Heading for API configuration section"
+  },
+  "apiConfigurationDescription": {
+    "message": "Pour utiliser cette extension, vous avez besoin d'une clé API Gemini. Obtenez-en une gratuitement sur",
+    "description": "Description text for API configuration"
+  },
+  "googleAIStudio": {
+    "message": "Google AI Studio",
+    "description": "Link text for Google AI Studio"
+  },
+  "apiKeyLabel": {
+    "message": "Clé API Gemini :",
+    "description": "Label for API key input"
+  },
+  "apiKeyPlaceholder": {
+    "message": "Entrez votre clé API",
+    "description": "Placeholder for API key input"
+  },
+  "showButton": {
+    "message": "Afficher",
+    "description": "Button text to show password"
+  },
+  "hideButton": {
+    "message": "Masquer",
+    "description": "Button text to hide password"
+  },
+  "apiEndpointLabel": {
+    "message": "Point de terminaison de l'API :",
+    "description": "Label for API endpoint input"
+  },
+  "apiEndpointPlaceholder": {
+    "message": "URL du point de terminaison de l'API",
+    "description": "Placeholder for API endpoint input"
+  },
+  "saveButton": {
+    "message": "Enregistrer les paramètres",
+    "description": "Button text to save settings"
+  },
+  "testButton": {
+    "message": "Tester la connexion",
+    "description": "Button text to test connection"
+  },
+  "testingButton": {
+    "message": "Test en cours...",
+    "description": "Button text while testing"
+  },
+  "aboutHeading": {
+    "message": "À propos",
+    "description": "Heading for about section"
+  },
+  "aboutDescription1": {
+    "message": "Cette extension utilise l'IA Gemini de Google pour vérifier vos e-mails avant de les envoyer. Elle vérifie l'orthographe, la grammaire, le ton, la clarté et les problèmes potentiels.",
+    "description": "First paragraph of about description"
+  },
+  "aboutDescription2": {
+    "message": "Vos e-mails sont envoyés à l'API Gemini de Google pour analyse. Veuillez consulter la politique de confidentialité de Google avant d'utiliser cette extension.",
+    "description": "Second paragraph of about description"
+  },
+  "privacyLabel": {
+    "message": "Confidentialité :",
+    "description": "Label for privacy notice"
+  },
+  "errorApiKeyRequired": {
+    "message": "Veuillez entrer une clé API",
+    "description": "Error message when API key is missing"
+  },
+  "errorEndpointRequired": {
+    "message": "Veuillez entrer un point de terminaison de l'API",
+    "description": "Error message when API endpoint is missing"
+  },
+  "successSaved": {
+    "message": "Paramètres enregistrés avec succès !",
+    "description": "Success message when settings are saved"
+  },
+  "errorSaving": {
+    "message": "Erreur lors de l'enregistrement des paramètres :",
+    "description": "Error message when saving fails"
+  },
+  "errorApiKeyTooShort": {
+    "message": "La clé API semble être trop courte. Veuillez vérifier votre clé.",
+    "description": "Error message when API key is too short"
+  },
+  "errorTestApiKeyFirst": {
+    "message": "Veuillez d'abord entrer une clé API",
+    "description": "Error message when testing without API key"
+  },
+  "errorTestEndpointFirst": {
+    "message": "Veuillez d'abord entrer un point de terminaison de l'API",
+    "description": "Error message when testing without endpoint"
+  },
+  "successTestConnection": {
+    "message": "✓ Connexion réussie ! La clé API est valide.",
+    "description": "Success message when connection test passes"
+  },
+  "errorTestUnexpectedResponse": {
+    "message": "Connexion réussie mais réponse inattendue reçue",
+    "description": "Error message when test succeeds but response is unexpected"
+  },
+  "errorTestConnectionFailed": {
+    "message": "Échec de la connexion :",
+    "description": "Error message when connection test fails"
+  },
+  "popupTitle": {
+    "message": "Gemini Mail Review",
+    "description": "Title of the popup"
+  },
+  "checkingEmail": {
+    "message": "Vérification de l'e-mail...",
+    "description": "Status text while checking email"
+  },
+  "analyzingEmail": {
+    "message": "Analyse de l'e-mail avec Gemini...",
+    "description": "Status text while analyzing email"
+  },
+  "analysisResultsHeading": {
+    "message": "Résultats de l'analyse :",
+    "description": "Heading for analysis results"
+  },
+  "sendAnywayButton": {
+    "message": "Envoyer quand même",
+    "description": "Button text to send email anyway"
+  },
+  "editEmailButton": {
+    "message": "Modifier l'e-mail",
+    "description": "Button text to edit email"
+  },
+  "configureApiKeyLink": {
+    "message": "Configurer la clé API et l'invite personnalisée",
+    "description": "Link text to open settings"
+  },
+  "errorConfigureApiKey": {
+    "message": "Veuillez configurer votre clé API Gemini dans les paramètres.",
+    "description": "Error message when API key is not configured"
+  },
+  "errorComposeWindow": {
+    "message": "Impossible de trouver la fenêtre de composition.",
+    "description": "Error message when compose window is not found"
+  },
+  "errorPrefix": {
+    "message": "Erreur :",
+    "description": "Prefix for error messages"
+  },
+  "customPromptLabel": {
+    "message": "Modèles d'invite personnalisée :",
+    "description": "Label for custom prompt templates section"
+  },
+  "customPromptDescription": {
+    "message": "Vous pouvez enregistrer 3 types de modèles d'invite personnalisée. Lors de la vérification des e-mails, vous pouvez sélectionner et modifier le modèle.",
+    "description": "Description for custom prompt feature"
+  },
+  "customPromptTemplate1Label": {
+    "message": "Modèle 1 :",
+    "description": "Label for custom prompt template 1"
+  },
+  "customPromptTemplate2Label": {
+    "message": "Modèle 2 :",
+    "description": "Label for custom prompt template 2"
+  },
+  "customPromptTemplate3Label": {
+    "message": "Modèle 3 :",
+    "description": "Label for custom prompt template 3"
+  },
+  "customPromptPlaceholder": {
+    "message": "Optionnel : Entrez des instructions supplémentaires pour Gemini AI",
+    "description": "Placeholder for custom prompt textarea"
+  },
+  "customPromptTemplateName1Label": {
+    "message": "Nom du modèle 1 :",
+    "description": "Label for template 1 name"
+  },
+  "customPromptTemplateName2Label": {
+    "message": "Nom du modèle 2 :",
+    "description": "Label for template 2 name"
+  },
+  "customPromptTemplateName3Label": {
+    "message": "Nom du modèle 3 :",
+    "description": "Label for template 3 name"
+  },
+  "customPromptTemplateNamePlaceholder": {
+    "message": "Nom du modèle (optionnel)",
+    "description": "Placeholder for template name input"
+  },
+  "selectTemplateLabel": {
+    "message": "Sélectionner un modèle d'invite personnalisée :",
+    "description": "Label for template selector dropdown"
+  },
+  "analyzeButton": {
+    "message": "Analyser l'e-mail",
+    "description": "Button text to start analysis"
+  },
+  "editPromptLabel": {
+    "message": "Modifier l'invite personnalisée :",
+    "description": "Label for editable custom prompt textarea"
+  },
+  "cacheRetentionLabel": {
+    "message": "Jours de rétention du cache :",
+    "description": "Label for cache retention days input"
+  },
+  "cacheRetentionPlaceholder": {
+    "message": "7",
+    "description": "Placeholder for cache retention days input"
+  },
+  "cacheRetentionDescription": {
+    "message": "Nombre de jours pendant lesquels conserver les résultats d'analyse en cache. Par défaut 7 jours.",
+    "description": "Description for cache retention days feature"
+  },
+  "errorCacheRetentionInvalid": {
+    "message": "Les jours de rétention du cache doivent être compris entre 1 et 365",
+    "description": "Error message when cache retention days value is invalid"
+  },
+  "cachedResponse": {
+    "message": "📦 Affichage de la réponse mise en cache",
+    "description": "Indicator showing that the response is from cache"
+  },
+  "contentChangedCachedResponse": {
+    "message": "⚠️ Le contenu de l'e-mail a changé. Affichage de l'analyse précédente.",
+    "description": "Indicator showing that email content changed but displaying old cached response"
+  },
+  "reRequestButton": {
+    "message": "Demander à nouveau à Gemini",
+    "description": "Button text to re-request analysis from Gemini"
+  },
+  "cacheManagementLabel": {
+    "message": "Gestion du cache :",
+    "description": "Label for cache management section"
+  },
+  "cacheManagementDescription": {
+    "message": "Les données mises en cache incluent le contenu des e-mails et les résultats d'analyse. Effacez le cache pour supprimer toutes les données d'e-mail stockées.",
+    "description": "Description for cache management feature"
+  },
+  "clearCacheButton": {
+    "message": "Effacer toutes les données mises en cache",
+    "description": "Button text to clear all cached data"
+  },
+  "confirmClearCache": {
+    "message": "Êtes-vous sûr de vouloir effacer tous les résultats d'analyse mis en cache ? Cette action ne peut pas être annulée.",
+    "description": "Confirmation message before clearing cache"
+  },
+  "successCacheCleared": {
+    "message": "Cache effacé avec succès",
+    "description": "Success message when cache is cleared"
+  },
+  "errorClearingCache": {
+    "message": "Erreur lors de l'effacement du cache :",
+    "description": "Error message when clearing cache fails"
+  },
+  "securityLabel": {
+    "message": "Sécurité :",
+    "description": "Label for security notice"
+  },
+  "aboutDescription3": {
+    "message": "Votre clé API et le cache des e-mails sont stockés localement dans le stockage de Thunderbird. Le cache comprend les sujets des e-mails, les destinataires et le contenu du corps. Pour les e-mails sensibles, envisagez de désactiver le cache ou de l'effacer régulièrement à l'aide de l'option de gestion du cache ci-dessus.",
+    "description": "Third paragraph of about description - security notice"
+  }
+}
