@@ -1,6 +1,6 @@
 # Development Notes
 
-English | [日本語](../ja/DEVELOPMENT.md)
+English | [日本語](../ja/DEVELOPMENT.md) | [Deutsch](../de/DEVELOPMENT.md) | [Français](../fr/DEVELOPMENT.md) | [简体中文](../zh_CN/DEVELOPMENT.md)
 
 ## Project Overview
 This is a Thunderbird add-on that integrates Google's Gemini AI to review emails before sending.
