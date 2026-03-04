@@ -2,7 +2,7 @@
 
 一个使用 Google Gemini AI 在发送前检查电子邮件的 Thunderbird 扩展。获得有关拼写、语法、语气、清晰度和潜在问题的智能反馈。
 
-[English](README.md) | [日本語](README.ja.md) | [Deutsch](README.de.md) | [Français](README.fr.md) | 简体中文
+[English](README.md) | [日本語](README.ja.md) | [Deutsch](README.de.md) | [Français](README.fr.md) | 简体中文 | [Italiano](README.it.md)
 
 ## 功能
 

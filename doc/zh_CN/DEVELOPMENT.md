@@ -1,6 +1,6 @@
 # 开发说明
 
-[English](../en/DEVELOPMENT.md) | [日本語](../ja/DEVELOPMENT.md) | [Deutsch](../de/DEVELOPMENT.md) | [Français](../fr/DEVELOPMENT.md) | 简体中文
+[English](../en/DEVELOPMENT.md) | [日本語](../ja/DEVELOPMENT.md) | [Deutsch](../de/DEVELOPMENT.md) | [Français](../fr/DEVELOPMENT.md) | 简体中文 | [Italiano](../it/DEVELOPMENT.md)
 
 ## 项目概述
 这是一个 Thunderbird 插件，集成了 Google 的 Gemini AI 来在发送前审查电子邮件。

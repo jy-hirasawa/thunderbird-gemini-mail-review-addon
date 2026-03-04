@@ -1,6 +1,6 @@
 # 安全政策
 
-[English](../en/SECURITY.md) | [日本語](../ja/SECURITY.md) | [Deutsch](../de/SECURITY.md) | [Français](../fr/SECURITY.md) | 简体中文
+[English](../en/SECURITY.md) | [日本語](../ja/SECURITY.md) | [Deutsch](../de/SECURITY.md) | [Français](../fr/SECURITY.md) | 简体中文 | [Italiano](../it/SECURITY.md)
 
 ## 数据存储和隐私
 

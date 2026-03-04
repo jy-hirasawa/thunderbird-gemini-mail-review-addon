@@ -1,6 +1,6 @@
 # Sicherheitsrichtlinie
 
-[English](../en/SECURITY.md) | [日本語](../ja/SECURITY.md) | Deutsch | [Français](../fr/SECURITY.md) | [简体中文](../zh_CN/SECURITY.md)
+[English](../en/SECURITY.md) | [日本語](../ja/SECURITY.md) | Deutsch | [Français](../fr/SECURITY.md) | [简体中文](../zh_CN/SECURITY.md) | [Italiano](../it/SECURITY.md)
 
 ## Datenspeicherung und Datenschutz
 
