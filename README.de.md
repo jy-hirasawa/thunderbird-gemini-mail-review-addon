@@ -2,7 +2,7 @@
 
 Ein Thunderbird-Add-on, das Google's Gemini AI verwendet, um Ihre E-Mails vor dem Senden zu überprüfen. Erhalten Sie intelligentes Feedback zu Rechtschreibung, Grammatik, Tonfall, Klarheit und potenziellen Problemen.
 
-[English](README.md) | [日本語](README.ja.md) | Deutsch | [Français](README.fr.md) | [简体中文](README.zh_CN.md)
+[English](README.md) | [日本語](README.ja.md) | Deutsch | [Français](README.fr.md) | [简体中文](README.zh_CN.md) | [Italiano](README.it.md)
 
 ## Funktionen
 

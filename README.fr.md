@@ -2,7 +2,7 @@
 
 Une extension Thunderbird qui utilise l'IA Gemini de Google pour vérifier vos e-mails avant de les envoyer. Obtenez des commentaires intelligents sur l'orthographe, la grammaire, le ton, la clarté et les problèmes potentiels.
 
-[English](README.md) | [日本語](README.ja.md) | [Deutsch](README.de.md) | Français | [简体中文](README.zh_CN.md)
+[English](README.md) | [日本語](README.ja.md) | [Deutsch](README.de.md) | Français | [简体中文](README.zh_CN.md) | [Italiano](README.it.md)
 
 ## Fonctionnalités
 

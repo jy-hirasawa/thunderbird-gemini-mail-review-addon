@@ -1,6 +1,6 @@
 # Entwicklungshinweise
 
-[English](../en/DEVELOPMENT.md) | [日本語](../ja/DEVELOPMENT.md) | Deutsch | [Français](../fr/DEVELOPMENT.md) | [简体中文](../zh_CN/DEVELOPMENT.md)
+[English](../en/DEVELOPMENT.md) | [日本語](../ja/DEVELOPMENT.md) | Deutsch | [Français](../fr/DEVELOPMENT.md) | [简体中文](../zh_CN/DEVELOPMENT.md) | [Italiano](../it/DEVELOPMENT.md)
 
 ## Projektübersicht
 Dies ist ein Thunderbird Add-on, das Google's Gemini AI integriert, um E-Mails vor dem Versenden zu überprüfen.
