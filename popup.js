@@ -484,9 +484,9 @@ function sanitizeContent(content) {
 // Call Gemini API
 async function analyzeEmailWithGemini(emailContent, apiKey, apiEndpoint, customPrompt) {
   // Sanitize email content
-  const sanitizedSubject = sanitizeContent(emailContent.subject || '(No subject)');
-  const sanitizedTo = sanitizeContent(emailContent.to || '(No recipient)');
-  const sanitizedBody = sanitizeContent(emailContent.body || '(Empty body)');
+  const sanitizedSubject = sanitizeContent(emailContent.subject || browser.i18n.getMessage('emailNoSubject'));
+  const sanitizedTo = sanitizeContent(emailContent.to || browser.i18n.getMessage('emailNoRecipient'));
+  const sanitizedBody = sanitizeContent(emailContent.body || browser.i18n.getMessage('emailEmptyBody'));
   
   // Build the prompt - prepend custom prompt if provided
   let prompt = '';
@@ -614,7 +614,7 @@ function validateApiEndpoint(endpoint) {
     const url = new URL(endpoint);
     // Only allow HTTPS protocol for security
     if (url.protocol !== 'https:') {
-      return { valid: false, error: 'API endpoint must use HTTPS protocol' };
+      return { valid: false, error: browser.i18n.getMessage('errorEndpointHttps') };
     }
     // Validate hostname is not a local/private address
     const hostname = url.hostname.toLowerCase();
@@ -623,17 +623,17 @@ function validateApiEndpoint(endpoint) {
         hostname.startsWith('192.168.') ||
         hostname.startsWith('10.') ||
         hostname.match(/^172\.(1[6-9]|2[0-9]|3[0-1])\./)) {
-      return { valid: false, error: 'API endpoint cannot be a local or private address' };
+      return { valid: false, error: browser.i18n.getMessage('errorEndpointPrivate') };
     }
     // Validate it's the expected Google API domain
     // Use endsWith to ensure the domain is exactly googleapis.com or a subdomain of it
     if (!hostname.endsWith('.googleapis.com') && hostname !== 'googleapis.com' &&
         !hostname.endsWith('.google.com') && hostname !== 'google.com') {
-      return { valid: false, error: 'API endpoint must be a Google API domain (googleapis.com)' };
+      return { valid: false, error: browser.i18n.getMessage('errorEndpointDomain') };
     }
     return { valid: true };
   } catch (error) {
-    return { valid: false, error: 'Invalid API endpoint URL format' };
+    return { valid: false, error: browser.i18n.getMessage('errorEndpointFormat') };
   }
 }
 
@@ -650,7 +650,7 @@ async function analyzeEmail(forceRefresh = false, useInitialPrompt = false) {
         apiKey = await window.CryptoUtils.decryptSettings(geminiApiKeyEncrypted);
       } catch (error) {
         console.error('Error decrypting API key:', error);
-        displayError('Failed to decrypt API key. Please reconfigure your settings.');
+        displayError(browser.i18n.getMessage('errorDecryptApiKey'));
         return;
       }
     } else if (geminiApiKey) {

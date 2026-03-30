@@ -266,5 +266,41 @@
   "aboutDescription3": {
     "message": "APIキーとメールキャッシュはThunderbirdのストレージにローカル保存されます。キャッシュにはメールの件名、受信者、本文が含まれます。機密性の高いメールの場合は、上記のキャッシュ管理オプションを使用してキャッシュを定期的にクリアすることを検討してください。",
     "description": "Third paragraph of about description - security notice"
+  },
+  "composeActionTitle": {
+    "message": "Geminiでメールをチェック",
+    "description": "Tooltip/title for the compose action button in the toolbar"
+  },
+  "errorEndpointHttps": {
+    "message": "APIエンドポイントはHTTPSプロトコルを使用する必要があります",
+    "description": "Error message when API endpoint does not use HTTPS"
+  },
+  "errorEndpointPrivate": {
+    "message": "APIエンドポイントにローカルアドレスまたはプライベートアドレスは使用できません",
+    "description": "Error message when API endpoint is a local or private address"
+  },
+  "errorEndpointDomain": {
+    "message": "APIエンドポイントはGoogle APIドメイン（googleapis.com）である必要があります",
+    "description": "Error message when API endpoint is not a Google API domain"
+  },
+  "errorEndpointFormat": {
+    "message": "APIエンドポイントのURL形式が無効です",
+    "description": "Error message when API endpoint URL format is invalid"
+  },
+  "errorDecryptApiKey": {
+    "message": "APIキーの復号化に失敗しました。設定を再構成してください。",
+    "description": "Error message when API key decryption fails"
+  },
+  "emailNoSubject": {
+    "message": "（件名なし）",
+    "description": "Placeholder text used in AI prompt when email has no subject"
+  },
+  "emailNoRecipient": {
+    "message": "（受信者なし）",
+    "description": "Placeholder text used in AI prompt when email has no recipient"
+  },
+  "emailEmptyBody": {
+    "message": "（本文なし）",
+    "description": "Placeholder text used in AI prompt when email body is empty"
   }
 }

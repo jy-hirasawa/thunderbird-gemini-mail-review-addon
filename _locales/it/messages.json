@@ -266,5 +266,41 @@
   "aboutDescription3": {
     "message": "La tua chiave API e la cache delle email sono memorizzate localmente nell'archivio di Thunderbird. La cache include oggetti delle email, destinatari e contenuto del corpo. Per email sensibili, considera di disabilitare la cache o di cancellarla regolarmente utilizzando l'opzione di gestione cache sopra.",
     "description": "Third paragraph of about description - security notice"
+  },
+  "composeActionTitle": {
+    "message": "Controlla email con Gemini",
+    "description": "Tooltip/title for the compose action button in the toolbar"
+  },
+  "errorEndpointHttps": {
+    "message": "L'endpoint API deve utilizzare il protocollo HTTPS",
+    "description": "Error message when API endpoint does not use HTTPS"
+  },
+  "errorEndpointPrivate": {
+    "message": "L'endpoint API non può essere un indirizzo locale o privato",
+    "description": "Error message when API endpoint is a local or private address"
+  },
+  "errorEndpointDomain": {
+    "message": "L'endpoint API deve essere un dominio Google API (googleapis.com)",
+    "description": "Error message when API endpoint is not a Google API domain"
+  },
+  "errorEndpointFormat": {
+    "message": "Formato URL dell'endpoint API non valido",
+    "description": "Error message when API endpoint URL format is invalid"
+  },
+  "errorDecryptApiKey": {
+    "message": "Impossibile decifrare la chiave API. Riconfigurare le impostazioni.",
+    "description": "Error message when API key decryption fails"
+  },
+  "emailNoSubject": {
+    "message": "(Nessun oggetto)",
+    "description": "Placeholder text used in AI prompt when email has no subject"
+  },
+  "emailNoRecipient": {
+    "message": "(Nessun destinatario)",
+    "description": "Placeholder text used in AI prompt when email has no recipient"
+  },
+  "emailEmptyBody": {
+    "message": "(Corpo vuoto)",
+    "description": "Placeholder text used in AI prompt when email body is empty"
   }
 }
