@@ -266,5 +266,41 @@
   "aboutDescription3": {
     "message": "您的 API 密钥和电子邮件缓存本地存储在 Thunderbird 的存储中。缓存包括电子邮件主题、收件人和正文内容。对于敏感电子邮件，请考虑禁用缓存或使用上述缓存管理选项定期清除。",
     "description": "Third paragraph of about description - security notice"
+  },
+  "composeActionTitle": {
+    "message": "使用Gemini检查邮件",
+    "description": "Tooltip/title for the compose action button in the toolbar"
+  },
+  "errorEndpointHttps": {
+    "message": "API端点必须使用HTTPS协议",
+    "description": "Error message when API endpoint does not use HTTPS"
+  },
+  "errorEndpointPrivate": {
+    "message": "API端点不能是本地或私有地址",
+    "description": "Error message when API endpoint is a local or private address"
+  },
+  "errorEndpointDomain": {
+    "message": "API端点必须是Google API域名（googleapis.com）",
+    "description": "Error message when API endpoint is not a Google API domain"
+  },
+  "errorEndpointFormat": {
+    "message": "API端点URL格式无效",
+    "description": "Error message when API endpoint URL format is invalid"
+  },
+  "errorDecryptApiKey": {
+    "message": "API密钥解密失败。请重新配置您的设置。",
+    "description": "Error message when API key decryption fails"
+  },
+  "emailNoSubject": {
+    "message": "（无主题）",
+    "description": "Placeholder text used in AI prompt when email has no subject"
+  },
+  "emailNoRecipient": {
+    "message": "（无收件人）",
+    "description": "Placeholder text used in AI prompt when email has no recipient"
+  },
+  "emailEmptyBody": {
+    "message": "（空邮件正文）",
+    "description": "Placeholder text used in AI prompt when email body is empty"
   }
 }

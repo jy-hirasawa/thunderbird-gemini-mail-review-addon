@@ -266,5 +266,41 @@
   "aboutDescription3": {
     "message": "Votre clé API et le cache des e-mails sont stockés localement dans le stockage de Thunderbird. Le cache comprend les sujets des e-mails, les destinataires et le contenu du corps. Pour les e-mails sensibles, envisagez de désactiver le cache ou de l'effacer régulièrement à l'aide de l'option de gestion du cache ci-dessus.",
     "description": "Third paragraph of about description - security notice"
+  },
+  "composeActionTitle": {
+    "message": "Vérifier l'e-mail avec Gemini",
+    "description": "Tooltip/title for the compose action button in the toolbar"
+  },
+  "errorEndpointHttps": {
+    "message": "Le point de terminaison API doit utiliser le protocole HTTPS",
+    "description": "Error message when API endpoint does not use HTTPS"
+  },
+  "errorEndpointPrivate": {
+    "message": "Le point de terminaison API ne peut pas être une adresse locale ou privée",
+    "description": "Error message when API endpoint is a local or private address"
+  },
+  "errorEndpointDomain": {
+    "message": "Le point de terminaison API doit être un domaine Google API (googleapis.com)",
+    "description": "Error message when API endpoint is not a Google API domain"
+  },
+  "errorEndpointFormat": {
+    "message": "Format d'URL du point de terminaison API invalide",
+    "description": "Error message when API endpoint URL format is invalid"
+  },
+  "errorDecryptApiKey": {
+    "message": "Échec du déchiffrement de la clé API. Veuillez reconfigurer vos paramètres.",
+    "description": "Error message when API key decryption fails"
+  },
+  "emailNoSubject": {
+    "message": "(Sans objet)",
+    "description": "Placeholder text used in AI prompt when email has no subject"
+  },
+  "emailNoRecipient": {
+    "message": "(Sans destinataire)",
+    "description": "Placeholder text used in AI prompt when email has no recipient"
+  },
+  "emailEmptyBody": {
+    "message": "(Corps vide)",
+    "description": "Placeholder text used in AI prompt when email body is empty"
   }
 }

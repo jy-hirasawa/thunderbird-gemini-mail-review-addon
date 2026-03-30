@@ -74,7 +74,7 @@ function validateApiEndpoint(endpoint) {
     const url = new URL(endpoint);
     // Only allow HTTPS protocol for security
     if (url.protocol !== 'https:') {
-      return { valid: false, error: 'API endpoint must use HTTPS protocol' };
+      return { valid: false, error: browser.i18n.getMessage('errorEndpointHttps') };
     }
     // Validate hostname is not a local/private address
     const hostname = url.hostname.toLowerCase();
@@ -83,17 +83,17 @@ function validateApiEndpoint(endpoint) {
         hostname.startsWith('192.168.') ||
         hostname.startsWith('10.') ||
         hostname.match(/^172\.(1[6-9]|2[0-9]|3[0-1])\./)) {
-      return { valid: false, error: 'API endpoint cannot be a local or private address' };
+      return { valid: false, error: browser.i18n.getMessage('errorEndpointPrivate') };
     }
     // Validate it's the expected Google API domain (with flexibility for regional endpoints)
     // Use endsWith to ensure the domain is exactly googleapis.com or a subdomain of it
     if (!hostname.endsWith('.googleapis.com') && hostname !== 'googleapis.com' &&
         !hostname.endsWith('.google.com') && hostname !== 'google.com') {
-      return { valid: false, error: 'API endpoint must be a Google API domain (googleapis.com)' };
+      return { valid: false, error: browser.i18n.getMessage('errorEndpointDomain') };
     }
     return { valid: true };
   } catch (error) {
-    return { valid: false, error: 'Invalid API endpoint URL format' };
+    return { valid: false, error: browser.i18n.getMessage('errorEndpointFormat') };
   }
 }
 
@@ -331,16 +331,16 @@ function toggleVisibility() {
 
 // Clear all cached data for security/privacy
 async function clearCache() {
-  if (!confirm(browser.i18n.getMessage('confirmClearCache') || 'Are you sure you want to clear all cached analysis results? This cannot be undone.')) {
+  if (!confirm(browser.i18n.getMessage('confirmClearCache'))) {
     return;
   }
   
   try {
     await browser.storage.local.remove(['geminiCache', 'lastCheckedHashes']);
-    showStatus(browser.i18n.getMessage('successCacheCleared') || 'Cache cleared successfully', 'success');
+    showStatus(browser.i18n.getMessage('successCacheCleared'), 'success');
   } catch (error) {
     console.error('Error clearing cache:', error);
-    showStatus(browser.i18n.getMessage('errorClearingCache') || 'Error clearing cache: ' + error.message, 'error');
+    showStatus(browser.i18n.getMessage('errorClearingCache') + ' ' + error.message, 'error');
   }
 }
 

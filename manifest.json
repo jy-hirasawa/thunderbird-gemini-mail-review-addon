@@ -20,7 +20,7 @@
     "scripts": ["background.js"]
   },
   "compose_action": {
-    "default_title": "Check email with Gemini",
+    "default_title": "__MSG_composeActionTitle__",
     "default_icon": {
       "16": "icons/icon-16.png",
       "32": "icons/icon-32.png"
