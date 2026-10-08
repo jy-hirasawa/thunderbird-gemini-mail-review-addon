@@ -42,7 +42,7 @@ Une extension Thunderbird qui utilise l'IA Gemini de Google pour vérifier vos e
    - Cliquez sur **Options** ou **Préférences**
    - Collez votre clé API
    - (Optionnel) Personnalisez l'URL du point de terminaison de l'API si vous souhaitez utiliser un modèle Gemini différent
-     - Par défaut: `https://generativelanguage.googleapis.com/v1/models/gemini-2.5-flash:generateContent`
+     - Par défaut: `https://generativelanguage.googleapis.com/v1/models/gemini-3.5-flash-lite:generateContent`
    - (Optionnel) Ajoutez des modèles d'invite personnalisée pour personnaliser la façon dont Gemini analyse vos e-mails
      - Vous pouvez enregistrer jusqu'à 3 modèles d'invite personnalisée avec des noms
      - Chaque modèle sera disponible à la sélection lors de la vérification des e-mails

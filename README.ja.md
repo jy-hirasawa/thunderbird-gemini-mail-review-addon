@@ -42,7 +42,7 @@ Google の Gemini AI を使用してメール送信前にチェックする Thun
    - **オプション** または **設定** をクリック
    - API キーを貼り付ける
    - （オプション）別の Gemini モデルを使用する場合は API エンドポイント URL をカスタマイズ
-     - デフォルト: `https://generativelanguage.googleapis.com/v1/models/gemini-2.5-flash:generateContent`
+     - デフォルト: `https://generativelanguage.googleapis.com/v1/models/gemini-3.5-flash-lite:generateContent`
    - （オプション）Gemini がメールを分析する方法をカスタマイズするためにカスタムプロンプトテンプレートを追加
      - 最大3つのカスタムプロンプトテンプレートを名前付きで保存できます
      - 各テンプレートはメールレビュー時に選択可能です

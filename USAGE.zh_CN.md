@@ -12,7 +12,7 @@
    - 找到 **Gemini Mail Review** 并点击**首选项**
    - 输入您的 Gemini API 密钥
    - （可选）自定义 API 端点 URL 以使用不同的 Gemini 模型
-     - 默认：`https://generativelanguage.googleapis.com/v1/models/gemini-2.5-flash:generateContent`
+     - 默认：`https://generativelanguage.googleapis.com/v1/models/gemini-3.5-flash-lite:generateContent`
      - 如需使用其他模型，请从 Google 的 [Gemini API 模型目录](https://ai.google.dev/gemini-api/docs/models)中选择当前可用的模型 ID。
    - （可选）添加自定义提示模板以自定义 Gemini 分析您的电子邮件的方式
      - 您最多可以保存 3 个带有名称的自定义提示模板

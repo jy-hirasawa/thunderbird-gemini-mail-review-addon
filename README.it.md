@@ -42,7 +42,7 @@ Un'estensione per Thunderbird che utilizza l'IA Gemini di Google per revisionare
    - Clicca su **Opzioni** o **Preferenze**
    - Incolla la tua chiave API
    - (Facoltativo) Personalizza l'URL dell'endpoint API se vuoi utilizzare un modello Gemini diverso
-     - Predefinito: `https://generativelanguage.googleapis.com/v1/models/gemini-2.5-flash:generateContent`
+     - Predefinito: `https://generativelanguage.googleapis.com/v1/models/gemini-3.5-flash-lite:generateContent`
    - (Facoltativo) Aggiungi modelli di prompt personalizzato per personalizzare come Gemini analizza le tue email
      - Puoi salvare fino a 3 modelli di prompt personalizzato con nomi
      - Ogni modello sarà disponibile per la selezione durante la revisione delle email

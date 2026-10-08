@@ -12,7 +12,7 @@ English | [日本語](USAGE.ja.md) | [Deutsch](USAGE.de.md) | [Français](USAGE.
    - Find **Gemini Mail Review** and click **Preferences**
    - Enter your Gemini API key
    - (Optional) Customize the API endpoint URL to use a different Gemini model
-     - Default: `https://generativelanguage.googleapis.com/v1/models/gemini-2.5-flash:generateContent`
+     - Default: `https://generativelanguage.googleapis.com/v1/models/gemini-3.5-flash-lite:generateContent`
      - For another model, use an available model ID from Google's [Gemini API model catalog](https://ai.google.dev/gemini-api/docs/models).
    - (Optional) Add custom prompt templates to customize how Gemini analyzes your emails
      - You can save up to 3 custom prompt templates with names

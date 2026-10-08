@@ -70,14 +70,14 @@
 
 **デフォルトエンドポイント：**
 ```
-https://generativelanguage.googleapis.com/v1/models/gemini-2.5-flash:generateContent
+https://generativelanguage.googleapis.com/v1/models/gemini-3.5-flash-lite:generateContent
 ```
 
 マニフェストでは、クロスオリジンリクエスト先を `generativelanguage.googleapis.com` のみに許可しています。
 
 別のモデルを使用する場合は、Google の [Gemini API モデル一覧](https://ai.google.dev/gemini-api/docs/models)から利用可能なモデル ID を選び、エンドポイント内のモデル名を置き換えてください。
 
-ユーザーはオプションページでエンドポイントを設定できます。カスタムエンドポイントが設定されていない場合、デフォルト（gemini-2.5-flash）が自動的に使用されます。
+ユーザーはオプションページでエンドポイントを設定できます。カスタムエンドポイントが設定されていない場合、デフォルト（gemini-3.5-flash-lite）が自動的に使用されます。
 
 ### カスタムプロンプトテンプレート
 

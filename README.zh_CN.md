@@ -42,7 +42,7 @@
    - 点击**选项**或**首选项**
    - 粘贴您的 API 密钥
    - （可选）如果要使用不同的 Gemini 模型，请自定义 API 端点 URL
-     - 默认：`https://generativelanguage.googleapis.com/v1/models/gemini-2.5-flash:generateContent`
+     - 默认：`https://generativelanguage.googleapis.com/v1/models/gemini-3.5-flash-lite:generateContent`
    - （可选）添加自定义提示模板以自定义 Gemini 如何分析您的电子邮件
      - 您可以保存最多 3 个带名称的自定义提示模板
      - 检查电子邮件时，每个模板都可供选择

@@ -47,7 +47,7 @@ const clearCacheButton = document.getElementById('clear-cache');
 const statusDiv = document.getElementById('status');
 
 // Default API endpoint
-const DEFAULT_API_ENDPOINT = 'https://generativelanguage.googleapis.com/v1/models/gemini-2.5-flash:generateContent';
+const DEFAULT_API_ENDPOINT = 'https://generativelanguage.googleapis.com/v1/models/gemini-3.5-flash-lite:generateContent';
 // Cache retention period constants
 const DEFAULT_CACHE_RETENTION_DAYS = 7;
 const MIN_CACHE_RETENTION_DAYS = 1;

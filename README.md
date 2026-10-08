@@ -42,7 +42,7 @@ English | [日本語](README.ja.md) | [Deutsch](README.de.md) | [Français](READ
    - Click **Options** or **Preferences**
    - Paste your API key
    - (Optional) Customize the API endpoint URL if you want to use a different Gemini model
-     - Default: `https://generativelanguage.googleapis.com/v1/models/gemini-2.5-flash:generateContent`
+     - Default: `https://generativelanguage.googleapis.com/v1/models/gemini-3.5-flash-lite:generateContent`
    - (Optional) Add custom prompt templates to customize how Gemini analyzes your emails
      - You can save up to 3 custom prompt templates with names
      - Each template will be available for selection when reviewing emails

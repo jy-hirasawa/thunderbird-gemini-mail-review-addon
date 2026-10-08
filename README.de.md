@@ -42,7 +42,7 @@ Ein Thunderbird-Add-on, das Google's Gemini AI verwendet, um Ihre E-Mails vor de
    - Klicken Sie auf **Einstellungen** oder **Optionen**
    - Fügen Sie Ihren API-Schlüssel ein
    - (Optional) Passen Sie die API-Endpunkt-URL an, wenn Sie ein anderes Gemini-Modell verwenden möchten
-     - Standard: `https://generativelanguage.googleapis.com/v1/models/gemini-2.5-flash:generateContent`
+     - Standard: `https://generativelanguage.googleapis.com/v1/models/gemini-3.5-flash-lite:generateContent`
    - (Optional) Fügen Sie benutzerdefinierte Eingabeaufforderungsvorlagen hinzu, um anzupassen, wie Gemini Ihre E-Mails analysiert
      - Sie können bis zu 3 benutzerdefinierte Eingabeaufforderungsvorlagen mit Namen speichern
      - Jede Vorlage ist bei der Überprüfung von E-Mails zur Auswahl verfügbar

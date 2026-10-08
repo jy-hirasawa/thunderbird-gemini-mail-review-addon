@@ -70,14 +70,14 @@ The add-on supports configurable API endpoints, allowing users to select differe
 
 **Default Endpoint:**
 ```
-https://generativelanguage.googleapis.com/v1/models/gemini-2.5-flash:generateContent
+https://generativelanguage.googleapis.com/v1/models/gemini-3.5-flash-lite:generateContent
 ```
 
 The manifest grants cross-origin requests only to `generativelanguage.googleapis.com`.
 
 To use a different model, select an available model ID from Google's [Gemini API model catalog](https://ai.google.dev/gemini-api/docs/models) and replace the model name in the endpoint.
 
-Users can configure the endpoint in the options page. If no custom endpoint is set, the default (gemini-2.5-flash) is used automatically.
+Users can configure the endpoint in the options page. If no custom endpoint is set, the default (gemini-3.5-flash-lite) is used automatically.
 
 ### Custom Prompt Templates
 

@@ -673,7 +673,7 @@ async function analyzeEmail(forceRefresh = false, useInitialPrompt = false) {
     const customPrompt = customPromptEdit ? customPromptEdit.value.trim() : '';
     
     // Use default endpoint if not configured
-    const apiEndpoint = geminiApiEndpoint || 'https://generativelanguage.googleapis.com/v1/models/gemini-2.5-flash:generateContent';
+    const apiEndpoint = geminiApiEndpoint || 'https://generativelanguage.googleapis.com/v1/models/gemini-3.5-flash-lite:generateContent';
     
     // Validate API endpoint for security
     const endpointValidation = validateApiEndpoint(apiEndpoint);
