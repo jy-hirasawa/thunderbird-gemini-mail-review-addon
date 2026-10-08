@@ -70,15 +70,12 @@ Il componente aggiuntivo supporta endpoint API configurabili, consentendo agli u
 
 **Endpoint predefinito:**
 ```
-https://generativelanguage.googleapis.com/v1/models/gemini-2.5-flash:generateContent
+https://generativelanguage.googleapis.com/v1/models/gemini-3.5-flash-lite:generateContent
 ```
 
-**Modelli alternativi:**
-- `gemini-pro`: `https://generativelanguage.googleapis.com/v1/models/gemini-pro:generateContent`
-- `gemini-1.5-pro`: `https://generativelanguage.googleapis.com/v1/models/gemini-1.5-pro:generateContent`
-- `gemini-2.0-flash`: `https://generativelanguage.googleapis.com/v1/models/gemini-2.0-flash:generateContent`
+Per usare un altro modello, scegli un ID disponibile nel [catalogo dei modelli dell'API Gemini](https://ai.google.dev/gemini-api/docs/models) di Google e sostituisci il nome del modello nell'endpoint.
 
-Gli utenti possono configurare l'endpoint nella pagina delle opzioni. Se non viene impostato un endpoint personalizzato, viene utilizzato automaticamente quello predefinito (gemini-2.5-flash).
+Gli utenti possono configurare l'endpoint nella pagina delle opzioni. Se non viene impostato un endpoint personalizzato, viene utilizzato automaticamente quello predefinito (gemini-3.5-flash-lite).
 
 ### Modelli di prompt personalizzato
 

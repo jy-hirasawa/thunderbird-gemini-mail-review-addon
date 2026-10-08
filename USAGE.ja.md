@@ -12,8 +12,8 @@
    - **Gemini Mail Review** を見つけて **設定** をクリック
    - Gemini API キーを入力
    - （オプション）別の Gemini モデルを使用するために API エンドポイント URL をカスタマイズ
-     - デフォルト: `https://generativelanguage.googleapis.com/v1/models/gemini-2.5-flash:generateContent`
-     - `gemini-pro`、`gemini-1.5-pro` などの他のモデルを使用するように変更可能
+     - デフォルト: `https://generativelanguage.googleapis.com/v1/models/gemini-3.5-flash-lite:generateContent`
+     - 別のモデルを使う場合は、Google の [Gemini API モデル一覧](https://ai.google.dev/gemini-api/docs/models)にある利用可能なモデル ID を指定してください。
    - （オプション）Gemini がメールを分析する方法をカスタマイズするためにカスタムプロンプトテンプレートを追加
      - 最大3つのカスタムプロンプトテンプレートを名前付きで保存できます
      - 各テンプレートには説明的な名前とカスタム指示を設定できます

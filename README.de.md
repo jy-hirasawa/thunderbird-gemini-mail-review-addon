@@ -6,7 +6,7 @@ Ein Thunderbird-Add-on, das Google's Gemini AI verwendet, um Ihre E-Mails vor de
 
 ## Funktionen
 
-- 🤖 **KI-gestützte Überprüfung**: Verwendet Google's Gemini Pro Modell zur Analyse Ihrer E-Mails
+- 🤖 **KI-gestützte Überprüfung**: Verwendet Googles Gemini API zur Analyse Ihrer E-Mails
 - ✅ **Umfassende Prüfungen**: Überprüft Rechtschreibung, Grammatik, Tonfall, Professionalität und Klarheit
 - ⚠️ **Problemerkennung**: Identifiziert potenzielle Probleme wie fehlende Anhänge oder unklare Nachrichten
 - 🎯 **Einfach zu bedienen**: Klicken Sie einfach auf das Add-on-Symbol im Verfassen-Fenster
@@ -15,13 +15,13 @@ Ein Thunderbird-Add-on, das Google's Gemini AI verwendet, um Ihre E-Mails vor de
 
 ## Installation
 
-### Aus der Quelle
+### Aus einer Release-Version
 
 1. Laden Sie die neueste Version von https://github.com/jy-hirasawa/thunderbird-gemini-mail-review-addon/releases/ herunter
 2. Öffnen Sie Thunderbird
 3. Gehen Sie zu **Extras** → **Add-ons und Themes** (oder drücken Sie `Strg+Umschalt+A`)
 4. Klicken Sie auf das Zahnradsymbol ⚙️ und wählen Sie **Add-on aus Datei installieren**
-5. Navigieren Sie zum Add-on-Verzeichnis und wählen Sie die Datei `manifest.json`
+5. Wählen Sie die heruntergeladene `.xpi`-Datei aus
 
 ### Anforderungen
 
@@ -31,7 +31,7 @@ Ein Thunderbird-Add-on, das Google's Gemini AI verwendet, um Ihre E-Mails vor de
 ## Einrichtung
 
 1. Holen Sie sich einen Gemini API-Schlüssel:
-   - Besuchen Sie [Google AI Studio](https://makersuite.google.com/app/apikey)
+   - Besuchen Sie [Google AI Studio](https://aistudio.google.com/apikey)
    - Melden Sie sich mit Ihrem Google-Konto an
    - Klicken Sie auf **API-Schlüssel erstellen**
    - Kopieren Sie den generierten Schlüssel
@@ -42,7 +42,7 @@ Ein Thunderbird-Add-on, das Google's Gemini AI verwendet, um Ihre E-Mails vor de
    - Klicken Sie auf **Einstellungen** oder **Optionen**
    - Fügen Sie Ihren API-Schlüssel ein
    - (Optional) Passen Sie die API-Endpunkt-URL an, wenn Sie ein anderes Gemini-Modell verwenden möchten
-     - Standard: `https://generativelanguage.googleapis.com/v1/models/gemini-2.5-flash:generateContent`
+     - Standard: `https://generativelanguage.googleapis.com/v1/models/gemini-3.5-flash-lite:generateContent`
    - (Optional) Fügen Sie benutzerdefinierte Eingabeaufforderungsvorlagen hinzu, um anzupassen, wie Gemini Ihre E-Mails analysiert
      - Sie können bis zu 3 benutzerdefinierte Eingabeaufforderungsvorlagen mit Namen speichern
      - Jede Vorlage ist bei der Überprüfung von E-Mails zur Auswahl verfügbar

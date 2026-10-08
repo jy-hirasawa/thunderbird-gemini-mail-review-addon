@@ -6,7 +6,7 @@
 
 ## 功能
 
-- 🤖 **AI 驱动审查**：使用 Google 的 Gemini Pro 模型分析您的电子邮件
+- 🤖 **AI 驱动审查**：使用 Google 的 Gemini API 分析您的电子邮件
 - ✅ **全面检查**：检查拼写、语法、语气、专业性和清晰度
 - ⚠️ **问题检测**：识别潜在问题，如缺少附件或不清楚的消息
 - 🎯 **易于使用**：只需在撰写窗口中点击扩展图标
@@ -15,13 +15,13 @@
 
 ## 安装
 
-### 从源代码安装
+### 从发布版本安装
 
 1. 从 https://github.com/jy-hirasawa/thunderbird-gemini-mail-review-addon/releases/ 下载最新版本
 2. 打开 Thunderbird
 3. 转到**工具** → **扩展和主题**（或按 `Ctrl+Shift+A`）
 4. 点击齿轮图标 ⚙️ 并选择**从文件安装扩展**
-5. 导航到扩展目录并选择 `manifest.json` 文件
+5. 选择下载的 `.xpi` 文件
 
 ### 要求
 
@@ -31,7 +31,7 @@
 ## 设置
 
 1. 获取 Gemini API 密钥：
-   - 访问 [Google AI Studio](https://makersuite.google.com/app/apikey)
+   - 访问 [Google AI Studio](https://aistudio.google.com/apikey)
    - 使用您的 Google 账户登录
    - 点击**创建 API 密钥**
    - 复制生成的密钥
@@ -42,7 +42,7 @@
    - 点击**选项**或**首选项**
    - 粘贴您的 API 密钥
    - （可选）如果要使用不同的 Gemini 模型，请自定义 API 端点 URL
-     - 默认：`https://generativelanguage.googleapis.com/v1/models/gemini-2.5-flash:generateContent`
+     - 默认：`https://generativelanguage.googleapis.com/v1/models/gemini-3.5-flash-lite:generateContent`
    - （可选）添加自定义提示模板以自定义 Gemini 如何分析您的电子邮件
      - 您可以保存最多 3 个带名称的自定义提示模板
      - 检查电子邮件时，每个模板都可供选择

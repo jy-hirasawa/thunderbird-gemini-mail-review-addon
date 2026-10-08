@@ -6,7 +6,7 @@ English | [日本語](README.ja.md) | [Deutsch](README.de.md) | [Français](READ
 
 ## Features
 
-- 🤖 **AI-Powered Review**: Uses Google's Gemini Pro model to analyze your emails
+- 🤖 **AI-Powered Review**: Uses Google's Gemini API to analyze your emails
 - ✅ **Comprehensive Checks**: Reviews spelling, grammar, tone, professionalism, and clarity
 - ⚠️ **Issue Detection**: Identifies potential problems like missing attachments or unclear messaging
 - 🎯 **Easy to Use**: Simply click the add-on icon in the compose window
@@ -15,13 +15,22 @@ English | [日本語](README.ja.md) | [Deutsch](README.de.md) | [Français](READ
 
 ## Installation
 
-### From Source
+### From a Release
 
 1. Download the latest release from https://github.com/jy-hirasawa/thunderbird-gemini-mail-review-addon/releases/
 2. Open Thunderbird
 3. Go to **Tools** → **Add-ons and Themes** (or press `Ctrl+Shift+A`)
 4. Click the gear icon ⚙️ and select **Install Add-on From File**
-5. Navigate to the add-on directory and select the `manifest.json` file
+5. Select the downloaded `.xpi` file
+
+### Temporary Installation from Source
+
+1. Open `about:debugging` in Thunderbird
+2. Select **This Thunderbird**
+3. Click **Load Temporary Add-on**
+4. Select `manifest.json` from the source checkout
+
+The temporary add-on is removed when Thunderbird restarts.
 
 ### Requirements
 
@@ -31,7 +40,7 @@ English | [日本語](README.ja.md) | [Deutsch](README.de.md) | [Français](READ
 ## Setup
 
 1. Get a Gemini API key:
-   - Visit [Google AI Studio](https://makersuite.google.com/app/apikey)
+   - Visit [Google AI Studio](https://aistudio.google.com/apikey)
    - Sign in with your Google account
    - Click **Create API Key**
    - Copy the generated key
@@ -42,7 +51,7 @@ English | [日本語](README.ja.md) | [Deutsch](README.de.md) | [Français](READ
    - Click **Options** or **Preferences**
    - Paste your API key
    - (Optional) Customize the API endpoint URL if you want to use a different Gemini model
-     - Default: `https://generativelanguage.googleapis.com/v1/models/gemini-2.5-flash:generateContent`
+     - Default: `https://generativelanguage.googleapis.com/v1/models/gemini-3.5-flash-lite:generateContent`
    - (Optional) Add custom prompt templates to customize how Gemini analyzes your emails
      - You can save up to 3 custom prompt templates with names
      - Each template will be available for selection when reviewing emails
@@ -139,11 +148,11 @@ This add-on sends your email content to Google's Gemini API for analysis. Your e
 
 ### Building
 
-This is a pure WebExtension with no build step required. Simply load the extension as described in the Installation section.
+This is a pure WebExtension with no build step required. To test changes from a checkout, use the temporary installation instructions above.
 
 ### Testing
 
-1. Install the add-on (see Installation section for instructions)
+1. Install the release or temporarily load the source checkout (see Installation)
 2. Configure your API key in the settings
 3. Compose a test email
 4. Click the add-on icon to test the review functionality

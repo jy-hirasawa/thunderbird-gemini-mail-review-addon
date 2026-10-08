@@ -11,15 +11,21 @@ on:
       - master
   workflow_dispatch:
 
+permissions:
+  contents: read
+
 jobs:
-  build-and-release:
+  build:
     runs-on: ubuntu-latest
     permissions:
-      contents: write
+      contents: read
+    outputs:
+      version: ${{ steps.version.outputs.version }}
+      tag_name: ${{ steps.version.outputs.tag_name }}
     
     steps:
       - name: Checkout code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
       
       - name: Generate date-based version
         id: version
@@ -72,19 +78,30 @@ jobs:
           unzip -l gemini-mail-review-${VERSION}.xpi
       
       - name: Upload artifact
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: gemini-mail-review-${{ steps.version.outputs.version }}
           path: gemini-mail-review-${{ steps.version.outputs.version }}.xpi
           retention-days: 90
       
-      - name: Create Release
-        if: github.event_name == 'push' && (github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master')
-        uses: softprops/action-gh-release@v1
+  release:
+    if: github.event_name == 'push' && (github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master')
+    needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Download XPI artifact
+        uses: actions/download-artifact@v7
         with:
-          tag_name: ${{ steps.version.outputs.tag_name }}
-          name: Release ${{ steps.version.outputs.version }}
-          files: gemini-mail-review-${{ steps.version.outputs.version }}.xpi
+          name: gemini-mail-review-${{ needs.build.outputs.version }}
+
+      - name: Create Release
+        uses: softprops/action-gh-release@v3
+        with:
+          tag_name: ${{ needs.build.outputs.tag_name }}
+          name: Release ${{ needs.build.outputs.version }}
+          files: gemini-mail-review-${{ needs.build.outputs.version }}.xpi
           generate_release_notes: true
           draft: false
           prerelease: false

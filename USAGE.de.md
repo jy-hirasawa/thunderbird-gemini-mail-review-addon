@@ -12,8 +12,8 @@
    - Suchen Sie **Gemini Mail Review** und klicken Sie auf **Einstellungen**
    - Geben Sie Ihren Gemini API-Schlüssel ein
    - (Optional) Passen Sie die API-Endpunkt-URL an, um ein anderes Gemini-Modell zu verwenden
-     - Standard: `https://generativelanguage.googleapis.com/v1/models/gemini-2.5-flash:generateContent`
-     - Sie können dies ändern, um andere Modelle wie `gemini-pro`, `gemini-1.5-pro` usw. zu verwenden
+     - Standard: `https://generativelanguage.googleapis.com/v1/models/gemini-3.5-flash-lite:generateContent`
+     - Wählen Sie für ein anderes Modell eine verfügbare Modell-ID aus Googles [Gemini-API-Modellkatalog](https://ai.google.dev/gemini-api/docs/models).
    - (Optional) Fügen Sie benutzerdefinierte Prompt-Vorlagen hinzu, um anzupassen, wie Gemini Ihre E-Mails analysiert
      - Sie können bis zu 3 benutzerdefinierte Prompt-Vorlagen mit Namen speichern
      - Jede Vorlage kann einen beschreibenden Namen und benutzerdefinierte Anweisungen haben

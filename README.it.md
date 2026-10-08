@@ -6,7 +6,7 @@ Un'estensione per Thunderbird che utilizza l'IA Gemini di Google per revisionare
 
 ## Funzionalità
 
-- 🤖 **Revisione basata su IA**: Utilizza il modello Gemini Pro di Google per analizzare le tue email
+- 🤖 **Revisione basata su IA**: Utilizza l'API Gemini di Google per analizzare le tue email
 - ✅ **Controlli completi**: Verifica ortografia, grammatica, tono, professionalità e chiarezza
 - ⚠️ **Rilevamento problemi**: Identifica potenziali problemi come allegati mancanti o messaggi poco chiari
 - 🎯 **Facile da usare**: Clicca semplicemente sull'icona dell'estensione nella finestra di composizione
@@ -15,13 +15,13 @@ Un'estensione per Thunderbird che utilizza l'IA Gemini di Google per revisionare
 
 ## Installazione
 
-### Dal sorgente
+### Da una release
 
 1. Scarica l'ultima versione da https://github.com/jy-hirasawa/thunderbird-gemini-mail-review-addon/releases/
 2. Apri Thunderbird
 3. Vai su **Strumenti** → **Componenti aggiuntivi e temi** (oppure premi `Ctrl+Shift+A`)
 4. Clicca sull'icona dell'ingranaggio ⚙️ e seleziona **Installa componente aggiuntivo da file**
-5. Naviga nella directory dell'estensione e seleziona il file `manifest.json`
+5. Seleziona il file `.xpi` scaricato
 
 ### Requisiti
 
@@ -31,7 +31,7 @@ Un'estensione per Thunderbird che utilizza l'IA Gemini di Google per revisionare
 ## Configurazione
 
 1. Ottieni una chiave API Gemini:
-   - Visita [Google AI Studio](https://makersuite.google.com/app/apikey)
+   - Visita [Google AI Studio](https://aistudio.google.com/apikey)
    - Accedi con il tuo account Google
    - Clicca su **Crea chiave API**
    - Copia la chiave generata
@@ -42,7 +42,7 @@ Un'estensione per Thunderbird che utilizza l'IA Gemini di Google per revisionare
    - Clicca su **Opzioni** o **Preferenze**
    - Incolla la tua chiave API
    - (Facoltativo) Personalizza l'URL dell'endpoint API se vuoi utilizzare un modello Gemini diverso
-     - Predefinito: `https://generativelanguage.googleapis.com/v1/models/gemini-2.5-flash:generateContent`
+     - Predefinito: `https://generativelanguage.googleapis.com/v1/models/gemini-3.5-flash-lite:generateContent`
    - (Facoltativo) Aggiungi modelli di prompt personalizzato per personalizzare come Gemini analizza le tue email
      - Puoi salvare fino a 3 modelli di prompt personalizzato con nomi
      - Ogni modello sarà disponibile per la selezione durante la revisione delle email

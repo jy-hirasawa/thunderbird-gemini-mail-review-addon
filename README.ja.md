@@ -6,7 +6,7 @@ Google の Gemini AI を使用してメール送信前にチェックする Thun
 
 ## 機能
 
-- 🤖 **AI による分析**: Google の Gemini Pro モデルを使用してメールを分析
+- 🤖 **AI による分析**: Google の Gemini API を使用してメールを分析
 - ✅ **包括的なチェック**: スペル、文法、トーン、プロフェッショナリズム、明瞭さをレビュー
 - ⚠️ **問題検出**: 添付ファイルの欠落や不明瞭なメッセージなどの潜在的な問題を特定
 - 🎯 **使いやすい**: 作成ウィンドウでアドオンアイコンをクリックするだけ
@@ -15,13 +15,22 @@ Google の Gemini AI を使用してメール送信前にチェックする Thun
 
 ## インストール
 
-### ソースから
+### リリース版から
 
 1. https://github.com/jy-hirasawa/thunderbird-gemini-mail-review-addon/releases/ から最新のReleaseをダウンロード
 2. Thunderbird を開く
 3. **ツール** → **アドオンとテーマ**（または `Ctrl+Shift+A` を押す）
 4. 歯車アイコン ⚙️ をクリックして **ファイルからアドオンをインストール** を選択
-5. アドオンディレクトリに移動して `manifest.json` ファイルを選択
+5. ダウンロードした `.xpi` ファイルを選択
+
+### ソースから一時的にインストール
+
+1. Thunderbird で `about:debugging` を開く
+2. **この Thunderbird** を選択
+3. **一時的なアドオンを読み込む** をクリック
+4. ソースチェックアウト内の `manifest.json` を選択
+
+一時インストールしたアドオンは Thunderbird の再起動時に削除されます。
 
 ### 必要要件
 
@@ -31,7 +40,7 @@ Google の Gemini AI を使用してメール送信前にチェックする Thun
 ## セットアップ
 
 1. Gemini API キーを取得:
-   - [Google AI Studio](https://makersuite.google.com/app/apikey) にアクセス
+   - [Google AI Studio](https://aistudio.google.com/apikey) にアクセス
    - Google アカウントでサインイン
    - **API キーを作成** をクリック
    - 生成されたキーをコピー
@@ -42,7 +51,7 @@ Google の Gemini AI を使用してメール送信前にチェックする Thun
    - **オプション** または **設定** をクリック
    - API キーを貼り付ける
    - （オプション）別の Gemini モデルを使用する場合は API エンドポイント URL をカスタマイズ
-     - デフォルト: `https://generativelanguage.googleapis.com/v1/models/gemini-2.5-flash:generateContent`
+     - デフォルト: `https://generativelanguage.googleapis.com/v1/models/gemini-3.5-flash-lite:generateContent`
    - （オプション）Gemini がメールを分析する方法をカスタマイズするためにカスタムプロンプトテンプレートを追加
      - 最大3つのカスタムプロンプトテンプレートを名前付きで保存できます
      - 各テンプレートはメールレビュー時に選択可能です
@@ -139,11 +148,11 @@ AI は以下をレビューします：
 
 ### ビルド
 
-これは純粋な WebExtension であり、ビルドステップは不要です。インストールセクションで説明されているように拡張機能を読み込むだけです。
+これは純粋な WebExtension であり、ビルドステップは不要です。ソースの変更をテストするには、上記の一時インストール手順を使用してください。
 
 ### テスト
 
-1. アドオンをインストール（インストールセクションの手順を参照）
+1. リリース版をインストールするか、ソースチェックアウトを一時的に読み込む（インストールセクションを参照）
 2. 設定で API キーを設定
 3. テストメールを作成
 4. アドオンアイコンをクリックしてレビュー機能をテスト
