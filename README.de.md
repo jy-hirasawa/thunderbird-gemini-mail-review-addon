@@ -15,7 +15,7 @@ Ein Thunderbird-Add-on, das Google's Gemini AI verwendet, um Ihre E-Mails vor de
 
 ## Installation
 
-### Aus der Quelle
+### Aus einer Release-Version
 
 1. Laden Sie die neueste Version von https://github.com/jy-hirasawa/thunderbird-gemini-mail-review-addon/releases/ herunter
 2. Öffnen Sie Thunderbird

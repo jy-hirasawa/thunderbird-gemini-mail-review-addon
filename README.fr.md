@@ -15,7 +15,7 @@ Une extension Thunderbird qui utilise l'IA Gemini de Google pour vérifier vos e
 
 ## Installation
 
-### Depuis la source
+### Depuis une version publiée
 
 1. Téléchargez la dernière version depuis https://github.com/jy-hirasawa/thunderbird-gemini-mail-review-addon/releases/
 2. Ouvrez Thunderbird

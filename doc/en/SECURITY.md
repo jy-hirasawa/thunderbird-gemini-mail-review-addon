@@ -21,6 +21,7 @@ This add-on stores the following data locally in Thunderbird's browser.storage.l
    - Stored in plain text (not sensitive)
    - Validated to ensure HTTPS protocol and Google domains only
    - Protected against SSRF attacks
+   - The manifest grants cross-origin access only to `https://generativelanguage.googleapis.com/*` so the add-on can call the Gemini API
 
 3. **Custom Prompt Templates** (`customPromptTemplatesEncrypted`)
    - Up to 3 custom prompt templates with names and content

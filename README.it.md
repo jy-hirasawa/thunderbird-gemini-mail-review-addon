@@ -15,7 +15,7 @@ Un'estensione per Thunderbird che utilizza l'IA Gemini di Google per revisionare
 
 ## Installazione
 
-### Dal sorgente
+### Da una release
 
 1. Scarica l'ultima versione da https://github.com/jy-hirasawa/thunderbird-gemini-mail-review-addon/releases/
 2. Apri Thunderbird

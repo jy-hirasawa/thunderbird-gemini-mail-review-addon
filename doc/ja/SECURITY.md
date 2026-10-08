@@ -21,6 +21,7 @@
    - プレーンテキストで保存（機密情報ではありません）
    - HTTPS プロトコルと Google ドメインのみを確保するために検証されます
    - SSRF 攻撃から保護されています
+   - Gemini API を呼び出すため、マニフェストは `https://generativelanguage.googleapis.com/*` のみにクロスオリジンアクセスを許可します
 
 3. **カスタムプロンプトテンプレート**（`customPromptTemplatesEncrypted`）
    - 名前とコンテンツを持つ最大 3 つのカスタムプロンプトテンプレート

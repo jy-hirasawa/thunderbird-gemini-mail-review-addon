@@ -15,13 +15,22 @@ English | [日本語](README.ja.md) | [Deutsch](README.de.md) | [Français](READ
 
 ## Installation
 
-### From Source
+### From a Release
 
 1. Download the latest release from https://github.com/jy-hirasawa/thunderbird-gemini-mail-review-addon/releases/
 2. Open Thunderbird
 3. Go to **Tools** → **Add-ons and Themes** (or press `Ctrl+Shift+A`)
 4. Click the gear icon ⚙️ and select **Install Add-on From File**
 5. Select the downloaded `.xpi` file
+
+### Temporary Installation from Source
+
+1. Open `about:debugging` in Thunderbird
+2. Select **This Thunderbird**
+3. Click **Load Temporary Add-on**
+4. Select `manifest.json` from the source checkout
+
+The temporary add-on is removed when Thunderbird restarts.
 
 ### Requirements
 
@@ -139,11 +148,11 @@ This add-on sends your email content to Google's Gemini API for analysis. Your e
 
 ### Building
 
-This is a pure WebExtension with no build step required. Simply load the extension as described in the Installation section.
+This is a pure WebExtension with no build step required. To test changes from a checkout, use the temporary installation instructions above.
 
 ### Testing
 
-1. Install the add-on (see Installation section for instructions)
+1. Install the release or temporarily load the source checkout (see Installation)
 2. Configure your API key in the settings
 3. Compose a test email
 4. Click the add-on icon to test the review functionality

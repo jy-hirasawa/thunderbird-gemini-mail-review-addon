@@ -15,7 +15,7 @@
 
 ## 安装
 
-### 从源代码安装
+### 从发布版本安装
 
 1. 从 https://github.com/jy-hirasawa/thunderbird-gemini-mail-review-addon/releases/ 下载最新版本
 2. 打开 Thunderbird
