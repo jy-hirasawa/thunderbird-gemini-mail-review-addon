@@ -73,10 +73,7 @@ Das Add-on unterstützt konfigurierbare API-Endpunkte, sodass Benutzer verschied
 https://generativelanguage.googleapis.com/v1/models/gemini-2.5-flash:generateContent
 ```
 
-**Alternative Modelle:**
-- `gemini-pro`: `https://generativelanguage.googleapis.com/v1/models/gemini-pro:generateContent`
-- `gemini-1.5-pro`: `https://generativelanguage.googleapis.com/v1/models/gemini-1.5-pro:generateContent`
-- `gemini-2.0-flash`: `https://generativelanguage.googleapis.com/v1/models/gemini-2.0-flash:generateContent`
+Für ein anderes Modell wählen Sie eine verfügbare Modell-ID aus Googles [Gemini-API-Modellkatalog](https://ai.google.dev/gemini-api/docs/models) und ersetzen Sie den Modellnamen im Endpunkt.
 
 Benutzer können den Endpunkt auf der Optionsseite konfigurieren. Wenn kein benutzerdefinierter Endpunkt festgelegt ist, wird automatisch der Standard (gemini-2.5-flash) verwendet.
 

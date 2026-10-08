@@ -73,10 +73,7 @@ Le module complémentaire prend en charge les points de terminaison API configur
 https://generativelanguage.googleapis.com/v1/models/gemini-2.5-flash:generateContent
 ```
 
-**Modèles alternatifs :**
-- `gemini-pro`: `https://generativelanguage.googleapis.com/v1/models/gemini-pro:generateContent`
-- `gemini-1.5-pro`: `https://generativelanguage.googleapis.com/v1/models/gemini-1.5-pro:generateContent`
-- `gemini-2.0-flash`: `https://generativelanguage.googleapis.com/v1/models/gemini-2.0-flash:generateContent`
+Pour utiliser un autre modèle, choisissez un identifiant disponible dans le [catalogue des modèles de l'API Gemini](https://ai.google.dev/gemini-api/docs/models) de Google et remplacez le nom du modèle dans le point de terminaison.
 
 Les utilisateurs peuvent configurer le point de terminaison dans la page d'options. Si aucun point de terminaison personnalisé n'est défini, le point par défaut (gemini-2.5-flash) est utilisé automatiquement.
 

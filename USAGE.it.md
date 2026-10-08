@@ -13,7 +13,7 @@
    - Inserisci la tua chiave API Gemini
    - (Facoltativo) Personalizza l'URL dell'endpoint API per utilizzare un modello Gemini diverso
      - Predefinito: `https://generativelanguage.googleapis.com/v1/models/gemini-2.5-flash:generateContent`
-     - Puoi cambiarlo per utilizzare altri modelli come `gemini-pro`, `gemini-1.5-pro`, ecc.
+     - Per usare un altro modello, scegli un ID disponibile nel [catalogo dei modelli dell'API Gemini](https://ai.google.dev/gemini-api/docs/models) di Google.
    - (Facoltativo) Aggiungi modelli di prompt personalizzato per personalizzare come Gemini analizza le tue email
      - Puoi salvare fino a 3 modelli di prompt personalizzato con nomi
      - Ogni modello può avere un nome descrittivo e istruzioni personalizzate

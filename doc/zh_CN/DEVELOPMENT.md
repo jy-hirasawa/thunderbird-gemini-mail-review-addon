@@ -73,10 +73,7 @@
 https://generativelanguage.googleapis.com/v1/models/gemini-2.5-flash:generateContent
 ```
 
-**替代模型：**
-- `gemini-pro`：`https://generativelanguage.googleapis.com/v1/models/gemini-pro:generateContent`
-- `gemini-1.5-pro`：`https://generativelanguage.googleapis.com/v1/models/gemini-1.5-pro:generateContent`
-- `gemini-2.0-flash`：`https://generativelanguage.googleapis.com/v1/models/gemini-2.0-flash:generateContent`
+如需使用其他模型，请从 Google 的 [Gemini API 模型目录](https://ai.google.dev/gemini-api/docs/models)中选择当前可用的模型 ID，并替换端点中的模型名称。
 
 用户可以在选项页面配置端点。如果未设置自定义端点，将自动使用默认端点（gemini-2.5-flash）。
 

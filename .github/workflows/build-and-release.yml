@@ -19,7 +19,7 @@ jobs:
     
     steps:
       - name: Checkout code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
       
       - name: Generate date-based version
         id: version
@@ -72,7 +72,7 @@ jobs:
           unzip -l gemini-mail-review-${VERSION}.xpi
       
       - name: Upload artifact
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: gemini-mail-review-${{ steps.version.outputs.version }}
           path: gemini-mail-review-${{ steps.version.outputs.version }}.xpi
@@ -80,7 +80,7 @@ jobs:
       
       - name: Create Release
         if: github.event_name == 'push' && (github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master')
-        uses: softprops/action-gh-release@v1
+        uses: softprops/action-gh-release@v3
         with:
           tag_name: ${{ steps.version.outputs.tag_name }}
           name: Release ${{ steps.version.outputs.version }}

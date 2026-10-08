@@ -6,7 +6,7 @@
 
 ## 功能
 
-- 🤖 **AI 驱动审查**：使用 Google 的 Gemini Pro 模型分析您的电子邮件
+- 🤖 **AI 驱动审查**：使用 Google 的 Gemini API 分析您的电子邮件
 - ✅ **全面检查**：检查拼写、语法、语气、专业性和清晰度
 - ⚠️ **问题检测**：识别潜在问题，如缺少附件或不清楚的消息
 - 🎯 **易于使用**：只需在撰写窗口中点击扩展图标
@@ -21,7 +21,7 @@
 2. 打开 Thunderbird
 3. 转到**工具** → **扩展和主题**（或按 `Ctrl+Shift+A`）
 4. 点击齿轮图标 ⚙️ 并选择**从文件安装扩展**
-5. 导航到扩展目录并选择 `manifest.json` 文件
+5. 选择下载的 `.xpi` 文件
 
 ### 要求
 
@@ -31,7 +31,7 @@
 ## 设置
 
 1. 获取 Gemini API 密钥：
-   - 访问 [Google AI Studio](https://makersuite.google.com/app/apikey)
+   - 访问 [Google AI Studio](https://aistudio.google.com/apikey)
    - 使用您的 Google 账户登录
    - 点击**创建 API 密钥**
    - 复制生成的密钥

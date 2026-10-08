@@ -6,7 +6,7 @@ English | [日本語](README.ja.md) | [Deutsch](README.de.md) | [Français](READ
 
 ## Features
 
-- 🤖 **AI-Powered Review**: Uses Google's Gemini Pro model to analyze your emails
+- 🤖 **AI-Powered Review**: Uses Google's Gemini API to analyze your emails
 - ✅ **Comprehensive Checks**: Reviews spelling, grammar, tone, professionalism, and clarity
 - ⚠️ **Issue Detection**: Identifies potential problems like missing attachments or unclear messaging
 - 🎯 **Easy to Use**: Simply click the add-on icon in the compose window
@@ -21,7 +21,7 @@ English | [日本語](README.ja.md) | [Deutsch](README.de.md) | [Français](READ
 2. Open Thunderbird
 3. Go to **Tools** → **Add-ons and Themes** (or press `Ctrl+Shift+A`)
 4. Click the gear icon ⚙️ and select **Install Add-on From File**
-5. Navigate to the add-on directory and select the `manifest.json` file
+5. Select the downloaded `.xpi` file
 
 ### Requirements
 
@@ -31,7 +31,7 @@ English | [日本語](README.ja.md) | [Deutsch](README.de.md) | [Français](READ
 ## Setup
 
 1. Get a Gemini API key:
-   - Visit [Google AI Studio](https://makersuite.google.com/app/apikey)
+   - Visit [Google AI Studio](https://aistudio.google.com/apikey)
    - Sign in with your Google account
    - Click **Create API Key**
    - Copy the generated key

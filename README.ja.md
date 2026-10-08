@@ -6,7 +6,7 @@ Google の Gemini AI を使用してメール送信前にチェックする Thun
 
 ## 機能
 
-- 🤖 **AI による分析**: Google の Gemini Pro モデルを使用してメールを分析
+- 🤖 **AI による分析**: Google の Gemini API を使用してメールを分析
 - ✅ **包括的なチェック**: スペル、文法、トーン、プロフェッショナリズム、明瞭さをレビュー
 - ⚠️ **問題検出**: 添付ファイルの欠落や不明瞭なメッセージなどの潜在的な問題を特定
 - 🎯 **使いやすい**: 作成ウィンドウでアドオンアイコンをクリックするだけ
@@ -21,7 +21,7 @@ Google の Gemini AI を使用してメール送信前にチェックする Thun
 2. Thunderbird を開く
 3. **ツール** → **アドオンとテーマ**（または `Ctrl+Shift+A` を押す）
 4. 歯車アイコン ⚙️ をクリックして **ファイルからアドオンをインストール** を選択
-5. アドオンディレクトリに移動して `manifest.json` ファイルを選択
+5. ダウンロードした `.xpi` ファイルを選択
 
 ### 必要要件
 
@@ -31,7 +31,7 @@ Google の Gemini AI を使用してメール送信前にチェックする Thun
 ## セットアップ
 
 1. Gemini API キーを取得:
-   - [Google AI Studio](https://makersuite.google.com/app/apikey) にアクセス
+   - [Google AI Studio](https://aistudio.google.com/apikey) にアクセス
    - Google アカウントでサインイン
    - **API キーを作成** をクリック
    - 生成されたキーをコピー

@@ -13,7 +13,7 @@
    - Entrez votre clé API Gemini
    - (Optionnel) Personnalisez l'URL du point de terminaison API pour utiliser un modèle Gemini différent
      - Par défaut : `https://generativelanguage.googleapis.com/v1/models/gemini-2.5-flash:generateContent`
-     - Vous pouvez changer ceci pour utiliser d'autres modèles comme `gemini-pro`, `gemini-1.5-pro`, etc.
+     - Pour utiliser un autre modèle, choisissez un identifiant disponible dans le [catalogue des modèles de l'API Gemini](https://ai.google.dev/gemini-api/docs/models) de Google.
    - (Optionnel) Ajoutez des modèles de prompt personnalisés pour personnaliser la façon dont Gemini analyse vos e-mails
      - Vous pouvez enregistrer jusqu'à 3 modèles de prompt personnalisés avec des noms
      - Chaque modèle peut avoir un nom descriptif et des instructions personnalisées

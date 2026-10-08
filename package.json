@@ -4,7 +4,7 @@
   "description": "A Thunderbird add-on that checks your email with Gemini AI before sending",
   "repository": {
     "type": "git",
-    "url": "https://github.com/jy-hirasawa/thundirbird-gemini-mail-review-addon.git"
+    "url": "https://github.com/jy-hirasawa/thunderbird-gemini-mail-review-addon.git"
   },
   "keywords": [
     "thunderbird",
